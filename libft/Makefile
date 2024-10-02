@@ -1,6 +1,6 @@
 NAME = 	libft.a
 
-CC = 	gcc 
+CC = 	gcc
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -12,7 +12,7 @@ SRC = 	ft_isalnum.c  ft_isascii.c  ft_isprint.c  ft_memmove.c  ft_strlen.c \
 		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
         ft_printf.c ft_printf_hexa.c ft_printf_utils.c \
-		get_next_line.c ft_atol.c ft_strcmp.c \
+		get_next_line.c ft_atol.c ft_strcmp.c ft_tablen.c \
 
 OBJ = ${SRC:.c=.o}
 

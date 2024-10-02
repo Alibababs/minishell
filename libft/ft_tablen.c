@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/02 15:45:09 by phautena         ###   ########.fr       */
+/*   Created: 2024/10/02 13:39:07 by phautena          #+#    #+#             */
+/*   Updated: 2024/10/02 13:39:19 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include "libft.h"
 
-void	init_data(void)
+int	tab_len(char **tab)
 {
-	ft_signals();
-}
+	int	i;
 
-int	main(void)
-{
-	t_input	input;
-
-	init_data();
-	while (1)
-	{
-		input.input = readline("minishelldefou> ");
-		if (!input.input)
-		{
-			printf("exit\n");
-			break ;
-		}
-		if (input.input)
-			add_history(input.input);
-		if (lexer(&input) == ERROR)
-			ft_printf("Error while lexing\n");
-		free_input_struct(&input);
-	}
-	return (0);
+	i = 0;
+	if (!tab)
+		return (1);
+	while (tab[i])
+		i++;
+	return (i);
 }
