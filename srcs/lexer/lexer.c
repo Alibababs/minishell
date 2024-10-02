@@ -5,81 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 12:17:58 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/02 15:01:05 by phautena         ###   ########.fr       */
+/*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
+/*   Updated: 2024/10/02 18:54:29 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	lexer(t_input *input)
-{
-	char	**splitted;
-	int		*tokenized;
+// int	lexer(char *input)
+// {
 
-	splitted = ft_split(input->input, ' ');
-	if (!splitted)
+// }
+
+int	tokenize_all(char *input)
+{
+	t_token	*head_token;
+	int		i;
+
+	head_token = NULL;
+	i = is_hd_sep(input, &head_token);
+	return (SUCCESS);
+}
+int	add_token_end(char *to_tokenize, t_token **head)
+{
+	t_token	*new_token;
+	t_token	*temp;
+
+	if (*head == NULL)
+	{
+		*head = create_token(to_tokenize);
+		if (!head)
+			return (ERROR);
+		return (SUCCESS);
+	}
+	new_token = create_token(to_tokenize);
+	if (!new_token)
 		return (ERROR);
-	tokenized = tokenize(splitted);
-	if (!tokenized)
-		return (free_array(splitted), ERROR);
-	input->tokenized = tokenized;
-	free_array(splitted);
+	temp = *head;
+	while (temp)
+		temp = temp->next;
+	new_token->prev = temp;
+	new_token->next = NULL;
+	temp->next = new_token;
+	new_token->value = to_tokenize;
+	// new_token->token = tokenize(to_tokenize);
+	return (SUCCESS);
+}
+
+t_token	*create_token(char *to_tokenize)
+{
+	t_token *new_token;
+
+	new_token = malloc(sizeof(t_token));
+	if (!new_token)
+		return (NULL);
+	new_token->prev = NULL;
+	new_token->next = NULL;
+	new_token->value = to_tokenize;
+	// new_token->token = tokenize(to_tokenize);
+	return (new_token);
+}
+
+int	is_hd_sep(char *input, t_token **head)
+{
+	char	*to_tokenize;
+
+	if (input[0] == '<' && input[1] == '<')
+	{
+		to_tokenize = "<<";
+		add_token_end(to_tokenize, head);
+		return (2);
+	}
 	return (0);
 }
 
-int	*tokenize(char **splitted)
+int	get_next_sep(char *input, int i)
 {
-	int		i;
-	int		*tokenized;
-
-	tokenized = malloc(sizeof(int) * tab_len(splitted));
-	if (!tokenized)
-		return (NULL);
-	i = 0;
-	while (splitted[i])
-	{
-		if (i == 0)
-			tokenized[i] = assign_first_token(splitted[i]);
-		else
-			tokenized[i] = assign_token(splitted[i], tokenized[i - 1]);
+	while (!is_separator(input[i]))
 		i++;
-	}
-	return (tokenized);
+	return (SUCCESS);
 }
 
-int	assign_first_token(char *str)
+int	is_separator(char c)
 {
-	if (is_builtin(str) == BUILTIN)
-		return (BUILTIN);
-	else if (is_redirection(str) == REDIR_IN)
-		return (REDIR_IN);
-	else if (is_redirection(str) == REDIR_OUT)
-		return (REDIR_OUT);
-	else if (is_pipe(str) == PIPE)
-		return (PIPE);
-	else if (is_env(str) == ENVAR)
-		return (ENVAR);
+	if (c == ' ' || c == '|')
+		return (1);
+	else if (c == '<' || c == '>')
+		return (1);
+	else if (c == '\0')
+		return (1);
 	else
-		return (CMD);
+		return (0);
 }
-
-int	assign_token(char *str, int prev)
-{
-	if (is_builtin(str) == BUILTIN)
-		return (BUILTIN);
-	else if (is_redirection(str) == REDIR_IN)
-		return (REDIR_IN);
-	else if (is_redirection(str) == REDIR_OUT)
-		return (REDIR_OUT);
-	else if (is_pipe(str) == PIPE)
-		return (PIPE);
-	else if (is_env(str) == ENVAR)
-		return (ENVAR);
-	else if (is_file(prev) == FILE)
-		return (FILE);
-	else if (is_argv(prev) == ARGV)
-		return (ARGV);
-	return (CMD);
-}
-

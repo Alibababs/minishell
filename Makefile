@@ -14,12 +14,10 @@ LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
-C_FILE		=	main	 			\
-				signal				\
-				lexer/lexer			\
-				lexer/lexer_is		\
-				lexer/lexer_utils	\
-				free				\
+C_FILE		=	main	 					\
+				signal						\
+				lexer/lexer					\
+				free						\
 
 SRC_DIR		=	./srcs/
 

@@ -6,19 +6,11 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/02 14:55:23 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:26:07 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_input_struct(t_input *input)
-{
-	if (input->input)
-		free(input->input);
-	if (input->tokenized)
-		free(input->tokenized);
-}
 
 void	free_array(char **array)
 {

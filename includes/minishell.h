@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/02 15:45:35 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:52:28 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,55 +21,40 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # define ERROR 1
+# define SUCCESS 0
 
-# define BUILTIN 101
-# define REDIR_OUT 102
-# define REDIR_IN 103
-# define PIPE 104
-# define ENVAR 105
-# define FILE 106
-# define ARGV 107
-# define CMD 108
-
-typedef struct	s_cmd
+typedef enum
 {
-	char			**path;
-	char			**argv;
-	int				pid;
-	int				to_read;
-	int				to_write;
-	int				builtin;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}	t_cmd;
+	PIPE,
+	IN,
+	OUT,
+	HEREDOC,
+	APPEND,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+	CMD,
+	ARGV,
+}	t_type;
 
-typedef struct	s_input
+typedef struct	s_token
 {
-	int				env_file;
-	char			*input;
-	int				*tokenized;
-	struct s_cmd	*head_cmd;
-}	t_input;
+	t_type			token;
+	char			*value;
+	struct s_token	*next;
+	struct s_token	*prev;
+}					t_token;
 
 void	ft_signals(void);
 
 ///lexer.c>>>
-int		lexer(t_input *input);
-int		*tokenize(char **splitted);
-int		assign_token(char *str, int prev);
-int		assign_first_token(char *str);
-int		is_argv(int prev);
-int		is_file(int prev);
-int		is_env(char *str);
-int		is_pipe(char *str);
-int		is_builtin(char *str);
-int		is_redirection(char *str);
-char	**declare_builtin(void);
-
-///free.c>>>
-void	free_input_struct(t_input *input);
-void	free_array(char **array);
+int		tokenize_all(char *input);
+int		add_token_end(char *to_tokenize, t_token **head);
+t_token	*create_token(char *to_tokenize);
+int		is_hd_sep(char *input, t_token **head);
+int		is_separator(char c);
+int		get_next_sep(char *input, int i);
 
 #endif
