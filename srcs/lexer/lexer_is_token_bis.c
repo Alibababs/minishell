@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 14:17:32 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:23:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	is_argv(t_type prev)
 {
 	if (prev == CMD || prev == BUILTIN || prev == ARGV)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	is_squote(char *str)

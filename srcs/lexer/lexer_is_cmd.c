@@ -6,15 +6,15 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:37 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 14:40:56 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:25:59 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_file(char *str)
+int	is_file(t_type prev)
 {
-	if (!access(str, F_OK))
+	if (prev == IN || prev == OUT || prev == APPEND || prev == HEREDOC)
 		return (0);
 	return (1);
 }

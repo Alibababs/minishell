@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 14:39:12 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:33:39 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int		lexer(char *input);
 void	tokenize_all(char *input, t_token **head);
 void	tokenize_char(int *i_ptr, char *input, t_token **head);
 void	tokenize_str(int *i_ptr, char *input, t_token **head);
-int		is_sep(char c);
 void	tokenize_quote(int *i_ptr, char *input, t_token **head, int mode);
+void	tokenize_env(int *i_ptr, char *input, t_token **head);
 
 ///lexer_list.c>>>
 void	add_token_end(char *to_tokenize, t_token **head);
@@ -95,11 +95,12 @@ char	**get_path(void);
 char	**fix_env(char **env);
 int		is_cmd(char *str);
 int		is_env(char *str);
-int		is_file(char *str);
+int		is_file(t_type prev);
 
 ///lexer_assign_token.c
 void	tokenize(t_token **head);
 void	assign_token(t_token **current);
 void	assign_token_bis(t_token **current);
+int		is_sep(char c);
 
 #endif

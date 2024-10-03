@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 14:49:41 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:29:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,26 @@ void	assign_token_bis(t_token **current)
 	temp = *current;
 	if (!is_env(temp->value))
 		temp->token = ENV;
-	else if (!is_file(temp->value))
-		temp->token = FIL;
 	else if (!is_cmd(temp->value))
 		temp->token = CMD;
 	else if (temp->prev)
 	{
 		if (!is_argv(temp->prev->token))
 			temp->token = ARGV;
+		else if (!is_file(temp->prev->token))
+			temp->token = FIL;
 	}
 	else
 		temp->token = NDEF;
+}
+
+int	is_sep(char c)
+{
+	if (c == '|' || c == ' ' || c == '<' || c == '>')
+		return (1);
+	else if (c == 34 || c == 39)
+		return (1);
+	else if (c == '$')
+		return (1);
+	return (0);
 }
