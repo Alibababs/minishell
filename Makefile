@@ -17,6 +17,7 @@ LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 C_FILE		=	main	 					\
 				signal						\
 				lexer/lexer					\
+				lexer/lexer_list			\
 				free						\
 
 SRC_DIR		=	./srcs/

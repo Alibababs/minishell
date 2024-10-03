@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/02 18:52:28 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:10:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ void	ft_signals(void);
 
 ///lexer.c>>>
 int		tokenize_all(char *input);
-int		add_token_end(char *to_tokenize, t_token **head);
-t_token	*create_token(char *to_tokenize);
-int		is_hd_sep(char *input, t_token **head);
-int		is_separator(char c);
-int		get_next_sep(char *input, int i);
+void	tokenize_char(int *i_ptr, char *input, t_token **head);
+void	tokenize_str(int *i_ptr, char *input, t_token **head);
+int		is_sep(char c);
+
+///lexer_list.c>>>
+void	add_token_end(char *to_tokenize, t_token **head);
+void	add_token_empty(char *to_tokenize, t_token **head);
+void	print_token(t_token **head);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/02 18:47:04 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:46:49 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break ;
 		}
-		tokenize_all(input);
+
 		if (input)
+		{
+			tokenize_all(input);
 			add_history(input);
+		}
 	}
 	(void)envp;
 	return (0);
