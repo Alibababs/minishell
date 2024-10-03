@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 15:33:39 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:57:22 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_signals(void);
 
 ///free.c>>>
 void	free_array(char **array);
+void	free_token(t_token **head);
 
 ///lexer.c>>>
 int		lexer(char *input);

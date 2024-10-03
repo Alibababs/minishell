@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:37 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 15:25:59 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:04:53 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_cmd(char *str)
 		if (!path_binary)
 			return (free_array(path), 2);
 		if (!access(path_binary, F_OK))
-			return (free_array(path), 0);
+			return (free_array(path), free(path_binary), 0);
 		free(path_binary);
 		i++;
 	}
@@ -63,8 +63,9 @@ char	**get_path(void)
 	if (!splitted_path)
 		return (NULL);
 	fixed = fix_env(splitted_path);
+	free_array(splitted_path);
 	if (!fixed)
-		return (free_array(splitted_path), NULL);
+		return (NULL);
 	return (fixed);
 }
 
