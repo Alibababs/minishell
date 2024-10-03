@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 13:18:34 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:51:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	lexer(char *input)
 	head = NULL;
 	tokenize_all(input, &head);
 	fix_redir_list(&head);
+	tokenize(&head);
 	print_token(&head);
 	return (0);
 }
@@ -58,8 +59,8 @@ void	tokenize_quote(int *i_ptr, char *input, t_token **head, int mode)
 	*i_ptr += 1;
 	while (input[*i_ptr] && input[*i_ptr] != quote)
 		*i_ptr += 1;
-	*i_ptr += 1;
 	to_tokenize = ft_substr(input, start, *i_ptr - start + 1);
+	*i_ptr += 1;
 	if (!to_tokenize)
 		return ;
 	add_token_end(to_tokenize, head);
@@ -102,6 +103,8 @@ int	is_sep(char c)
 	if (c == '|' || c == ' ' || c == '<' || c == '>')
 		return (1);
 	else if (c == 34 || c == 39)
+		return (1);
+	else if (c == '$')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 13:06:12 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:39:12 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,19 @@
 
 typedef enum
 {
-	PIPE,
-	IN,
-	OUT,
-	HEREDOC,
-	APPEND,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-	CMD,
-	ARGV,
+	PIPE = 101,
+	IN = 102,
+	OUT = 103,
+	HEREDOC = 104,
+	APPEND = 105,
+	S_QUOTE = 106,
+	D_QUOTE = 107,
+	CMD = 108,
+	ARGV = 109,
+	BUILTIN = 110,
+	ENV = 111,
+	FIL = 112,
+	NDEF = 113,
 }	t_type;
 
 typedef struct	s_token
@@ -48,6 +52,9 @@ typedef struct	s_token
 }					t_token;
 
 void	ft_signals(void);
+
+///free.c>>>
+void	free_array(char **array);
 
 ///lexer.c>>>
 int		lexer(char *input);
@@ -68,5 +75,31 @@ void	fix_redir(t_token **start);
 void	del_next_redir(t_token **current);
 void	add_redir(t_token **current);
 int		is_redir(char *value);
+
+///lexer_is_token.c
+int		is_in(char *str);
+int		is_out(char *str);
+int		is_append(char *str);
+int		is_hd(char *str);
+int		is_pipe(char *str);
+
+///lexer_is_token_bis.c
+int		is_argv(t_type prev);
+int		is_squote(char *str);
+int		is_dquote(char *str);
+int		is_builtin(char *str);
+char	**declare_builtin(void);
+
+///lexer_is_cmd.c
+char	**get_path(void);
+char	**fix_env(char **env);
+int		is_cmd(char *str);
+int		is_env(char *str);
+int		is_file(char *str);
+
+///lexer_assign_token.c
+void	tokenize(t_token **head);
+void	assign_token(t_token **current);
+void	assign_token_bis(t_token **current);
 
 #endif

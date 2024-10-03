@@ -19,6 +19,10 @@ C_FILE		=	main	 						\
 				lexer/lexer						\
 				lexer/lexer_list				\
 				lexer/lexer_fix_redir			\
+				lexer/lexer_is_token			\
+				lexer/lexer_is_token_bis		\
+				lexer/lexer_assign_token		\
+				lexer/lexer_is_cmd				\
 				free							\
 
 SRC_DIR		=	./srcs/

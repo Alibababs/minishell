@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 11:33:18 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:39:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	add_token_end(char *to_tokenize, t_token **head)
 		new_token->next = NULL;
 		new_token->prev = temp;
 		new_token->value = to_tokenize;
-		// new_token->token = tokenize();
 	}
 }
 
@@ -45,7 +44,6 @@ void	add_token_empty(char *to_tokenize, t_token **head)
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	new_token->value = to_tokenize;
-	// new_token->token = tokenize();
 	*head = new_token;
 }
 
@@ -62,7 +60,7 @@ void	print_token(t_token **head)
 	{
 		printf("TOKEN [%d]\n", i);
 		printf("Value: %s\n", temp->value);
-		// printf("Token: %s\n", temp->token);
+		printf("Token: %u\n", temp->token);
 		printf("\n\n");
 		temp = temp->next;
 		i++;
