@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 12:31:05 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:06:12 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	tokenize_all(char *input, t_token **head);
 void	tokenize_char(int *i_ptr, char *input, t_token **head);
 void	tokenize_str(int *i_ptr, char *input, t_token **head);
 int		is_sep(char c);
+void	tokenize_quote(int *i_ptr, char *input, t_token **head, int mode);
 
 ///lexer_list.c>>>
 void	add_token_end(char *to_tokenize, t_token **head);
