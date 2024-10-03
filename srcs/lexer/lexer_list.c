@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 11:02:47 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:33:18 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	add_token_end(char *to_tokenize, t_token **head)
 	t_token	*new_token;
 	t_token	*temp;
 
-	if (!*head)
+	if (*head == NULL)
 		add_token_empty(to_tokenize, head);
 	else
 	{
@@ -54,6 +54,8 @@ void	print_token(t_token **head)
 	int		i;
 	t_token	*temp;
 
+	if (!*head)
+		return ;
 	i = 0;
 	temp = *head;
 	while (temp)

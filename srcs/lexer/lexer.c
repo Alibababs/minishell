@@ -6,35 +6,38 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 11:10:41 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:30:58 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	lexer(char *input)
-// {
-
-// }
-
-int	tokenize_all(char *input)
+int	lexer(char *input)
 {
 	t_token	*head;
+
+	head = NULL;
+	tokenize_all(input, &head);
+	fix_redir_list(&head);
+	print_token(&head);
+	return (0);
+}
+
+void	tokenize_all(char *input, t_token **head)
+{
 	int		i;
 	int		*i_ptr;
 
-	head = NULL;
+	*head = NULL;
 	i = 0;
 	i_ptr = &i;
 	while (input[i])
 	{
 		if (is_sep(input[*i_ptr]))
-			tokenize_char(i_ptr, input, &head);
+			tokenize_char(i_ptr, input, head);
 		else
-			tokenize_str(i_ptr, input, &head);
+			tokenize_str(i_ptr, input, head);
 	}
-	print_token(&head);
-	return (0);
 }
 
 void	tokenize_char(int *i_ptr, char *input, t_token **head)
