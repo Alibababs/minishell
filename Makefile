@@ -23,6 +23,8 @@ C_FILE		=	main	 						\
 				lexer/lexer_is_token_bis		\
 				lexer/lexer_assign_token		\
 				lexer/lexer_is_cmd				\
+				env/env_list					\
+				env/env_utils					\
 				free							\
 
 SRC_DIR		=	./srcs/

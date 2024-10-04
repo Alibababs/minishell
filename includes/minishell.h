@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 15:57:22 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:26:42 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,41 @@ typedef struct	s_token
 	struct s_token	*prev;
 }					t_token;
 
+typedef struct	s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}					t_env;
+
+/// signal.c>>>
 void	ft_signals(void);
 
 ///free.c>>>
 void	free_array(char **array);
 void	free_token(t_token **head);
 
+/////////////////////ENV/////////////////////////////////////
+///env_list.c>>>
+void	add_env_empty(char *name, char *value, t_env **head);
+void	add_env_end(char *name, char *value, t_env **head);
+char	*get_env_name(char *var);
+char	*get_env_value(char *var);
+int		init_env(t_env **head, char **envp);
+
+///env_utils.c>>>
+void	print_env(t_env **head);
+char	*get_var(char *name, t_env **head);
+
+
+
+/////////////////////ENV/////////////////////////////////////
+
+/////////////////////LEXER///////////////////////////////////
 ///lexer.c>>>
 int		lexer(char *input);
-void	tokenize_all(char *input, t_token **head);
+void	lex_all(char *input, t_token **head);
 void	tokenize_char(int *i_ptr, char *input, t_token **head);
 void	tokenize_str(int *i_ptr, char *input, t_token **head);
 void	tokenize_quote(int *i_ptr, char *input, t_token **head, int mode);
@@ -103,5 +129,6 @@ void	tokenize(t_token **head);
 void	assign_token(t_token **current);
 void	assign_token_bis(t_token **current);
 int		is_sep(char c);
+/////////////////////LEXER///////////////////////////////////
 
 #endif

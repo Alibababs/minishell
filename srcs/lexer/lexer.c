@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 16:18:47 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:13:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	lexer(char *input)
 	t_token	*head;
 
 	head = NULL;
-	tokenize_all(input, &head);
+	lex_all(input, &head);
 	fix_redir_list(&head);
 	tokenize(&head);
-	// print_token(&head);
+	print_token(&head);
 	free_token(&head);
 	return (0);
 }
 
-void	tokenize_all(char *input, t_token **head)
+void	lex_all(char *input, t_token **head)
 {
 	int		i;
 	int		*i_ptr;

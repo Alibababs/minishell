@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/03 14:54:15 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:39:11 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ void	init_data(void)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
+	t_env	*head_env;
 
 	init_data();
+	///ENV TEST///
+	head_env = NULL;
+	init_env(&head_env, envp);
+	// print_env(&head_env);
+	// printf("Value: %s\n", get_var("PATH", &head_env));
+	////////////////////
 	while (argc && argv)
 	{
 		input = readline("minishelldefou> ");
