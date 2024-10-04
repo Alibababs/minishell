@@ -6,11 +6,40 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:00:20 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:22:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	env_var(char **envp)
+{
+	t_env	*head;
+
+	head = NULL;
+	init_env(&head, envp);
+	// print_env(&head);
+	// print_export(&head);
+	export_var("TEST=This is a test!", &head);
+	printf("Value: %s\n", get_var("TEST", &head));
+	free_env(&head);
+}
+
+void	export_var(char *var, t_env **head)
+{
+	char	*name;
+	char	*value;
+
+	if (!var)
+		return ;
+	name = get_env_name(var);
+	if (!name)
+		return ;
+	value = get_env_value(var);
+	if (!value)
+		return (free(name));
+	add_env_end(name, value, head);
+}
 
 void	print_export(t_env **head)
 {

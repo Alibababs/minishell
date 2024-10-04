@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/04 12:59:30 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:21:46 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_signals(void);
 ///free.c>>>
 void	free_array(char **array);
 void	free_token(t_token **head);
+void	free_env(t_env **head);
 
 /////////////////////ENV/////////////////////////////////////
 ///env_list.c>>>
@@ -78,7 +79,8 @@ int		init_env(t_env **head, char **envp);
 void	print_env(t_env **head);
 char	*get_var(char *name, t_env **head);
 void	print_export(t_env **head);
-
+void	export_var(char *var, t_env **head);
+void	env_var(char **envp);
 /////////////////////ENV/////////////////////////////////////
 
 /////////////////////LEXER///////////////////////////////////
