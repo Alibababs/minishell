@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/04 13:21:46 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:12:28 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define ERROR 1
 # define SUCCESS 0
 
-typedef enum
+typedef enum s_type
 {
 	PIPE = 101,
 	IN = 102,

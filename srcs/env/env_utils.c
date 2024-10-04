@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:22:00 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:40:46 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	env_var(char **envp)
 
 	head = NULL;
 	init_env(&head, envp);
+	// export_var("EFD", &head);
 	// print_env(&head);
 	// print_export(&head);
-	export_var("TEST=This is a test!", &head);
-	printf("Value: %s\n", get_var("TEST", &head));
+	// printf("Value: %s\n", get_var("TEST", &head));
 	free_env(&head);
 }
 
@@ -35,9 +35,14 @@ void	export_var(char *var, t_env **head)
 	name = get_env_name(var);
 	if (!name)
 		return ;
+	if (!ft_strchr(var, '='))
+	{
+		add_env_end(name, NULL, head);
+		return ;
+	}
 	value = get_env_value(var);
 	if (!value)
-		return (free(name));
+		value = NULL;
 	add_env_end(name, value, head);
 }
 
@@ -50,7 +55,10 @@ void	print_export(t_env **head)
 	temp = *head;
 	while (temp)
 	{
-		printf("export %s=\"%s\"\n", temp->name, temp->value);
+		if (temp->value)
+			printf("export %s=\"%s\"\n", temp->name, temp->value);
+		else
+			printf("export %s\n", temp->name);
 		temp = temp->next;
 	}
 }
@@ -64,7 +72,8 @@ void	print_env(t_env **head)
 	temp = *head;
 	while (temp)
 	{
-		printf("%s=%s\n", temp->name, temp->value);
+		if (temp->value)
+			printf("%s=%s\n", temp->name, temp->value);
 		temp = temp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 16:01:33 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:56:59 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	is_builtin(char *str)
 	i = 0;
 	while (builtin[i])
 	{
-		if (!ft_strncmp(str, builtin[i], ft_strlen(str)))
+		if (!ft_strncmp(str, builtin[i], ft_strlen(builtin[i])))
 			return (free(builtin), 0);
 		i++;
 	}
