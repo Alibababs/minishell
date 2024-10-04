@@ -6,11 +6,25 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 12:26:36 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:00:20 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_export(t_env **head)
+{
+	t_env	*temp;
+
+	if (*head == NULL)
+		return ;
+	temp = *head;
+	while (temp)
+	{
+		printf("export %s=\"%s\"\n", temp->name, temp->value);
+		temp = temp->next;
+	}
+}
 
 void	print_env(t_env **head)
 {

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/04 12:26:42 by phautena         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:59:30 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int		init_env(t_env **head, char **envp);
 ///env_utils.c>>>
 void	print_env(t_env **head);
 char	*get_var(char *name, t_env **head);
-
-
+void	print_export(t_env **head);
 
 /////////////////////ENV/////////////////////////////////////
 
