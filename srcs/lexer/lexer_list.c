@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 14:39:48 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:26:59 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,25 @@ void	print_token(t_token **head)
 		temp = temp->next;
 		i++;
 	}
+}
+
+int	check_quotes_closed(char *input)
+{
+	int	i;
+	int	squotes;
+	int	dquotes;
+
+	i = -1;
+	squotes = 0;
+	dquotes = 0;
+	while (input[++i])
+	{
+		if (input[i] == 39)
+			squotes++;
+		else if (input[i] == 34)
+			dquotes++;
+	}
+	if (squotes % 2 != 0 || dquotes % 2 != 0)
+		return (1);
+	return (0);
 }

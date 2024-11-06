@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:52:28 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:34:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	assign_token(t_token **current)
 		return ;
 	if (!is_builtin(temp->value))
 		temp->token = BUILTIN;
+	else if (!is_sem(temp->value))
+		temp->token = SEM;
 	else if (!is_in(temp->value))
 		temp->token = IN;
 	else if (!is_out(temp->value))
@@ -66,6 +68,8 @@ void	assign_token_bis(t_token **current)
 			temp->token = ARGV;
 		else if (!is_file(temp->prev->token))
 			temp->token = FIL;
+		else
+			temp->token = NDEF;
 	}
 	else
 		temp->token = NDEF;
@@ -80,4 +84,11 @@ int	is_sep(char c)
 	else if (c == '$')
 		return (1);
 	return (0);
+}
+
+int	is_sem(char *str)
+{
+if (!ft_strncmp(str, ";", 2))
+		return (0);
+	return (1);
 }

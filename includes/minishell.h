@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/04 15:12:28 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:33:42 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum s_type
 	ENV = 111,
 	FIL = 112,
 	NDEF = 113,
+	SEM = 114,
 }	t_type;
 
 typedef struct	s_token
@@ -96,6 +97,7 @@ void	tokenize_env(int *i_ptr, char *input, t_token **head);
 void	add_token_end(char *to_tokenize, t_token **head);
 void	add_token_empty(char *to_tokenize, t_token **head);
 void	print_token(t_token **head);
+int		check_quotes_closed(char *input);
 
 ///lexer_fix_redir.c>>>
 void	fix_redir_list(t_token **head);
@@ -130,6 +132,7 @@ void	tokenize(t_token **head);
 void	assign_token(t_token **current);
 void	assign_token_bis(t_token **current);
 int		is_sep(char c);
+int		is_sem(char *str);
 /////////////////////LEXER///////////////////////////////////
 
 #endif

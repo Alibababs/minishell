@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:55:41 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:27:18 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	lexer(char *input)
 	if (ft_strlen(input) == 0)
 		return (1);
 	head = NULL;
+	if (check_quotes_closed(input))
+		return (ft_printf("A quote is not closed. Please fix your quotes.\n"));
 	lex_all(input, &head);
 	fix_redir_list(&head);
 	tokenize(&head);
