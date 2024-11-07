@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/07 13:00:00 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:27:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	env_var(char **envp);
 ///env_parsing.c
 int		export_var_parsing(char *var);
 char	*export_env_value(char *var);
+
+///unset.c
+void	unset(char *name, t_env **head);
 /////////////////////ENV/////////////////////////////////////
 
 /////////////////////LEXER///////////////////////////////////

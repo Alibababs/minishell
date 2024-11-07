@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:13:47 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 13:10:40 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:27:25 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ char	*export_env_value(char *var)
 		return (value);
 	}
 	j = i;
-	while (var[j] && var[j] != ' ')
+	while (var[j] && !ft_isspace(var[j]))
 		j++;
 	value = ft_substr(var, i, j - i);
 	if (!value)
 		return (NULL);
 	return (value);
 }
+

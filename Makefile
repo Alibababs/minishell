@@ -26,6 +26,7 @@ C_FILE		=	main	 						\
 				env/env_list					\
 				env/env_utils					\
 				env/env_parsing					\
+				env/unset						\
 				free							\
 
 SRC_DIR		=	./srcs/
