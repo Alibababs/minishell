@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:56:59 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:52:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_argv(t_type prev)
 {
-	if (prev == CMD || prev == BUILTIN || prev == ARGV)
+	if (prev == CMD || prev == BUILTIN || prev == ARGV || prev == HEREDOC ||
+		prev == S_QUOTE || prev == D_QUOTE)
 		return (0);
 	return (1);
 }
