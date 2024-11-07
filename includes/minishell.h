@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/07 14:27:48 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:42:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,9 @@ void	assign_token(t_token **current);
 void	assign_token_bis(t_token **current);
 int		is_sep(char c);
 int		is_sem(char *str);
+
+//lexer_fix_argv.c
+void	lexer_fix_master(t_token **head);
 /////////////////////LEXER///////////////////////////////////
 
 #endif

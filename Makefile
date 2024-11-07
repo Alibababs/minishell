@@ -23,6 +23,7 @@ C_FILE		=	main	 						\
 				lexer/lexer_is_token_bis		\
 				lexer/lexer_assign_token		\
 				lexer/lexer_is_cmd				\
+				lexer/lexer_fix_argv			\
 				env/env_list					\
 				env/env_utils					\
 				env/env_parsing					\
