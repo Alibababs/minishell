@@ -6,7 +6,7 @@ NAME		=	minishell
 
 CC			=	cc
 
-FLAG		=	-Wall -Wextra -Werror -g3 -I ./includes
+FLAG		=	-Wall -Werror -Wextra -g3 -I ./includes
 
 LIBFT_PATH	=	./libft/
 
@@ -29,6 +29,7 @@ C_FILE		=	main	 								\
 				builtins/env_parsing					\
 				builtins/unset							\
 				builtins/pwd							\
+				parsing/expander						\
 				free									\
 
 SRC_DIR		=	./srcs/

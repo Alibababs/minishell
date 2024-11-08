@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:13:47 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:46:34 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:26:02 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static int	check_name(char *var)
 {
 	int	i;
 
-	if (var[0] != '_' && !ft_isalpha(var[0]))
+	if (var[0] != '_' && !ft_isalpha_upper(var[0]))
 		return (1);
 	i = -1;
 	while (var[++i])
 	{
 		if (var[i] == '=')
 			break ;
-		else if (!ft_isalpha(var[i]) && !ft_isalnum(var[i]) && var[i] != '_')
+		else if (!ft_isalpha_upper(var[i]) && !ft_isalnum(var[i]) && var[i] != '_')
 			return (2);
 	}
 	return (0);

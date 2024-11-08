@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:21 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:35:07 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void	free_array(char **array);
 void	free_token(t_token **head);
 void	free_env(t_env **head);
 
+////////////////PARSING>
+///expander.c
+void	expander(t_token **h_token, t_env **h_env);
+
 //////////////////BUILTINS>
 ///env_list.c
 void	add_env_empty(char *name, char *value, t_env **head);
@@ -91,7 +95,7 @@ void	ft_pwd(void);
 
 ///////////////LEXER>
 ///lexer.c
-int		lexer(char *input);
+int	lexer(char *input, t_token **h_token, t_env **h_env);
 ///lexer_list.c
 void	add_token_end(char *to_tokenize, t_token **head);
 void	add_token_empty(char *to_tokenize, t_token **head);

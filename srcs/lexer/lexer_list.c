@@ -6,25 +6,25 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:15 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:33:21 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_token_end(char *to_tokenize, t_token **head)
+void	add_token_end(char *to_tokenize, t_token **h_token)
 {
 	t_token	*new_token;
 	t_token	*temp;
 
-	if (*head == NULL)
-		add_token_empty(to_tokenize, head);
+	if (*h_token == NULL)
+		add_token_empty(to_tokenize, h_token);
 	else
 	{
 		new_token = malloc(sizeof(t_token));
 		if (!new_token)
 			return ;
-		temp = *head;
+		temp = *h_token;
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new_token;
@@ -34,7 +34,7 @@ void	add_token_end(char *to_tokenize, t_token **head)
 	}
 }
 
-void	add_token_empty(char *to_tokenize, t_token **head)
+void	add_token_empty(char *to_tokenize, t_token **h_token)
 {
 	t_token	*new_token;
 
@@ -44,18 +44,18 @@ void	add_token_empty(char *to_tokenize, t_token **head)
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	new_token->value = to_tokenize;
-	*head = new_token;
+	*h_token = new_token;
 }
 
-void	print_token(t_token **head)
+void	print_token(t_token **h_token)
 {
 	int		i;
 	t_token	*temp;
 
-	if (!*head)
+	if (!*h_token)
 		return ;
 	i = 0;
-	temp = *head;
+	temp = *h_token;
 	while (temp)
 	{
 		printf("TOKEN [%d]\n", i);
@@ -88,7 +88,7 @@ int	check_quotes_closed(char *input)
 	return (0);
 }
 
-void	tokenize_env(int *i_ptr, char *input, t_token **head)
+void	tokenize_env(int *i_ptr, char *input, t_token **h_token)
 {
 	int		start;
 	char	*to_tokenize;
@@ -100,5 +100,5 @@ void	tokenize_env(int *i_ptr, char *input, t_token **head)
 	to_tokenize = ft_substr(input, start, *i_ptr - start);
 	if (!to_tokenize)
 		return ;
-	add_token_end(to_tokenize, head);
+	add_token_end(to_tokenize, h_token);
 }

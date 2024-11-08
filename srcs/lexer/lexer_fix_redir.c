@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:39:44 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:32:45 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,24 @@ static int	is_redir(char *value)
 	return (0);
 }
 
-void	fix_redir_list(t_token **head)
+void	fix_redir_list(t_token **h_token)
 {
 	t_token	*temp;
 
-	temp = *head;
+	temp = *h_token;
 	while (temp->next)
 	{
 		if (!is_redir(temp->value) && !is_redir(temp->next->value))
 		{
 			add_redir(&temp);
 			del_next_redir(&temp);
-			temp = *head;
+			temp = *h_token;
 		}
-		else if (temp->next->value[0] == ' ')
+		else if (temp->prev && temp->next->value[0] == ' ' && temp->token != ARGV
+				&& temp->token != S_QUOTE && temp->token != D_QUOTE)
 		{
 			del_next_redir(&temp);
-			temp = *head;
+			temp = *h_token;
 		}
 		else
 			temp = temp->next;

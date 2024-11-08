@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:47:04 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:30:28 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	env_var(char **envp)
 
 	head = NULL;
 	init_env(&head, envp);
+	// export_var("TEST=lol", &head);
+	// print_env(&head);
 }
 
 void	export_var(char *var, t_env **head)
@@ -76,15 +78,15 @@ void	print_env(t_env **head)
 	}
 }
 
-char	*get_var(char *name, t_env **head)
+char	*get_var(char *name, t_env **h_env)
 {
 	int		len;
 	t_env	*temp;
 
-	if (!name || *head == NULL)
+	if (!name || *h_env == NULL)
 		return (NULL);
 	len = ft_strlen(name);
-	temp = *head;
+	temp = *h_env;
 	while (temp)
 	{
 		if (!ft_strncmp(name, temp->name, len))

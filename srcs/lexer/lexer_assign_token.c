@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:36 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:32:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static void	assign_token(t_token **current)
 		assign_token_bis(&temp);
 }
 
-void	tokenize(t_token **head)
+void	tokenize(t_token **h_token)
 {
 	t_token	*temp;
 
-	temp = *head;
+	temp = *h_token;
 	while (temp)
 	{
 		assign_token(&temp);

@@ -6,17 +6,17 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:37:03 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:46:27 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:32:32 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	lexer_multiple_space(t_token **head)
+static void	lexer_multiple_space(t_token **h_token)
 {
 	t_token	*temp;
 
-	temp = *head;
+	temp = *h_token;
 	while (temp)
 	{
 		if ((temp->token == ARGV || temp->token == S_QUOTE
@@ -25,32 +25,32 @@ static void	lexer_multiple_space(t_token **head)
 			&& ft_isspace(temp->next->next->value[0]))
 		{
 			del_next_redir(&temp);
-			temp = *head;
+			temp = *h_token;
 		}
 		temp = temp->next;
 	}
 }
 
-static void	lexer_one_space(t_token **head)
+static void	lexer_one_space(t_token **h_token)
 {
 	t_token	*temp;
 
-	temp = *head;
+	temp = *h_token;
 	while (temp)
 	{
 		if ((temp->token == CMD || temp->token == BUILTIN) && temp->next
 			&& ft_isspace(temp->next->value[0]))
 		{
 			del_next_redir(&temp);
-			temp = *head;
+			temp = *h_token;
 		}
 		else
 			temp = temp->next;
 	}
 }
 
-void	lexer_fix_master(t_token **head)
+void	lexer_fix_master(t_token **h_token)
 {
-	lexer_one_space(head);
-	lexer_multiple_space(head);
+	lexer_one_space(h_token);
+	lexer_multiple_space(h_token);
 }

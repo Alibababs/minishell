@@ -6,11 +6,19 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/08 11:43:46 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:34:57 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	process_command(char *input, t_env **h_env)
+{
+	t_token	*h_token;
+
+	lexer(input, &h_token, h_env);
+	expander(&h_token, h_env);
+}
 
 void	init_data(void)
 {
@@ -19,6 +27,7 @@ void	init_data(void)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_env	*h_env;
 	char	*input;
 
 	init_data();
@@ -33,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (input)
 		{
-			lexer(input);
+			process_command(input, &h_env);
 			add_history(input);
 		}
 	}
