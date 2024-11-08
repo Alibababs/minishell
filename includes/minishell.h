@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/08 14:35:07 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:15:56 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_env
 void	ft_signals(void);
 ///free.c
 void	free_array(char **array);
-void	free_token(t_token **head);
-void	free_env(t_env **head);
+void	free_token(t_token **h_token);
+void	free_env(t_env **h_env);
 
 ////////////////PARSING>
 ///expander.c
@@ -74,36 +74,36 @@ void	expander(t_token **h_token, t_env **h_env);
 
 //////////////////BUILTINS>
 ///env_list.c
-void	add_env_empty(char *name, char *value, t_env **head);
-void	add_env_end(char *name, char *value, t_env **head);
+void	add_env_empty(char *name, char *value, t_env **h_env);
+void	add_env_end(char *name, char *value, t_env **h_env);
 char	*get_env_name(char *var);
 char	*get_env_value(char *var);
-int		init_env(t_env **head, char **envp);
+int		init_env(t_env **h_env, char **envp);
 ///env_utils.c
-void	print_env(t_env **head);
-char	*get_var(char *name, t_env **head);
-void	print_export(t_env **head);
-void	export_var(char *var, t_env **head);
-void	env_var(char **envp);
+void	print_env(t_env **h_env);
+char	*get_var(char *name, t_env **h_env);
+void	print_export(t_env **h_env);
+void	export_var(char *var, t_env **h_env);
+void	env_var(char **envp, t_env **h_env);
 ///env_parsing.c
 int		export_var_parsing(char *var);
 char	*export_env_value(char *var);
 ///unset.c
-void	unset(char *name, t_env **head);
+void	unset(char *name, t_env **h_env);
 ///pwd.c
 void	ft_pwd(void);
 
 ///////////////LEXER>
 ///lexer.c
-int	lexer(char *input, t_token **h_token, t_env **h_env);
+int	lexer(char *input, t_token **h_token);
 ///lexer_list.c
-void	add_token_end(char *to_tokenize, t_token **head);
-void	add_token_empty(char *to_tokenize, t_token **head);
-void	print_token(t_token **head);
+void	add_token_end(char *to_tokenize, t_token **h_token);
+void	add_token_empty(char *to_tokenize, t_token **h_token);
+void	print_token(t_token **h_token);
 int		check_quotes_closed(char *input);
-void	tokenize_env(int *i_ptr, char *input, t_token **head);
+void	tokenize_env(int *i_ptr, char *input, t_token **h_token);
 ///lexer_fix_redir.c
-void	fix_redir_list(t_token **head);
+void	fix_redir_list(t_token **h_token);
 void	fix_redir(t_token **start);
 void	del_next_redir(t_token **current);
 ///lexer_is_token.c
@@ -124,9 +124,9 @@ int		is_cmd(char *str);
 int		is_env(char *str);
 int		is_file(t_type prev);
 ///lexer_assign_token.c
-void	tokenize(t_token **head);
+void	tokenize(t_token **h_token);
 int		is_sep(char c);
 //lexer_fix_argv.c
-void	lexer_fix_master(t_token **head);
+void	lexer_fix_master(t_token **h_token);
 
 #endif

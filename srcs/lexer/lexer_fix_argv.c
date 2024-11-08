@@ -6,11 +6,30 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:37:03 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 14:32:32 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:59:04 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	lexer_beginning_space(t_token **h_token)
+{
+	t_token	*temp;
+
+	temp = *h_token;
+	while (temp->token == NDEF)
+	{
+		*h_token = temp->next;
+		if (temp->next)
+		{
+			temp->next->prev = NULL;
+			if (temp->value)
+				free(temp->value);
+			free(temp);
+		}
+		temp = temp->next;
+	}
+}
 
 static void	lexer_multiple_space(t_token **h_token)
 {
@@ -51,6 +70,7 @@ static void	lexer_one_space(t_token **h_token)
 
 void	lexer_fix_master(t_token **h_token)
 {
+	lexer_beginning_space(h_token);
 	lexer_one_space(h_token);
 	lexer_multiple_space(h_token);
 }

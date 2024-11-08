@@ -6,23 +6,21 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 14:30:28 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:43:55 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_var(char **envp)
+void	env_var(char **envp, t_env **h_env)
 {
-	t_env	*head;
-
-	head = NULL;
-	init_env(&head, envp);
-	// export_var("TEST=lol", &head);
-	// print_env(&head);
+	*h_env = NULL;
+	init_env(h_env, envp);
+	export_var("TEST=illbereplaced", h_env);
+	// print_env(h_env);
 }
 
-void	export_var(char *var, t_env **head)
+void	export_var(char *var, t_env **h_env)
 {
 	char	*name;
 	char	*value;
@@ -34,25 +32,25 @@ void	export_var(char *var, t_env **head)
 	name = get_env_name(var);
 	if (!name)
 		return ;
-	unset(name, head);
+	unset(name, h_env);
 	if (!ft_strchr(var, '='))
 	{
-		add_env_end(name, NULL, head);
+		add_env_end(name, NULL, h_env);
 		return ;
 	}
 	value = export_env_value(var);
 	if (!value)
 		value = NULL;
-	add_env_end(name, value, head);
+	add_env_end(name, value, h_env);
 }
 
-void	print_export(t_env **head)
+void	print_export(t_env **h_env)
 {
 	t_env	*temp;
 
-	if (*head == NULL)
+	if (*h_env == NULL)
 		return ;
-	temp = *head;
+	temp = *h_env;
 	while (temp)
 	{
 		if (temp->value)
@@ -63,13 +61,13 @@ void	print_export(t_env **head)
 	}
 }
 
-void	print_env(t_env **head)
+void	print_env(t_env **h_env)
 {
 	t_env	*temp;
 
-	if (*head == NULL)
+	if (*h_env == NULL)
 		return ;
-	temp = *head;
+	temp = *h_env;
 	while (temp)
 	{
 		if (temp->value)

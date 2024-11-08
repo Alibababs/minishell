@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:27:27 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 14:27:35 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:13:49 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static void	unset_destroy(t_env *temp)
 	temp = NULL;
 }
 
-void	unset(char *name, t_env **head)
+void	unset(char *name, t_env **h_env)
 {
 	t_env	*temp;
 
-	temp = *head;
+	temp = *h_env;
 	while (temp)
 	{
 		if (!ft_strncmp(name, temp->name, ft_strlen(name) + 1))

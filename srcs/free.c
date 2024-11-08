@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/04 13:21:07 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:15:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	free_env(t_env **head)
+void	free_env(t_env **h_env)
 {
 	t_env	*temp;
 
-	if (*head == NULL)
+	if (*h_env == NULL)
 		return ;
-	temp = *head;
+	temp = *h_env;
 	while (temp->next)
 	{
 		if (temp->name)
@@ -50,13 +50,13 @@ void	free_env(t_env **head)
 	free(temp);
 }
 
-void	free_token(t_token **head)
+void	free_token(t_token **h_token)
 {
 	t_token	*temp;
 
-	if (*head == NULL)
+	if (*h_token == NULL)
 		return ;
-	temp = *head;
+	temp = *h_token;
 	while (temp->next)
 	{
 		if (temp->value)

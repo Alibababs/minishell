@@ -6,13 +6,13 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:26:02 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 12:57:17 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:13:09 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_env(t_env **head, char **envp)
+int	init_env(t_env **h_env, char **envp)
 {
 	int		i;
 	char	*name;
@@ -29,7 +29,7 @@ int	init_env(t_env **head, char **envp)
 		value = get_env_value(envp[i]);
 		if (!value)
 			return (free(name), 3);
-		add_env_end(name, value, head);
+		add_env_end(name, value, h_env);
 		i++;
 	}
 	return (0);
@@ -64,7 +64,7 @@ char	*get_env_value(char *var)
 	return (value);
 }
 
-void	add_env_empty(char *name, char *value, t_env **head)
+void	add_env_empty(char *name, char *value, t_env **h_env)
 {
 	t_env	*new_env;
 
@@ -75,22 +75,22 @@ void	add_env_empty(char *name, char *value, t_env **head)
 	new_env->value = value;
 	new_env->prev = NULL;
 	new_env->next = NULL;
-	*head = new_env;
+	*h_env = new_env;
 }
 
-void	add_env_end(char *name, char *value, t_env **head)
+void	add_env_end(char *name, char *value, t_env **h_env)
 {
 	t_env	*new_env;
 	t_env	*temp;
 
-	if (*head == NULL)
-		add_env_empty(name, value, head);
+	if (*h_env == NULL)
+		add_env_empty(name, value, h_env);
 	else
 	{
 		new_env = malloc(sizeof(t_env));
 		if (!new_env)
 			return ;
-		temp = *head;
+		temp = *h_env;
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new_env;

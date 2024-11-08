@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/08 14:34:57 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:57:12 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ static void	process_command(char *input, t_env **h_env)
 {
 	t_token	*h_token;
 
-	lexer(input, &h_token, h_env);
+	if (ft_strlen(input) == 0)
+		return ;
+	lexer(input, &h_token);
 	expander(&h_token, h_env);
+	print_token(&h_token);
 }
 
 void	init_data(void)
@@ -31,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 
 	init_data();
-	env_var(envp);
+	env_var(envp, &h_env);
 	while (argc && argv)
 	{
 		input = readline("minishelldefou> ");
