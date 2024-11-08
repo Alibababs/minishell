@@ -6,25 +6,42 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 13:37:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:36 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	tokenize(t_token **head)
+static int	is_sem(char *str)
+{
+	if (!ft_strncmp(str, ";", 2))
+		return (0);
+	return (1);
+}
+
+static void	assign_token_bis(t_token **current)
 {
 	t_token	*temp;
 
-	temp = *head;
-	while (temp)
+	temp = *current;
+	if (!is_env(temp->value))
+		temp->token = ENV;
+	else if (!is_cmd(temp->value))
+		temp->token = CMD;
+	else if (temp->prev)
 	{
-		assign_token(&temp);
-		temp = temp->next;
+		if (!is_argv(temp->prev->token))
+			temp->token = ARGV;
+		else if (!is_file(temp->prev->token))
+			temp->token = FIL;
+		else
+			temp->token = NDEF;
 	}
+	else
+		temp->token = NDEF;
 }
 
-void	assign_token(t_token **current)
+static void	assign_token(t_token **current)
 {
 	t_token	*temp;
 
@@ -53,26 +70,16 @@ void	assign_token(t_token **current)
 		assign_token_bis(&temp);
 }
 
-void	assign_token_bis(t_token **current)
+void	tokenize(t_token **head)
 {
 	t_token	*temp;
 
-	temp = *current;
-	if (!is_env(temp->value))
-		temp->token = ENV;
-	else if (!is_cmd(temp->value))
-		temp->token = CMD;
-	else if (temp->prev)
+	temp = *head;
+	while (temp)
 	{
-		if (!is_argv(temp->prev->token))
-			temp->token = ARGV;
-		else if (!is_file(temp->prev->token))
-			temp->token = FIL;
-		else
-			temp->token = NDEF;
+		assign_token(&temp);
+		temp = temp->next;
 	}
-	else
-		temp->token = NDEF;
 }
 
 int	is_sep(char c)
@@ -84,11 +91,4 @@ int	is_sep(char c)
 	else if (c == '$')
 		return (1);
 	return (0);
-}
-
-int	is_sem(char *str)
-{
-if (!ft_strncmp(str, ";", 2))
-		return (0);
-	return (1);
 }

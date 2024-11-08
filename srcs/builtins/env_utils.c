@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 14:30:41 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:47:04 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ void	env_var(char **envp)
 
 	head = NULL;
 	init_env(&head, envp);
-	// export_var("TEST2=mdr", &head);
-	// export_var("TEST2=ptdr", &head);
-	// export_var("TEST=lol", &head);
-	// print_env(&head);
-	// print_export(&head);
-	// printf("Value: %s\n", get_var("TEST", &head));
-	free_env(&head);
 }
 
 void	export_var(char *var, t_env **head)
@@ -85,7 +78,7 @@ void	print_env(t_env **head)
 
 char	*get_var(char *name, t_env **head)
 {
-	int	len;
+	int		len;
 	t_env	*temp;
 
 	if (!name || *head == NULL)

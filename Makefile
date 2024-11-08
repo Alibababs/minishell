@@ -14,21 +14,22 @@ LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
-C_FILE		=	main	 						\
-				signal							\
-				lexer/lexer						\
-				lexer/lexer_list				\
-				lexer/lexer_fix_redir			\
-				lexer/lexer_is_token			\
-				lexer/lexer_is_token_bis		\
-				lexer/lexer_assign_token		\
-				lexer/lexer_is_cmd				\
-				lexer/lexer_fix_argv			\
-				env/env_list					\
-				env/env_utils					\
-				env/env_parsing					\
-				env/unset						\
-				free							\
+C_FILE		=	main	 								\
+				signal									\
+				lexer/lexer								\
+				lexer/lexer_list						\
+				lexer/lexer_fix_redir					\
+				lexer/lexer_is_token					\
+				lexer/lexer_is_token_bis				\
+				lexer/lexer_assign_token				\
+				lexer/lexer_is_cmd						\
+				lexer/lexer_fix_argv					\
+				builtins/env_list						\
+				builtins/env_utils						\
+				builtins/env_parsing					\
+				builtins/unset							\
+				builtins/pwd							\
+				free									\
 
 SRC_DIR		=	./srcs/
 

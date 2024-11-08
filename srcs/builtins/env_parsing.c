@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:13:47 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 14:27:25 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:46:34 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,3 @@ char	*export_env_value(char *var)
 		return (NULL);
 	return (value);
 }
-

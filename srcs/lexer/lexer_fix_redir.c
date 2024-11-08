@@ -6,11 +6,38 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 14:40:50 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:39:44 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	add_redir(t_token **current)
+{
+	t_token	*temp;
+	char	*fixed;
+
+	temp = *current;
+	fixed = ft_strjoin(temp->value, temp->next->value);
+	if (!fixed)
+		return ;
+	free(temp->value);
+	temp->value = fixed;
+}
+
+static int	is_redir(char *value)
+{
+	int	i;
+
+	i = 0;
+	while (value[i])
+	{
+		if (value[i] != '<' && value[i] != '>')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	fix_redir_list(t_token **head)
 {
@@ -51,31 +78,4 @@ void	del_next_redir(t_token **current)
 	if (temp->value)
 		free(temp->value);
 	free(temp);
-}
-
-void	add_redir(t_token **current)
-{
-	t_token	*temp;
-	char	*fixed;
-
-	temp = *current;
-	fixed = ft_strjoin(temp->value, temp->next->value);
-	if (!fixed)
-		return ;
-	free(temp->value);
-	temp->value = fixed;
-}
-
-int	is_redir(char *value)
-{
-	int	i;
-
-	i = 0;
-	while (value[i])
-	{
-		if (value[i] != '<' && value[i] != '>')
-			return (1);
-		i++;
-	}
-	return (0);
 }

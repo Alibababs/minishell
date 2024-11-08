@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/07 13:34:34 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,19 @@ int	check_quotes_closed(char *input)
 	if (squotes % 2 != 0 || dquotes % 2 != 0)
 		return (1);
 	return (0);
+}
+
+void	tokenize_env(int *i_ptr, char *input, t_token **head)
+{
+	int		start;
+	char	*to_tokenize;
+
+	start = *i_ptr;
+	*i_ptr += 1;
+	while (input[*i_ptr] && !is_sep(input[*i_ptr]))
+		*i_ptr += 1;
+	to_tokenize = ft_substr(input, start, *i_ptr - start);
+	if (!to_tokenize)
+		return ;
+	add_token_end(to_tokenize, head);
 }

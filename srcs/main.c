@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/10/04 13:14:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:43:46 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break ;
 		}
-
 		if (input)
 		{
 			lexer(input);
