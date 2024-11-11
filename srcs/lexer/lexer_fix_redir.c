@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 14:32:45 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:39:45 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	fix_redir_list(t_token **h_token)
 	t_token	*temp;
 
 	temp = *h_token;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		if (!is_redir(temp->value) && !is_redir(temp->next->value))
 		{

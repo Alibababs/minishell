@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:37:03 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 15:59:04 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:40:53 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	lexer_beginning_space(t_token **h_token)
 	t_token	*temp;
 
 	temp = *h_token;
-	while (temp->token == NDEF)
+	while (temp && ft_isspace(temp->value[0]))
 	{
 		*h_token = temp->next;
 		if (temp->next)
