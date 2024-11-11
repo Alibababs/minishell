@@ -29,6 +29,7 @@ C_FILE		=	main	 								\
 				builtins/env_parsing					\
 				builtins/unset							\
 				builtins/pwd							\
+				builtins/echo							\
 				parsing/expander						\
 				free									\
 
