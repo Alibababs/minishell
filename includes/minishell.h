@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/11 13:57:18 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:09:59 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }					t_env;
+
+typedef struct s_cmd
+{
+	char			*path;
+	char			**argv;
+	int				in;
+	int				out;
+	int				pid;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}					t_cmd;
 
 ///////////GENERAL>
 ///signal.c

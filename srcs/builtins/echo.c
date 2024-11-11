@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:52:46 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/11 14:05:38 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:36:16 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	echo_write(char *argv[], int newline_flag)
 		i = 0;
 	while (argv[++i])
 		printf("%s", argv[i]);
-	if (newline_flag == 1)
+	if (newline_flag == 0)
 		printf("\n");
 }
 

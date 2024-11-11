@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 15:43:55 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:20:37 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	env_var(char **envp, t_env **h_env)
 {
 	*h_env = NULL;
 	init_env(h_env, envp);
-	export_var("TEST=illbereplaced", h_env);
+	export_var("TEST=out.txt", h_env);
 	// print_env(h_env);
 }
 
@@ -83,7 +83,7 @@ char	*get_var(char *name, t_env **h_env)
 
 	if (!name || *h_env == NULL)
 		return (NULL);
-	len = ft_strlen(name);
+	len = ft_strlen(name) - 1;
 	temp = *h_env;
 	while (temp)
 	{
@@ -91,5 +91,6 @@ char	*get_var(char *name, t_env **h_env)
 			return (temp->value);
 		temp = temp->next;
 	}
+	printf("LOL");
 	return (NULL);
 }
