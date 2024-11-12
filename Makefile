@@ -30,7 +30,10 @@ C_FILE		=	main	 								\
 				builtins/unset							\
 				builtins/pwd							\
 				builtins/echo							\
+				builtins/cd								\
 				parsing/expander						\
+				parsing/parsing							\
+				parsing/parsing_list					\
 				free									\
 
 SRC_DIR		=	./srcs/

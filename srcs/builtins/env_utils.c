@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/11 15:20:37 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:21:17 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ char	*get_var(char *name, t_env **h_env)
 			return (temp->value);
 		temp = temp->next;
 	}
-	printf("LOL");
 	return (NULL);
 }
