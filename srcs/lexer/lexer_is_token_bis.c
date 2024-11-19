@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 11:44:30 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:04:52 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,21 @@ int	is_dquote(char *str)
 	return (1);
 }
 
-int	is_builtin(char *str)
+int	is_builtin_bis(char *str)
 {
 	char	**builtin;
 	int		i;
 
 	builtin = declare_builtin();
 	if (!builtin)
-		return (1);
+		return (0);
 	i = 0;
 	while (builtin[i])
 	{
-		if (!ft_strncmp(str, builtin[i], ft_strlen(builtin[i])))
-			return (free(builtin), 0);
+		if (!ft_strncmp(str, builtin[i], ft_strlen(str)))
+			return (free(builtin), 1);
 		i++;
 	}
 	free(builtin);
-	return (2);
+	return (0);
 }

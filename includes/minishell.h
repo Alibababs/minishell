@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/19 12:52:15 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:10:47 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 
 typedef enum s_type
 {
-	PIPE = 101,
+	PIPE = 101, //
 	IN = 102,
-	OUT = 103,
-	HEREDOC = 104,
+	OUT = 103, //
+	HEREDOC = 104, //
 	APPEND = 105,
 	S_QUOTE = 106,
 	D_QUOTE = 107,
@@ -41,7 +41,6 @@ typedef enum s_type
 	ENV = 111,
 	FIL = 112,
 	NDEF = 113,
-	SEM = 114,
 }	t_type;
 
 typedef struct s_token
@@ -88,6 +87,8 @@ void	parsing(t_token **h_token, t_cmd **h_cmd);
 void	add_cmd_end(t_cmd **h_cmd);
 int		count_cmds(t_cmd **h_cmd);
 void	print_cmd(t_cmd **h_cmd);
+///parsing_argv.c
+void	set_argv(t_token **h_token, t_cmd **h_cmd);
 
 //////////////////BUILTINS>
 ///env_list.c
@@ -137,7 +138,7 @@ int		is_pipe(char *str);
 int		is_argv(t_type prev);
 int		is_squote(char *str);
 int		is_dquote(char *str);
-int		is_builtin(char *str);
+int		is_builtin_bis(char *str);
 ///lexer_is_cmd.c
 char	**get_path(void);
 char	**fix_env(char **env);
@@ -147,6 +148,7 @@ int		is_file(t_type prev);
 ///lexer_assign_token.c
 void	tokenize(t_token **h_token);
 int		is_sep(char c);
+int		is_builtin(t_token *current);
 //lexer_fix_argv.c
 void	lexer_fix_master(t_token **h_token);
 

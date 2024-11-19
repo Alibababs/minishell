@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:38:46 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:56:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	parsing(t_token **h_token, t_cmd **h_cmd)
 {
 	create_cmd_list(h_token, h_cmd);
 	set_path(h_token, h_cmd);
+	set_argv(h_token, h_cmd);
 	print_cmd(h_cmd);
 }
 

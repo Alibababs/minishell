@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/19 13:22:37 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:07:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	process_command(char *input, t_env **h_env)
 		return ;
 	lexer(input, &h_token);
 	expander(&h_token, h_env);
+	//Make PARSING ERRORS (Most important)
 	parsing(&h_token, &h_cmd);
 }
 

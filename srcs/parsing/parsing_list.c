@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:36:22 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:56:36 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,23 @@
 void	print_cmd(t_cmd **h_cmd)
 {
 	int		i;
-	// int		j;
+	int		j;
 	t_cmd	*temp;
 
 	if (!*h_cmd)
 		return ;
 	i = 0;
-	// j = 0;
 	temp = *h_cmd;
 	while (temp)
 	{
+		j = 0;
 		printf("CMD [%d]\n", i);
 		printf("Path: %s\n", temp->path);
-		// while (temp->argv[j++])
-			// printf("Argv [j]: %s\n", temp->argv[j]);
+		while (temp->argv[j])
+		{
+			printf("Argv [%d]: %s\n", j, temp->argv[j]);
+			j++;
+		}
 		printf("In: %d\n", temp->in);
 		printf("Out: %d\n", temp->out);
 		printf("PID: %d\n", temp->pid);

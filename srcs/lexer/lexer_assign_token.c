@@ -6,18 +6,11 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:28:01 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:06:24 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_sem(char *str)
-{
-	if (!ft_strncmp(str, ";", 2))
-		return (0);
-	return (1);
-}
 
 static void	assign_token_bis(t_token **current)
 {
@@ -27,10 +20,7 @@ static void	assign_token_bis(t_token **current)
 	if (!is_env(temp->value))
 		temp->token = ENV;
 	else if (!is_cmd(temp))
-	{
-
 		temp->token = CMD;
-	}
 	else if (temp->prev)
 	{
 		if (!is_argv(temp->prev->token))
@@ -51,10 +41,8 @@ static void	assign_token(t_token **current)
 	temp = *current;
 	if (!temp->value)
 		return ;
-	if (!is_builtin(temp->value))
+	if (!is_builtin(temp))
 		temp->token = BUILTIN;
-	else if (!is_sem(temp->value))
-		temp->token = SEM;
 	else if (!is_in(temp->value))
 		temp->token = IN;
 	else if (!is_out(temp->value))
@@ -94,4 +82,19 @@ int	is_sep(char c)
 	else if (c == '$')
 		return (1);
 	return (0);
+}
+
+int	is_builtin(t_token *current)
+{
+	if (current->prev)
+	{
+		if (is_builtin_bis(current->value) && (current->prev->token == IN || current->prev->token == HEREDOC
+			|| current->prev->token == OUT))
+			return (1);
+		if (is_builtin_bis(current->value) && (current->prev->token != BUILTIN || current->prev->token != CMD))
+			return (0);
+	}
+	else if (is_builtin_bis(current->value))
+		return (0);
+	return (1);
 }

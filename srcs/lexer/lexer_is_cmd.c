@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:37 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:37:22 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:07:21 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	is_env(char *str)
 
 int	is_cmd(t_token *current)
 {
-	if (current->prev == NULL)
+	if (!current->prev)
 		return (0);
-	else if (is_sep(current->prev->value[0]))
+	else if (current->prev->value[0] == '|')
+		return (0);
+	else if (current->prev->prev && current->prev->prev->token == IN)
 		return (0);
 	else
 		return (1);
