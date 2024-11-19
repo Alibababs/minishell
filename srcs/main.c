@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/12 12:36:41 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:22:37 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 static void	process_command(char *input, t_env **h_env)
 {
 	t_token	*h_token;
+	t_cmd	*h_cmd;
 
+
+	h_token = NULL;
+	h_cmd = NULL;
 	if (ft_strlen(input) == 0)
 		return ;
 	lexer(input, &h_token);
 	expander(&h_token, h_env);
-	print_token(&h_token);
-	parsing(&h_token, h_env);
+	parsing(&h_token, &h_cmd);
 }
 
 void	init_data(void)

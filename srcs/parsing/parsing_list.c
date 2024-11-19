@@ -6,11 +6,37 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/11 16:04:52 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:36:22 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_cmd(t_cmd **h_cmd)
+{
+	int		i;
+	// int		j;
+	t_cmd	*temp;
+
+	if (!*h_cmd)
+		return ;
+	i = 0;
+	// j = 0;
+	temp = *h_cmd;
+	while (temp)
+	{
+		printf("CMD [%d]\n", i);
+		printf("Path: %s\n", temp->path);
+		// while (temp->argv[j++])
+			// printf("Argv [j]: %s\n", temp->argv[j]);
+		printf("In: %d\n", temp->in);
+		printf("Out: %d\n", temp->out);
+		printf("PID: %d\n", temp->pid);
+		printf("\n\n");
+		temp = temp->next;
+		i++;
+	}
+}
 
 static void	init_cmd_node(t_cmd *current)
 {
@@ -52,6 +78,21 @@ void	add_cmd_end(t_cmd **h_cmd)
 		temp->next = new_cmd;
 		new_cmd->next = NULL;
 		new_cmd->prev = temp;
-		init_cmd_node(temp);
+		init_cmd_node(new_cmd);
 	}
+}
+
+int	count_cmds(t_cmd **h_cmd)
+{
+	t_cmd	*temp;
+	int		res;
+
+	temp = *h_cmd;
+	res = 0;
+	while (temp)
+	{
+		res++;
+		temp = temp->next;
+	}
+	return (res);
 }

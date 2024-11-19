@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/12 12:05:16 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:52:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ void	free_env(t_env **h_env);
 ///expander.c
 void	expander(t_token **h_token, t_env **h_env);
 ///parsing.c
-void	parsing(t_token **h_token, t_env **h_env);
+void	parsing(t_token **h_token, t_cmd **h_cmd);
 ///parsing_list.c
 void	add_cmd_end(t_cmd **h_cmd);
+int		count_cmds(t_cmd **h_cmd);
+void	print_cmd(t_cmd **h_cmd);
 
 //////////////////BUILTINS>
 ///env_list.c
@@ -139,7 +141,7 @@ int		is_builtin(char *str);
 ///lexer_is_cmd.c
 char	**get_path(void);
 char	**fix_env(char **env);
-int		is_cmd(char *str);
+int		is_cmd(t_token *current);
 int		is_env(char *str);
 int		is_file(t_type prev);
 ///lexer_assign_token.c

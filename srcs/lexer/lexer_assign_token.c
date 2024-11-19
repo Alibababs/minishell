@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 14:32:15 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:28:01 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ static void	assign_token_bis(t_token **current)
 	temp = *current;
 	if (!is_env(temp->value))
 		temp->token = ENV;
-	else if (!is_cmd(temp->value))
+	else if (!is_cmd(temp))
+	{
+
 		temp->token = CMD;
+	}
 	else if (temp->prev)
 	{
 		if (!is_argv(temp->prev->token))

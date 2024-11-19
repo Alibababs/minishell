@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:37 by phautena          #+#    #+#             */
-/*   Updated: 2024/10/03 16:04:53 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:37:22 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,14 @@ int	is_env(char *str)
 	return (1);
 }
 
-int	is_cmd(char *str)
+int	is_cmd(t_token *current)
 {
-	int		i;
-	char	**path;
-	char	*path_binary;
-
-	i = 0;
-	path = get_path();
-	if (!path)
+	if (current->prev == NULL)
+		return (0);
+	else if (is_sep(current->prev->value[0]))
+		return (0);
+	else
 		return (1);
-	while (path[i])
-	{
-		path_binary = ft_strjoin(path[i], str);
-		if (!path_binary)
-			return (free_array(path), 2);
-		if (!access(path_binary, F_OK))
-			return (free_array(path), free(path_binary), 0);
-		free(path_binary);
-		i++;
-	}
-	free_array(path);
-	return (3);
 }
 
 char	**get_path(void)
