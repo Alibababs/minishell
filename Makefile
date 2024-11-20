@@ -36,6 +36,7 @@ C_FILE		=	main	 								\
 				parsing/parsing_list					\
 				parsing/parsing_argv					\
 				free									\
+				free_bis								\
 
 SRC_DIR		=	./srcs/
 

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 11:29:11 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:52:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	process_command(char *input, t_head *head)
 	lexer(input, &head->h_token);
 	expander(&head->h_token, &head->h_env);
 	//Make PARSING ERRORS (Most important)
-	parsing(&head->h_token, &head->h_cmd);
+	parsing(&head->h_token, &head->h_cmd, head);
 }
 
 void	init_data(void)

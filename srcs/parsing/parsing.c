@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:17:14 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:53:20 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,23 @@ static char	*get_cmd_path(char *binary)
 	return (binary);
 }
 
-static void	set_cmd(t_token *token_current, t_cmd *cmd_current)
+static void	set_cmd(t_token *token_current, t_cmd *cmd_current, t_head *head)
 {
 	if (token_current->value[0] != '/')
+	{
 		cmd_current->path = get_cmd_path(token_current->value);
+		if (!cmd_current->path)
+			error_cmd(head);
+	}
 	else
+	{
 		cmd_current->path = ft_strdup(token_current->value);
+		if (!cmd_current->path)
+			error_cmd(head);
+	}
 }
 
-static void	set_path(t_token **h_token, t_cmd **h_cmd)
+static void	set_path(t_token **h_token, t_cmd **h_cmd, t_head *head)
 {
 	int		cmd_n;
 	t_cmd	*cmd_temp;
@@ -57,13 +65,15 @@ static void	set_path(t_token **h_token, t_cmd **h_cmd)
 	{
 		if (token_temp->token == CMD)
 		{
-			set_cmd(token_temp, cmd_temp);
+			set_cmd(token_temp, cmd_temp, head);
 			cmd_temp = cmd_temp->next;
 			cmd_n--;
 		}
 		else if (token_temp->token == BUILTIN)
 		{
 			cmd_temp->path = ft_strdup(token_temp->value);
+			if (!cmd_temp->path)
+				error_cmd(head);
 			cmd_temp = cmd_temp->next;
 			cmd_n--;
 		}
@@ -71,7 +81,7 @@ static void	set_path(t_token **h_token, t_cmd **h_cmd)
 	}
 }
 
-static void	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
+static int	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 {
 	t_token *temp;
 	int		cmd_n;
@@ -86,16 +96,19 @@ static void	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 	}
 	while (cmd_n > 0)
 	{
-		add_cmd_end(h_cmd);
+		if (add_cmd_end(h_cmd) != 0)
+			return (1);
 		cmd_n--;
 	}
+	return (0);
 }
 
-void	parsing(t_token **h_token, t_cmd **h_cmd)
+void	parsing(t_token **h_token, t_cmd **h_cmd, t_head *head)
 {
-	create_cmd_list(h_token, h_cmd);
-	set_path(h_token, h_cmd);
-	set_argv(h_token, h_cmd);
+	if (create_cmd_list(h_token, h_cmd) != 0)
+		error_cmd(head);
+	set_path(h_token, h_cmd, head);
+	set_argv(h_token, h_cmd, head);
 	print_cmd(h_cmd);
 }
 

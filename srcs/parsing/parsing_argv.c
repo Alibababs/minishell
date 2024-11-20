@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 16:55:15 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:52:30 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_nodes_until_pipe(t_token *h_current)
 	return (i);
 }
 
-static char	**get_argv(t_token *h_current)
+static char	**get_argv(t_token *h_current, t_head *head)
 {
 	char	**res;
 	int		n_argv;
@@ -36,11 +36,13 @@ static char	**get_argv(t_token *h_current)
 	n_argv = count_nodes_until_pipe(h_current);
 	res = malloc(sizeof(char *) * n_argv + 1);
 	if (!res)
-		return (NULL);
+		error_cmd(head);
 	i = 0;
 	while (i < n_argv)
 	{
 		res[i] = ft_strdup(h_current->value);
+		if (!res[i])
+			error_cmd(head);
 		h_current = h_current->next;
 		i++;
 	}
@@ -48,7 +50,7 @@ static char	**get_argv(t_token *h_current)
 	return (res);
 }
 
-void	set_argv(t_token **h_token, t_cmd **h_cmd)
+void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head)
 {
 	t_token	*token_temp;
 	t_cmd	*cmd_temp;
@@ -57,7 +59,7 @@ void	set_argv(t_token **h_token, t_cmd **h_cmd)
 	token_temp = *h_token;
 	while (cmd_temp)
 	{
-		cmd_temp->argv = get_argv(token_temp);
+		cmd_temp->argv = get_argv(token_temp, head);
 		while (token_temp->next && token_temp->token != PIPE)
 			token_temp = token_temp->next;
 		if (token_temp->next && token_temp->token == PIPE)

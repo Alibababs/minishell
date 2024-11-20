@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:17:59 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:43:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,35 @@ static void	init_cmd_node(t_cmd *current)
 	current->pid = -1;
 }
 
-static void	add_cmd_empty(t_cmd **h_cmd)
+static int	add_cmd_empty(t_cmd **h_cmd)
 {
 	t_cmd	*new_cmd;
 
 	new_cmd = malloc(sizeof(t_cmd));
 	if (!new_cmd)
-		return ;
+		return (1);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
 	init_cmd_node(new_cmd);
 	*h_cmd = new_cmd;
+	return (0);
 }
 
-void	add_cmd_end(t_cmd **h_cmd)
+int	add_cmd_end(t_cmd **h_cmd)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
 
 	if (*h_cmd == NULL)
-		add_cmd_empty(h_cmd);
+	{
+		if (add_cmd_empty(h_cmd) != 0)
+			return (1);
+	}
 	else
 	{
 		new_cmd = malloc(sizeof(t_cmd));
 		if (!new_cmd)
-			return ;
+			return (1);
 		temp = *h_cmd;
 		while (temp->next)
 			temp = temp->next;
@@ -83,6 +87,7 @@ void	add_cmd_end(t_cmd **h_cmd)
 		new_cmd->prev = temp;
 		init_cmd_node(new_cmd);
 	}
+	return (0);
 }
 
 int	count_cmds(t_cmd **h_cmd)

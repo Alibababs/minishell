@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 11:22:59 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:51:02 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,21 @@ void	free_array(char **array);
 void	free_token(t_token **h_token);
 void	free_env(t_env **h_env);
 void	error_token(t_token **h_token);
+void	free_cmd(t_cmd **h_cmd);
+///free_bis.c
+void	error_cmd(t_head *head);
 
 ////////////////PARSING>
 ///expander.c
 void	expander(t_token **h_token, t_env **h_env);
 ///parsing.c
-void	parsing(t_token **h_token, t_cmd **h_cmd);
+void	parsing(t_token **h_token, t_cmd **h_cmd, t_head *head);
 ///parsing_list.c
-void	add_cmd_end(t_cmd **h_cmd);
+int		add_cmd_end(t_cmd **h_cmd);
 int		count_cmds(t_cmd **h_cmd);
 void	print_cmd(t_cmd **h_cmd);
 ///parsing_argv.c
-void	set_argv(t_token **h_token, t_cmd **h_cmd);
+void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head);
 
 //////////////////BUILTINS>
 ///env_list.c
