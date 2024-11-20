@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 12:23:23 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:56:23 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	(void)envp;
+	free_env(&head.h_env);
 	return (0);
 }
