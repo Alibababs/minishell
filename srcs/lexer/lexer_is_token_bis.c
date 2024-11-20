@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:22:46 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:13:55 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	**declare_builtin(void)
 int	is_argv(t_type prev)
 {
 	if (prev == CMD || prev == BUILTIN || prev == ARGV || prev == HEREDOC
-		|| prev == S_QUOTE || prev == D_QUOTE)
+		|| prev == S_QUOTE || prev == D_QUOTE || prev == ENV)
 		return (0);
 	return (1);
 }

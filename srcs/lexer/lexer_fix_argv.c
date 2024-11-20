@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:37:03 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:25:32 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:19:02 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ void	lexer_fix_master(t_token **h_token)
 	while (temp && temp->next)
 	{
 		if (temp->next->value[0] == ' ')
+		{
 			del_next_redir(&temp);
-		temp = temp->next;
+			temp = *h_token;
+		}
+		else
+			temp = temp->next;
 	}
 }
