@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 14:33:21 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:20:03 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	add_token_end(char *to_tokenize, t_token **h_token)
 	{
 		new_token = malloc(sizeof(t_token));
 		if (!new_token)
-			return ;
+			return (error_token(h_token));
 		temp = *h_token;
 		while (temp->next)
 			temp = temp->next;
@@ -40,7 +40,7 @@ void	add_token_empty(char *to_tokenize, t_token **h_token)
 
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		return ;
+		return (error_token(h_token));
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	new_token->value = to_tokenize;
@@ -99,6 +99,6 @@ void	tokenize_env(int *i_ptr, char *input, t_token **h_token)
 		*i_ptr += 1;
 	to_tokenize = ft_substr(input, start, *i_ptr - start);
 	if (!to_tokenize)
-		return ;
+		return (error_token(h_token));
 	add_token_end(to_tokenize, h_token);
 }

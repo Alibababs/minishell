@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:49:05 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:20:37 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	tokenize_quote(int *i_ptr, char *input, t_token **h_token, int mode)
 	to_tokenize = ft_substr(input, start, *i_ptr - start + 1);
 	*i_ptr += 1;
 	if (!to_tokenize)
-		return ;
+		return (error_token(h_token));
 	add_token_end(to_tokenize, h_token);
 }
 
@@ -47,7 +47,7 @@ static void	tokenize_char(int *i_ptr, char *input, t_token **h_token)
 
 	to_tokenize = malloc(sizeof(char *));
 	if (!to_tokenize)
-		return ;
+		return (error_token(h_token));
 	to_tokenize[0] = input[*i_ptr];
 	to_tokenize[1] = '\0';
 	add_token_end(to_tokenize, h_token);
@@ -61,7 +61,7 @@ static void	tokenize_str(int *i_ptr, char *input, t_token **h_token)
 
 	to_tokenize = malloc(sizeof(char *));
 	if (!to_tokenize)
-		return ;
+		return (error_token(h_token));
 	i = 0;
 	while (input[*i_ptr] && !is_sep(input[*i_ptr]))
 	{

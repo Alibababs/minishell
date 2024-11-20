@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 17:06:24 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:24:25 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void	assign_token_bis(t_token **current)
 		temp->token = NDEF;
 }
 
-static void	assign_token(t_token **current)
+static void	assign_token(t_token **current, t_token **h_token)
 {
 	t_token	*temp;
 
 	temp = *current;
 	if (!temp->value)
 		return ;
-	if (!is_builtin(temp))
+	if (!is_builtin(temp, h_token))
 		temp->token = BUILTIN;
 	else if (!is_in(temp->value))
 		temp->token = IN;
@@ -68,7 +68,7 @@ void	tokenize(t_token **h_token)
 	temp = *h_token;
 	while (temp)
 	{
-		assign_token(&temp);
+		assign_token(&temp, h_token);
 		temp = temp->next;
 	}
 }
@@ -84,17 +84,17 @@ int	is_sep(char c)
 	return (0);
 }
 
-int	is_builtin(t_token *current)
+int	is_builtin(t_token *current, t_token **h_token)
 {
 	if (current->prev)
 	{
-		if (is_builtin_bis(current->value) && (current->prev->token == IN || current->prev->token == HEREDOC
+		if (is_builtin_bis(current->value, h_token) && (current->prev->token == IN || current->prev->token == HEREDOC
 			|| current->prev->token == OUT))
 			return (1);
-		if (is_builtin_bis(current->value) && (current->prev->token != BUILTIN || current->prev->token != CMD))
+		if (is_builtin_bis(current->value, h_token) && (current->prev->token != BUILTIN || current->prev->token != CMD))
 			return (0);
 	}
-	else if (is_builtin_bis(current->value))
+	else if (is_builtin_bis(current->value, h_token))
 		return (0);
 	return (1);
 }

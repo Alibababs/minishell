@@ -6,26 +6,22 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/19 17:07:35 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:29:11 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	process_command(char *input, t_env **h_env)
+static void	process_command(char *input, t_head *head)
 {
-	t_token	*h_token;
-	t_cmd	*h_cmd;
-
-
-	h_token = NULL;
-	h_cmd = NULL;
+	head->h_token = NULL;
+	head->h_cmd = NULL;
 	if (ft_strlen(input) == 0)
 		return ;
-	lexer(input, &h_token);
-	expander(&h_token, h_env);
+	lexer(input, &head->h_token);
+	expander(&head->h_token, &head->h_env);
 	//Make PARSING ERRORS (Most important)
-	parsing(&h_token, &h_cmd);
+	parsing(&head->h_token, &head->h_cmd);
 }
 
 void	init_data(void)
@@ -35,11 +31,11 @@ void	init_data(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_env	*h_env;
+	t_head	head;
 	char	*input;
 
 	init_data();
-	env_var(envp, &h_env);
+	env_var(envp, &head);
 	while (argc && argv)
 	{
 		input = readline("minishelldefou> ");
@@ -50,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (input)
 		{
-			process_command(input, &h_env);
+			process_command(input, &head);
 			add_history(input);
 		}
 	}

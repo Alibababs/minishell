@@ -6,18 +6,18 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/11 15:21:17 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:29:06 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_var(char **envp, t_env **h_env)
+void	env_var(char **envp, t_head *head)
 {
-	*h_env = NULL;
-	init_env(h_env, envp);
-	export_var("TEST=out.txt", h_env);
-	// print_env(h_env);
+	head->h_env = NULL;
+	init_env(&head->h_env, envp);
+	export_var("TEST=out.txt", &head->h_env);
+	print_env(&head->h_env);
 }
 
 void	export_var(char *var, t_env **h_env)

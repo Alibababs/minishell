@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 15:15:38 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:19:23 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ void	free_token(t_token **h_token)
 	if (temp->value)
 		free(temp->value);
 	free(temp);
+}
+
+void	error_token(t_token **h_token)
+{
+	printf("Error occured while allocating memory for tokens\nExiting\n");
+	free_token(h_token);
+	exit (1);
 }
