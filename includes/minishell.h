@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 12:23:08 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:39:33 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	cmd_cleanup(t_head *head);
 
 ////////////////PARSING>
 ///expander.c
-void	expander(t_token **h_token, t_env **h_env);
+
 ///parsing.c
 void	parsing(t_token **h_token, t_cmd **h_cmd, t_head *head);
 ///parsing_list.c
