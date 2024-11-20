@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:52:30 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:13:34 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**get_argv(t_token *h_current, t_head *head)
 	int		i;
 
 	n_argv = count_nodes_until_pipe(h_current);
-	res = malloc(sizeof(char *) * n_argv + 1);
+	res = malloc(sizeof(char *) * (n_argv + 1));
 	if (!res)
 		error_cmd(head);
 	i = 0;

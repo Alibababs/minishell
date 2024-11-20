@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 13:20:55 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:17:32 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ void	fix_redir_list(t_token **h_token)
 		if (!is_redir(temp->value) && !is_redir(temp->next->value))
 		{
 			add_redir(&temp);
-			del_next_redir(&temp);
-			temp = *h_token;
-		}
-		else if (temp->prev && temp->next->value[0] == ' ' && temp->token != ARGV
-				&& temp->token != S_QUOTE && temp->token != D_QUOTE)
-		{
 			del_next_redir(&temp);
 			temp = *h_token;
 		}
