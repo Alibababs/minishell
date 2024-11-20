@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:18:56 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:44:28 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ static void	tokenize_str(int *i_ptr, char *input, t_token **h_token)
 {
 	char	*to_tokenize;
 	int		i;
+	int		j;
 
-	to_tokenize = malloc(sizeof(char) * ft_strlen(input));
-	if (!to_tokenize)
-		return (error_token(h_token));
 	i = 0;
+	j = *i_ptr;
 	while (input[*i_ptr] && !is_sep(input[*i_ptr]))
 	{
-		to_tokenize[i] = input[*i_ptr];
 		i++;
 		*i_ptr += 1;
 	}
-	to_tokenize[i] = '\0';
+	to_tokenize = ft_substr(input, j, i);
+	if (!to_tokenize)
+		error_token(h_token);
 	add_token_end(to_tokenize, h_token);
 }
 

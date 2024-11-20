@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 11:51:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:23:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	error_token(t_token **h_token);
 void	free_cmd(t_cmd **h_cmd);
 ///free_bis.c
 void	error_cmd(t_head *head);
+void	cmd_cleanup(t_head *head);
 
 ////////////////PARSING>
 ///expander.c

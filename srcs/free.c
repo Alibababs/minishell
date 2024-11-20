@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:42:04 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:48:47 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,12 @@ void	free_cmd(t_cmd **h_cmd)
 		temp = temp->next;
 		free(temp->prev);
 	}
-	if (temp->path)
-		free(temp->path);
+	// if (temp->path)
+		// free(temp->path);
 	if (temp->argv)
 		free_array(temp->argv);
-	free(temp);
+	if (temp)
+		free(temp);
 }
 
 void	error_token(t_token **h_token)
