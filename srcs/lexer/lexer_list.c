@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:20:03 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:14:26 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,23 @@ void	print_token(t_token **h_token)
 int	check_quotes_closed(char *input)
 {
 	int	i;
-	int	squotes;
-	int	dquotes;
+	int	flag;
 
-	i = -1;
-	squotes = 0;
-	dquotes = 0;
-	while (input[++i])
+	i = 0;
+	flag = -1;
+	while (input[i])
 	{
-		if (input[i] == 39)
-			squotes++;
-		else if (input[i] == 34)
-			dquotes++;
+		if (input[i] == 34 && flag == -1)
+			flag = 1;
+		else if (input[i] == 34 && flag == 1)
+			flag = -1;
+		else if (input[i] == 39 && flag == -1)
+			flag = 2;
+		else if (input[i] == 39 && flag == 2)
+			flag = -1;
+		i++;
 	}
-	if (squotes % 2 != 0 || dquotes % 2 != 0)
+	if (flag != -1)
 		return (1);
 	return (0);
 }
