@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 17:09:36 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:02:36 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ static void	process_command(char *input, t_head *head)
 	head->h_cmd = NULL;
 	if (ft_strlen(input) == 0)
 		return ;
-	lexer(input, &head->h_token);
+	if (lexer(input, &head->h_token))
+		return ;
 	expander(head);
-	//Need to re-do expander (it was FREAKING SHIT)
-	//Make PARSING ERRORS (Most important)
-	parsing(&head->h_token, &head->h_cmd, head);
+	if (parsing(head))
+		return ;
+	pre_exec(&head->h_token, &head->h_cmd, head);
 	cmd_cleanup(head);
 }
 

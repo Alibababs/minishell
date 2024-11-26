@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:37 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/19 16:07:21 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:26:10 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,21 @@ int	is_file(t_type prev)
 
 int	is_env(char *str)
 {
-	if (str[0] == '$')
+	if (str[0] == '$' && str[1] != '\0')
 		return (0);
 	return (1);
 }
 
 int	is_cmd(t_token *current)
 {
+	int	i;
+
+	i = -1;
+	while (current->value[++i])
+	{
+		if (!ft_isalpha(current->value[i]))
+			return (1);
+	}
 	if (!current->prev)
 		return (0);
 	else if (current->prev->value[0] == '|')

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/20 15:56:25 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:44:16 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,25 @@ void	free_cmd(t_cmd **h_cmd);
 void	error_cmd(t_head *head);
 void	cmd_cleanup(t_head *head);
 
-////////////////PARSING>
+//////////////PARSING>
+///parsing.c
+int		parsing(t_head *head);
+///parsing_errors.c
+int		syntax_error(t_head *head, char *str);
+///parsing_utils.c
+int		parsing_is_redir(t_token *current);
+int		is_shitty_redir(t_token *current);
+
+////////////////PRE_EXEC>
 ///expander.c
 void	expander(t_head *head);
-
-///parsing.c
-void	parsing(t_token **h_token, t_cmd **h_cmd, t_head *head);
-///parsing_list.c
+///pre_exec.c
+void	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head);
+///cmd_list.c
 int		add_cmd_end(t_cmd **h_cmd);
 int		count_cmds(t_cmd **h_cmd);
 void	print_cmd(t_cmd **h_cmd);
-///parsing_argv.c
+///cmd_argv.c
 void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head);
 
 //////////////////BUILTINS>

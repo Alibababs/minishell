@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:58:26 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 10:35:51 by phautena         ###   ########.fr       */
+/*   Created: 2024/11/21 12:10:32 by phautena          #+#    #+#             */
+/*   Updated: 2024/11/21 13:49:54 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(char *directory)
+int	parsing_is_redir(t_token *current)
 {
-	int	ret;
+	if (current->token == IN || current->token == OUT
+		|| current->token == APPEND || current->token == HEREDOC)
+		return (1);
+	else
+		return (0);
+}
 
-	ret = chdir(directory);
-	if (ret != 0)
-		perror("Can't open directory\n");
-	// Changer Variable Environnement OLDPWD and PWD
+int	is_shitty_redir(t_token *current)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = current->value;
+	while (str[i])
+	{
+		if (str[i] != '<' && str[i] != '>')
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@ NAME		=	minishell
 
 CC			=	cc
 
-FLAG		=	-Wall -Werror -Wextra -g3 -I ./includes
+FLAG		=	-Wall -Werror -Wextra -g3 -fPIE -I./includes
 
 LIBFT_PATH	=	./libft/
 
@@ -14,29 +14,32 @@ LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
-C_FILE		=	main	 								\
-				signal									\
-				lexer/lexer								\
-				lexer/lexer_list						\
-				lexer/lexer_fix_redir					\
-				lexer/lexer_is_token					\
-				lexer/lexer_is_token_bis				\
-				lexer/lexer_assign_token				\
-				lexer/lexer_is_cmd						\
-				lexer/lexer_fix_argv					\
-				builtins/env_list						\
-				builtins/env_utils						\
-				builtins/env_parsing					\
-				builtins/unset							\
-				builtins/pwd							\
-				builtins/echo							\
-				builtins/cd								\
-				parsing/expander						\
-				parsing/parsing							\
-				parsing/parsing_list					\
-				parsing/parsing_argv					\
-				free									\
-				free_bis								\
+C_FILE		=	main	 									\
+				signal										\
+				lexer/lexer									\
+				lexer/lexer_list							\
+				lexer/lexer_fix_redir						\
+				lexer/lexer_is_token						\
+				lexer/lexer_is_token_bis					\
+				lexer/lexer_assign_token					\
+				lexer/lexer_is_cmd							\
+				lexer/lexer_fix_argv						\
+				builtins/env_list							\
+				builtins/env_utils							\
+				builtins/env_parsing						\
+				builtins/unset								\
+				builtins/pwd								\
+				builtins/echo								\
+				builtins/cd									\
+				pre_exec/expander							\
+				pre_exec/pre_exec							\
+				pre_exec/cmd_list							\
+				pre_exec/cmd_argv							\
+				parsing/parsing								\
+				parsing/parsing_errors						\
+				parsing/parsing_utils						\
+				free										\
+				free_bis									\
 
 SRC_DIR		=	./srcs/
 

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   parsing_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:58:26 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 10:35:51 by phautena         ###   ########.fr       */
+/*   Created: 2024/11/21 11:05:20 by phautena          #+#    #+#             */
+/*   Updated: 2024/11/21 11:12:03 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(char *directory)
+int	syntax_error(t_head *head, char *str)
 {
-	int	ret;
-
-	ret = chdir(directory);
-	if (ret != 0)
-		perror("Can't open directory\n");
-	// Changer Variable Environnement OLDPWD and PWD
+	printf("syntax error near unexpected token `%s'\n", str);
+	free_token(&head->h_token);
+	free_cmd(&head->h_cmd);
+	return (1);
 }

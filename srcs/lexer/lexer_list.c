@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:24:36 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 10:14:26 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:59:21 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	add_token_end(char *to_tokenize, t_token **h_token)
 		temp->next = new_token;
 		new_token->next = NULL;
 		new_token->prev = temp;
+		new_token->token = 0;
 		new_token->value = to_tokenize;
 	}
 }
@@ -43,6 +44,7 @@ void	add_token_empty(char *to_tokenize, t_token **h_token)
 		return (error_token(h_token));
 	new_token->next = NULL;
 	new_token->prev = NULL;
+	new_token->token = 0;
 	new_token->value = to_tokenize;
 	*h_token = new_token;
 }
