@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:35:49 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 11:00:29 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:52:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,20 @@ static void	tokenize_str(int *i_ptr, char *input, t_token **h_token)
 	add_token_end(to_tokenize, h_token);
 }
 
-static void	lex_all(char *input, t_token **h_token)
+static int	lex_all(char *input, t_token **h_token)
 {
 	int		i;
 	int		*i_ptr;
 
 	i = 0;
 	i_ptr = &i;
+	if (!all_spaces(input))
+		return (1);
 	while (input[i])
 	{
-		if (input[i] == '$')
+		if (ft_isspace(input[i]))
+			i++;
+		else if (input[i] == '$')
 			tokenize_env(i_ptr, input, h_token);
 		else if (input[i] == 34)
 			tokenize_quote(i_ptr, input, h_token, 1);
@@ -93,6 +97,7 @@ static void	lex_all(char *input, t_token **h_token)
 		else
 			tokenize_str(i_ptr, input, h_token);
 	}
+	return (0);
 }
 
 int	lexer(char *input, t_token **h_token)
@@ -101,7 +106,8 @@ int	lexer(char *input, t_token **h_token)
 		return (1);
 	if (check_quotes_closed(input))
 		return (printf("A quote is not closed. Please fix your quotes.\n"));
-	lex_all(input, h_token);
+	if (lex_all(input, h_token))
+		return (1);
 	fix_redir_list(h_token);
 	lexer_fix_master(h_token);
 	tokenize(h_token);

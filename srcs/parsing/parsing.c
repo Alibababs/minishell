@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:14 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 13:49:58 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:53:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ static int	single_char_redir_errors(t_head *head)
 	temp = head->h_token;
 	if (temp->token == NDEF && ft_strlen(temp->value) == 1)
 		return (syntax_error(head, temp->value));
+	else if (temp->token == PIPE && (!temp->next || !temp->prev))
+		return (syntax_error(head, temp->value));
 	while (temp)
 	{
 		if (parsing_is_redir(temp) && !temp->next)
 			return (syntax_error(head, "newline"));
-		if (is_shitty_redir(temp))
+		else if (is_shitty_redir(temp))
+			return (syntax_error(head, temp->value));
+		else if (parsing_pipes(temp))
 			return (syntax_error(head, temp->value));
 		temp = temp->next;
 	}

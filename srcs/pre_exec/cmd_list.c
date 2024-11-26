@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_list.c                                     :+:      :+:    :+:   */
+/*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 11:43:48 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:13:05 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	print_cmd(t_cmd **h_cmd)
 			printf("Argv [%d]: %s\n", j, temp->argv[j]);
 			j++;
 		}
-		printf("In: %d\n", temp->in);
-		printf("Out: %d\n", temp->out);
+		for (int h = 0; h < 2; h++)
+			printf("In: %d\n", temp->in[h]);
+		// printf("Out: %d\n", temp->out);
 		printf("PID: %d\n", temp->pid);
 		printf("\n\n");
 		temp = temp->next;
@@ -45,8 +46,8 @@ static void	init_cmd_node(t_cmd *current)
 {
 	current->path = NULL;
 	current->argv = NULL;
-	current->in = -1;
-	current->out = -1;
+	current->in = NULL;
+	current->out = NULL;
 	current->pid = -1;
 }
 

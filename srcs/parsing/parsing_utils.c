@@ -6,11 +6,18 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:10:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 13:49:54 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:41:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	parsing_pipes(t_token *current)
+{
+	if (current->next && current->token == PIPE && current->next->token == PIPE)
+		return (1);
+	return (0);
+}
 
 int	parsing_is_redir(t_token *current)
 {
@@ -24,15 +31,22 @@ int	parsing_is_redir(t_token *current)
 int	is_shitty_redir(t_token *current)
 {
 	int		i;
+	int		len;
 	char	*str;
 
 	i = 0;
 	str = current->value;
-	while (str[i])
+	len = ft_strlen(str);
+	if (len > 1)
 	{
-		if (str[i] != '<' && str[i] != '>')
-			return (0);
-		i++;
+		while (str[i])
+		{
+			if (str[i] != '<' && str[i] != '>')
+				return (0);
+			i++;
+		}
+		return (1);
 	}
-	return (1);
+	else
+		return (0);
 }

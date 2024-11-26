@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/21 13:44:16 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:38:26 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_cmd
 {
 	char			*path;
 	char			**argv;
-	int				in;
-	int				out;
+	int				*in;
+	int				*out;
 	int				pid;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -94,6 +94,7 @@ void	free_cmd(t_cmd **h_cmd);
 ///free_bis.c
 void	error_cmd(t_head *head);
 void	cmd_cleanup(t_head *head);
+void	file_error(t_head *head, char *file);
 
 //////////////PARSING>
 ///parsing.c
@@ -103,6 +104,7 @@ int		syntax_error(t_head *head, char *str);
 ///parsing_utils.c
 int		parsing_is_redir(t_token *current);
 int		is_shitty_redir(t_token *current);
+int		parsing_pipes(t_token *current);
 
 ////////////////PRE_EXEC>
 ///expander.c
@@ -115,6 +117,8 @@ int		count_cmds(t_cmd **h_cmd);
 void	print_cmd(t_cmd **h_cmd);
 ///cmd_argv.c
 void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head);
+///pre_exec_redirs.c
+int		set_redirs_in(t_token **h_token, t_cmd **h_cmd, t_head *head);
 
 //////////////////BUILTINS>
 ///env_list.c
@@ -154,6 +158,7 @@ void	tokenize_env(int *i_ptr, char *input, t_token **h_token);
 void	fix_redir_list(t_token **h_token);
 void	fix_redir(t_token **start);
 void	del_next_redir(t_token **current);
+int		all_spaces(char *input);
 ///lexer_is_token.c
 int		is_in(char *str);
 int		is_out(char *str);

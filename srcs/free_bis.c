@@ -6,11 +6,18 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:45:57 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:22:57 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:38:14 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	file_error(t_head *head, char *file)
+{
+	printf("Failed to open: %s\n", file);
+	free_token(&head->h_token);
+	free_cmd(&head->h_cmd);
+}
 
 void	error_cmd(t_head *head)
 {

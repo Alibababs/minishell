@@ -6,12 +6,25 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:17:32 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:50:55 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	all_spaces(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (!ft_isspace(input[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 static void	add_redir(t_token **current)
 {
 	t_token	*temp;
