@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 15:13:05 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:02:42 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	print_cmd(t_cmd **h_cmd)
 			printf("Argv [%d]: %s\n", j, temp->argv[j]);
 			j++;
 		}
-		for (int h = 0; h < 2; h++)
-			printf("In: %d\n", temp->in[h]);
-		// printf("Out: %d\n", temp->out);
+		for (int k = 0; k < temp->infiles; k++)
+			printf("In [%d]: %d\n", k, temp->fd_in[k]);
+		for (int l = 0; l < temp->outfiles; l++)
+			printf("Out [%d]: %d\n", l, temp->fd_out[l]);
 		printf("PID: %d\n", temp->pid);
 		printf("\n\n");
 		temp = temp->next;
@@ -46,8 +47,10 @@ static void	init_cmd_node(t_cmd *current)
 {
 	current->path = NULL;
 	current->argv = NULL;
-	current->in = NULL;
-	current->out = NULL;
+	current->fd_in = NULL;
+	current->fd_out = NULL;
+	current->infiles = 0;
+	current->outfiles = 0;
 	current->pid = -1;
 }
 

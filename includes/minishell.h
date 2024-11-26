@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/26 14:38:26 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:42:05 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ typedef struct s_cmd
 {
 	char			*path;
 	char			**argv;
-	int				*in;
-	int				*out;
+	int				*fd_in;
+	int				*fd_out;
+	int				infiles;
+	int				outfiles;
 	int				pid;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -94,7 +96,6 @@ void	free_cmd(t_cmd **h_cmd);
 ///free_bis.c
 void	error_cmd(t_head *head);
 void	cmd_cleanup(t_head *head);
-void	file_error(t_head *head, char *file);
 
 //////////////PARSING>
 ///parsing.c
@@ -110,7 +111,7 @@ int		parsing_pipes(t_token *current);
 ///expander.c
 void	expander(t_head *head);
 ///pre_exec.c
-void	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head);
+int		pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head);
 ///cmd_list.c
 int		add_cmd_end(t_cmd **h_cmd);
 int		count_cmds(t_cmd **h_cmd);
@@ -118,7 +119,8 @@ void	print_cmd(t_cmd **h_cmd);
 ///cmd_argv.c
 void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head);
 ///pre_exec_redirs.c
-int		set_redirs_in(t_token **h_token, t_cmd **h_cmd, t_head *head);
+int		set_redirs_in(t_token **h_token, t_cmd **h_cmd);
+int		set_redirs_out(t_token **h_token, t_cmd **h_cmd);
 
 //////////////////BUILTINS>
 ///env_list.c

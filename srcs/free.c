@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:48:47 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:38:07 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ void	free_cmd(t_cmd **h_cmd)
 			free(temp->path);
 		if (temp->argv)
 			free_array(temp->argv);
+		if (temp->fd_in)
+			free(temp->fd_in);
+		if (temp->fd_out)
+			free(temp->fd_out);
 		temp = temp->next;
 		free(temp->prev);
 	}
-	// if (temp->path)
-		// free(temp->path);
 	if (temp->argv)
 		free_array(temp->argv);
 	if (temp)
