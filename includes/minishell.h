@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/26 15:42:05 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:17:44 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 # define ERROR 1
 # define SUCCESS 0
 
 typedef enum s_type
 {
-	PIPE = 101, //
+	PIPE = 101,
 	IN = 102,
-	OUT = 103, //
-	HEREDOC = 104, //
+	OUT = 103,
+	HEREDOC = 104,
 	APPEND = 105,
 	S_QUOTE = 106,
 	D_QUOTE = 107,
@@ -71,6 +72,8 @@ typedef struct s_cmd
 	int				*fd_out;
 	int				infiles;
 	int				outfiles;
+	int				to_read;
+	int				to_write;
 	int				pid;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -96,6 +99,7 @@ void	free_cmd(t_cmd **h_cmd);
 ///free_bis.c
 void	error_cmd(t_head *head);
 void	cmd_cleanup(t_head *head);
+void	close_fds(t_cmd *current);
 
 //////////////PARSING>
 ///parsing.c
@@ -122,6 +126,13 @@ void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head);
 int		set_redirs_in(t_token **h_token, t_cmd **h_cmd);
 int		set_redirs_out(t_token **h_token, t_cmd **h_cmd);
 
+////////////////EXEC>
+///exec.c
+int		exec(t_cmd **h_cmd, char **envp, t_env **h_env);
+///exec_utils.c
+int		exec_is_builtin(char *str);
+int		exec_builtin(t_cmd *current, t_env **h_env);
+
 //////////////////BUILTINS>
 ///env_list.c
 void	add_env_empty(char *name, char *value, t_env **h_env);
@@ -145,7 +156,7 @@ void	ft_pwd(void);
 ///echo.c
 void	echo(char *argv[]);
 ///cd.c
-void	ft_cd(char *directory);
+void	ft_cd(char **argv);
 
 ///////////////LEXER>
 ///lexer.c
@@ -172,6 +183,7 @@ int		is_argv(t_type prev);
 int		is_squote(char *str);
 int		is_dquote(char *str);
 int		is_builtin_bis(char *str, t_token **h_token);
+char	**declare_builtin(void);
 ///lexer_is_cmd.c
 char	**get_path(void);
 char	**fix_env(char **env);

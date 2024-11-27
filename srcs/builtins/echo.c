@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:52:46 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/11 14:36:16 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:18:31 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ static void	echo_write(char *argv[], int newline_flag)
 void	echo(char *argv[])
 {
 	if (!ft_strncmp(argv[1], "-n", 3))
-	{
-		printf("-n detected\n");
 		echo_write(argv, 1);
-	}
 	else
 		echo_write(argv, 0);
 }

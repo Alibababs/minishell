@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 14:17:38 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:20:47 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	count_nodes_until_pipe(t_token *h_current)
 
 	temp = h_current;
 	i = 0;
-	while (temp && temp->token != PIPE)
+	while (temp && temp->token != PIPE && temp->token != IN && temp->token != OUT)
 	{
 		i++;
 		temp = temp->next;

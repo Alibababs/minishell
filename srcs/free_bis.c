@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:45:57 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 15:36:12 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:32:31 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,28 @@ void	cmd_cleanup(t_head *head)
 {
 	free_token(&head->h_token);
 	free_cmd(&head->h_cmd);
+}
+
+void	close_fds(t_cmd *current)
+{
+	int	i;
+
+	if (current->infiles > 0)
+	{
+		i = current->infiles;
+		while (i > 0)
+		{
+			close(current->fd_in[i]);
+			i--;
+		}
+	}
+	if (current->outfiles > 0)
+	{
+		i = current->outfiles;
+		while (i > 0)
+		{
+			close(current->fd_out[i]);
+			i--;
+		}
+	}
 }

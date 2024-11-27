@@ -6,13 +6,13 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:13:55 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:51:36 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**declare_builtin(void)
+char	**declare_builtin(void)
 {
 	char	**builtin;
 

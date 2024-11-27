@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 15:38:07 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:32:12 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	free_cmd(t_cmd **h_cmd)
 	temp = *h_cmd;
 	while (temp->next)
 	{
+		close_fds(temp);
 		if (temp->path)
 			free(temp->path);
 		if (temp->argv)

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:36:43 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 16:02:42 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:29:39 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	print_cmd(t_cmd **h_cmd)
 		}
 		for (int k = 0; k < temp->infiles; k++)
 			printf("In [%d]: %d\n", k, temp->fd_in[k]);
+		printf("Infiles: %d\n", temp->infiles);
 		for (int l = 0; l < temp->outfiles; l++)
 			printf("Out [%d]: %d\n", l, temp->fd_out[l]);
+		printf("Outfiles: %d\n", temp->outfiles);
 		printf("PID: %d\n", temp->pid);
 		printf("\n\n");
 		temp = temp->next;
@@ -51,6 +53,8 @@ static void	init_cmd_node(t_cmd *current)
 	current->fd_out = NULL;
 	current->infiles = 0;
 	current->outfiles = 0;
+	current->to_read = -1;
+	current->to_write = -1;
 	current->pid = -1;
 }
 

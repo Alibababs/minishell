@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 15:42:31 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:39:11 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
 	set_argv(h_token, h_cmd, head);
 	if (set_redirs_in(h_token, h_cmd) || set_redirs_out(h_token, h_cmd))
 		return (1);
-	print_cmd(h_cmd);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:06:34 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 16:38:16 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:26:09 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,17 @@ int	set_redirs_in(t_token **h_token, t_cmd **h_cmd)
 	t_token = (*h_token)->next;
 	while (t_cmd)
 	{
-		t_cmd->infiles = count_files(t_token, 0);
-		if (t_cmd->infiles < 1 && !t_cmd->next)
+		if (!t_token)
 			return (0);
-		t_cmd->fd_in = set_infiles(t_token, t_cmd->infiles);
-		if (!t_cmd->fd_in)
-			return (1);
+		t_cmd->infiles = count_files(t_token, 0);
+		if (t_cmd->infiles < 1)
+			;
+		else
+		{
+			t_cmd->fd_in = set_infiles(t_token, t_cmd->infiles);
+			if (!t_cmd->fd_in)
+				return (1);
+		}
 		while (t_token->next && t_token->token != PIPE)
 			t_token = t_token->next;
 		if (t_cmd->next)
@@ -120,12 +125,17 @@ int	set_redirs_out(t_token **h_token, t_cmd **h_cmd)
 	t_token = (*h_token)->next;
 	while (t_cmd)
 	{
-		t_cmd->outfiles = count_files(t_token, 1);
-		if (t_cmd->outfiles < 1 && !t_cmd->next)
+		if (!t_token)
 			return (0);
-		t_cmd->fd_out = set_outfiles(t_token, t_cmd->outfiles);
-		if (!t_cmd->fd_out)
-			return (1);
+		t_cmd->outfiles = count_files(t_token, 1);
+		if (t_cmd->outfiles < 1)
+			;
+		else
+		{
+			t_cmd->fd_out = set_outfiles(t_token, t_cmd->outfiles);
+			if (!t_cmd->fd_out)
+				return (1);
+		}
 		while (t_token->next && t_token->token != PIPE)
 			t_token = t_token->next;
 		if (t_cmd->next)

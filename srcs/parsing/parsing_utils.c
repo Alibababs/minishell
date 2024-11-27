@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:10:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 13:41:48 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:02:43 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_shitty_redir(t_token *current)
 	i = 0;
 	str = current->value;
 	len = ft_strlen(str);
-	if (len > 1)
+	if (len > 2)
 	{
 		while (str[i])
 		{
