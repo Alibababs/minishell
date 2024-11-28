@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:56:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/21 14:02:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:45:14 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	expander(t_head *head)
 	{
 		if (temp->token != S_QUOTE && ft_strchr(temp->value, '$'))
 			expand_node(temp, &head->h_env);
+		remove_quotes(temp);
+		if (temp->prev && temp->prev->token == PIPE)
+			temp->token = CMD;
 		temp = temp->next;
 	}
 }

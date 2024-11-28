@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:45:57 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 14:32:31 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:14:03 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	close_fds(t_cmd *current)
 		i = current->infiles;
 		while (i > 0)
 		{
-			close(current->fd_in[i]);
+			if (current->fd_in[i] > 0)
+				close(current->fd_in[i]);
 			i--;
 		}
 	}
@@ -44,7 +45,8 @@ void	close_fds(t_cmd *current)
 		i = current->outfiles;
 		while (i > 0)
 		{
-			close(current->fd_out[i]);
+			if (current->fd_out[i] > 0)
+				close(current->fd_out[i]);
 			i--;
 		}
 	}

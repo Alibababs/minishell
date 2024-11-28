@@ -37,6 +37,7 @@ C_FILE		=	main	 									\
 				pre_exec/cmd_list							\
 				pre_exec/cmd_argv							\
 				pre_exec/pre_exec_redirs					\
+				pre_exec/pre_exec_utils						\
 				exec/exec									\
 				exec/exec_utils								\
 				parsing/parsing								\

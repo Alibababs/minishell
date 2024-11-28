@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 14:20:47 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:05:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,60 @@ static int	count_nodes_until_pipe(t_token *h_current)
 
 	temp = h_current;
 	i = 0;
-	while (temp && temp->token != PIPE && temp->token != IN && temp->token != OUT)
+	while (temp && temp->token != PIPE)
+	{
+		if (temp->token == IN || temp->token == OUT)
+			return (i);
+		else
+		{
+			i++;
+			temp = temp->next;
+		}
+	}
+	return (i);
+}
+
+static int	count_in_first_cmd(t_token *h_current)
+{
+	int		i;
+	t_token	*temp;
+
+	temp = h_current->next;
+	i = 0;
+	while (temp && temp->token != PIPE)
 	{
 		i++;
 		temp = temp->next;
 	}
-	return (i);
+	return (i + 1);
+}
+
+static char **in_first_cmd(t_token *h_current, t_head **head)
+{
+	char	**res;
+	int		i;
+	t_token	*temp;
+
+	if (h_current->next->next)
+		temp = h_current->next->next;
+	i = 0;
+	res = malloc(sizeof(char *) * count_in_first_cmd(h_current));
+	if (!res)
+		error_cmd(*head);
+	while (temp && temp->token != PIPE)
+	{
+		res[i] = ft_strdup(temp->value);
+		if (!res[i])
+			error_cmd(*head);
+		temp = temp->next;
+		i++;
+	}
+	res[i] = ft_strdup(h_current->next->value);
+	if (!res[i])
+		error_cmd(*head);
+	i++;
+	res[i] = NULL;
+	return (res);
 }
 
 static char	**get_argv(t_token *h_current, t_head *head)
@@ -33,6 +81,8 @@ static char	**get_argv(t_token *h_current, t_head *head)
 	int		n_argv;
 	int		i;
 
+	if (h_current->token == IN && h_current->next->next)
+		return (in_first_cmd(h_current, &head));
 	n_argv = count_nodes_until_pipe(h_current);
 	res = malloc(sizeof(char *) * (n_argv + 1));
 	if (!res)

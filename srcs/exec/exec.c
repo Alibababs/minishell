@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:11:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:17:52 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:33:56 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ static int	exec_cmds(t_cmd **h_cmd, char **envp, t_env **h_env)
 	temp = *h_cmd;
 	while (temp)
 	{
+		dprintf(1, "CMD SIZE: %d\n", count_cmds(h_cmd));
+		dprintf(1, "WTF\n");
 		if (!exec_is_builtin(temp->path))
 		{
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
+				ft_signals(2);
 				dup2(temp->to_read, STDIN_FILENO);
 				dup2(temp->to_write, STDOUT_FILENO);
 				close_pipes(h_cmd);

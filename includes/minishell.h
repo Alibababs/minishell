@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/28 11:56:49 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/11/28 14:59:01 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_head
 
 ///////////GENERAL>
 /// signal.c
-void					ft_signals(void);
+void					ft_signals(int mode);
 /// free.c
 void					free_array(char **array);
 void					free_token(t_token **h_token);
@@ -110,6 +110,7 @@ int						syntax_error(t_head *head, char *str);
 int						parsing_is_redir(t_token *current);
 int						is_shitty_redir(t_token *current);
 int						parsing_pipes(t_token *current);
+void					remove_quotes(t_token *current);
 
 ////////////////PRE_EXEC>
 /// expander.c
@@ -134,6 +135,7 @@ int						exec(t_cmd **h_cmd, char **envp, t_env **h_env);
 /// exec_utils.c
 int						exec_is_builtin(char *str);
 int						exec_builtin(t_cmd *current, t_env **h_env);
+int						check_exec_cmds(t_cmd **h_cmd);
 
 //////////////////BUILTINS>
 /// env_list.c

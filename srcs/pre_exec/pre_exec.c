@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 14:39:11 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:59:47 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ static int	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 	int		cmd_n;
 
 	temp = *h_token;
-	cmd_n = 0;
+	cmd_n = 1;
 	while (temp)
 	{
-		if (temp->token == CMD || temp->token == BUILTIN
-			|| (temp->token == ENV && (!temp->prev || temp->prev->token == PIPE)))
+		if (temp->token == PIPE)
 			cmd_n++;
 		temp = temp->next;
 	}
@@ -104,13 +103,24 @@ static int	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 	return (0);
 }
 
-int	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
+int		pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
 {
+	t_cmd	*temp;
+
 	if (create_cmd_list(h_token, h_cmd) != 0)
 		error_cmd(head);
 	set_path(h_token, h_cmd, head);
 	set_argv(h_token, h_cmd, head);
 	if (set_redirs_in(h_token, h_cmd) || set_redirs_out(h_token, h_cmd))
+		return (1);
+	temp = *h_cmd;
+	while (temp)
+	{
+		if (!temp->path)
+			return (1);
+		temp = temp->next;
+	}
+	if (check_exec_cmds(h_cmd))
 		return (1);
 	return (0);
 }
