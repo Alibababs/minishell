@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:17:09 by phautena         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:51:03 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_builtin(t_cmd *current, t_env **h_env)
 	else if (!ft_strncmp(current->path, "env", 3))
 		print_env(h_env);
 	else if (!ft_strncmp(current->path, "exit", 3))
-		exit(0);
+		ft_exit(current->argv);
 	return (0);
 }
 

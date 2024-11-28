@@ -31,6 +31,7 @@ C_FILE		=	main	 									\
 				builtins/pwd								\
 				builtins/echo								\
 				builtins/cd									\
+				builtins/exit								\
 				pre_exec/expander							\
 				pre_exec/pre_exec							\
 				pre_exec/cmd_list							\
