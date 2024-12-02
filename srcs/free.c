@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:52:31 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 14:32:12 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:25:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ void	error_token(t_token **h_token)
 {
 	printf("Error occured while allocating memory for tokens\nExiting\n");
 	free_token(h_token);
-	exit (1);
+	exit(1);
 }
-

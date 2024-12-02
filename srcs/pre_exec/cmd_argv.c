@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_argv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 15:05:35 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:26:20 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	count_in_first_cmd(t_token *h_current)
 	return (i + 1);
 }
 
-static char **in_first_cmd(t_token *h_current, t_head **head)
+static char	**in_first_cmd(t_token *h_current, t_head **head)
 {
 	char	**res;
 	int		i;
@@ -117,4 +117,3 @@ void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head)
 		cmd_temp = cmd_temp->next;
 	}
 }
-

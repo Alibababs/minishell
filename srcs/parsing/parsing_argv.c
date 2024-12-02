@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_argv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 12:13:34 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:26:36 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ void	set_argv(t_token **h_token, t_cmd **h_cmd, t_head *head)
 		cmd_temp = cmd_temp->next;
 	}
 }
-

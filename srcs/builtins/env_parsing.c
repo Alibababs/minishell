@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:13:47 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/08 13:26:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:28:04 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	check_name(char *var)
 	{
 		if (var[i] == '=')
 			break ;
-		else if (!ft_isalpha_upper(var[i]) && !ft_isalnum(var[i]) && var[i] != '_')
+		else if (!ft_isalpha_upper(var[i]) && !ft_isalnum(var[i])
+			&& var[i] != '_')
 			return (2);
 	}
 	return (0);

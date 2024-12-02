@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 14:59:47 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:26:05 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	set_path(t_token **h_token, t_cmd **h_cmd, t_head *head)
 
 static int	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 {
-	t_token *temp;
+	t_token	*temp;
 	int		cmd_n;
 
 	temp = *h_token;
@@ -103,7 +103,7 @@ static int	create_cmd_list(t_token **h_token, t_cmd **h_cmd)
 	return (0);
 }
 
-int		pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
+int	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
 {
 	t_cmd	*temp;
 
@@ -124,4 +124,3 @@ int		pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
 		return (1);
 	return (0);
 }
-

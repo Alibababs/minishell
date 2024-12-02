@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_assign_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:39:50 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 13:10:51 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:26:47 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,13 @@ int	is_builtin(t_token *current, t_token **h_token)
 {
 	if (current->prev)
 	{
-		if (is_builtin_bis(current->value, h_token) && (current->prev->token == IN || current->prev->token == HEREDOC
-			|| current->prev->token == OUT || current->prev->token == APPEND))
+		if (is_builtin_bis(current->value, h_token)
+			&& (current->prev->token == IN || current->prev->token == HEREDOC
+				|| current->prev->token == OUT
+				|| current->prev->token == APPEND))
 			return (1);
-		if (is_builtin_bis(current->value, h_token) && (current->prev->token != BUILTIN && current->prev->token != CMD))
+		if (is_builtin_bis(current->value, h_token)
+			&& (current->prev->token != BUILTIN && current->prev->token != CMD))
 			return (0);
 	}
 	else if (is_builtin_bis(current->value, h_token))

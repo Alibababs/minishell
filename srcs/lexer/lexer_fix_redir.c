@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_fix_redir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:22:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/26 13:50:55 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:27:09 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	all_spaces(char *input)
 	}
 	return (0);
 }
+
 static void	add_redir(t_token **current)
 {
 	t_token	*temp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_exec_redirs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:06:34 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 15:07:57 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:27:41 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ static int	count_files(t_token *current, int mode)
 	{
 		if (mode == 0)
 		{
-			if (temp->token == FIL && ((temp->prev && temp->prev->token == IN) || (temp->next && temp->next->token == IN)))
+			if (temp->token == FIL && ((temp->prev && temp->prev->token == IN)
+					|| (temp->next && temp->next->token == IN)))
 				res++;
 			temp = temp->next;
 		}
 		else
 		{
-			if (temp->token == FIL && ((temp->prev && temp->prev->token == OUT)))
+			if (temp->token == FIL && ((temp->prev
+						&& temp->prev->token == OUT)))
 				res++;
 			temp = temp->next;
 		}
@@ -50,7 +52,8 @@ static int	*set_infiles(t_token *current, int n_files)
 	temp = current;
 	while (temp && temp->token != CMD && temp->token != BUILTIN)
 	{
-		if (temp->token == FIL && ((temp->prev && temp->prev->token == IN) || (temp->next && temp->next->token == IN)))
+		if (temp->token == FIL && ((temp->prev && temp->prev->token == IN)
+				|| (temp->next && temp->next->token == IN)))
 		{
 			res[i] = open(temp->value, O_RDONLY);
 			if (res[i] < 0)
