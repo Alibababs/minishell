@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:31:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/28 15:36:01 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:01:34 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	process_command(char *input, t_head *head, char **envp)
 	cmd_cleanup(head);
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_head	head;
@@ -50,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (input)
 		{
+			ft_signals(2);
 			process_command(input, &head, envp);
 			add_history(input);
 		}

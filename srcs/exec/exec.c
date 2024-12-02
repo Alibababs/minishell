@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:11:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 15:33:56 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:01:21 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	close_pipes(t_cmd **h_cmd)
 	}
 }
 
-static int init_pipes(t_cmd **h_cmd)
+static int	init_pipes(t_cmd **h_cmd)
 {
 	int		nb_process;
 	int		pipefd[2];
@@ -79,7 +79,6 @@ static int	exec_cmds(t_cmd **h_cmd, char **envp, t_env **h_env)
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
-				ft_signals(2);
 				dup2(temp->to_read, STDIN_FILENO);
 				dup2(temp->to_write, STDOUT_FILENO);
 				close_pipes(h_cmd);
