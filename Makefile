@@ -1,6 +1,9 @@
-GREEN=\033[1;32m
-RED=\033[0;31m
-BLUE=\033[0;34m
+GREEN	= \033[1;32m
+RED		= \033[0;31m
+BLUE	= \033[0;34m
+YELLOW	= \033[1;33m
+CYAN	= \033[0;36m
+RESET	= \033[0m
 
 NAME		=	minishell
 
@@ -58,28 +61,28 @@ OBJ			=	$(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBFT_LIB):
-	@echo "$(BLUE)COMPILING $(LIBFT_PATH)\n"
+	@echo "$(BLUE)Compiling $(LIBFT_PATH)...$(RESET)"
 	@make -sC $(LIBFT_PATH)
-	@echo "$(GREEN)libft.a created\n"
+	@echo "$(GREEN)libft.a created$(RESET)"
 
 $(NAME): $(LIBFT_LIB) $(OBJ)
-	@echo "$(BLUE)COMPILING $(NAME)...\n"
+	@echo "$(BLUE)Compiling $(NAME)...$(RESET)"
 	@$(CC) $(OBJ) $(LIBFT_LIB) $(FLAG) -lreadline -o $(NAME)
-	@echo "$(GREEN)./$(NAME) created\n"
+	@echo "$(GREEN)Executable $(NAME) created$(RESET)"
 
 clean:
-	@echo "$(RED)\nDeleting obj file in $(LIBFT_PATH)...\n"
+	@echo "$(RED)Deleting object files in $(LIBFT_PATH)...$(RESET)"
 	@make clean -sC $(LIBFT_PATH)
-	@echo "$(GREEN)Done\n"
-	@echo "$(RED)Deleting $(NAME) object...\n"
+	@echo "$(GREEN)Done$(RESET)"
+	@echo "$(RED)Deleting $(NAME) object files...$(RESET)"
 	@rm -f $(OBJ)
-	@echo "$(GREEN)Done\n"
+	@echo "$(GREEN)Done$(RESET)"
 
 fclean: clean
-	@echo "$(RED)Deleting $(NAME) executable...\n"
+	@echo "$(RED)Deleting $(NAME) executable...$(RESET)"
 	@rm -f $(NAME)
 	@make fclean -sC $(LIBFT_PATH)
-	@echo "$(GREEN)Done\n"
+	@echo "$(GREEN)Done$(RESET)"
 
 re: fclean all
 
