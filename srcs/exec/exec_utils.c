@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/03 13:12:07 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:01:08 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exec_builtin(t_cmd *current, t_env **h_env)
 	if (!ft_strcmp(current->path, "cd"))
 		ft_cd(current->argv);
 	else if (!ft_strcmp(current->path, "echo"))
-		echo(current->argv);
+		ft_echo(current->argv);
 	else if (!ft_strcmp(current->path, "pwd"))
 		ft_pwd();
 	else if (!ft_strcmp(current->path, "export"))

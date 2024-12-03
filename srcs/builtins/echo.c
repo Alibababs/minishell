@@ -6,30 +6,50 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:52:46 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:16 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:02:34 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	echo_write(char *argv[], int newline_flag)
+static int	is_n(char *str)
 {
 	int	i;
 
-	if (newline_flag == 1)
-		i = 1;
-	else
-		i = 0;
-	while (argv[++i])
-		printf("%s", argv[i]);
-	if (newline_flag == 0)
-		printf("\n");
+	i = 1;
+	if (!str || str[0] != '-')
+		return (1);
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (1);
+		i++;
+	}
+	if (i > 1)
+		return (0);
+	return (1);
 }
 
-void	echo(char *argv[])
+static int	echo_print(char *argv[])
 {
-	if (!ft_strcmp(argv[1], "-n"))
-		echo_write(argv, 1);
-	else
-		echo_write(argv, 0);
+	int	i;
+
+	i = 1;
+	if (!is_n(argv[1]))
+		i++;
+	while (argv[i])
+	{
+		printf("%s", argv[i]);
+		if (argv[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (is_n(argv[1]))
+		printf("\n");
+	return (0);
+}
+
+void	ft_echo(char *argv[])
+{
+	echo_print(argv);
 }

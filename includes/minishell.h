@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/28 14:59:01 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:00:39 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void					unset(char *name, t_env **h_env);
 /// pwd.c
 void					ft_pwd(void);
 /// echo.c
-void					echo(char *argv[]);
+void					ft_echo(char *argv[]);
 /// cd.c
 void					ft_cd(char **argv);
 /// exit.c
