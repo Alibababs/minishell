@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:11:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/03 13:07:48 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/03 18:38:26 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 static void	wait_for_all(t_cmd **h_cmd)
 {
 	t_cmd	*temp;
+	int		status;
 
+	status = 0;
 	temp = *h_cmd;
 	while (temp)
 	{
 		if (temp->pid > -1)
-			waitpid(temp->pid, NULL, 0);
+		{
+			waitpid(temp->pid, &status, 0);
+			g_exit_status = 1;
+			return ;
+		}
+		if ((status) == 0)
+			g_exit_status = 0;
+		else
+			g_exit_status = 1;
 		temp = temp->next;
 	}
 }

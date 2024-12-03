@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:56:15 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 14:45:14 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:41:50 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	expander(t_head *head)
 	temp = head->h_token;
 	while (temp)
 	{
+		if (!ft_strcmp(temp->value, "$?"))
+			temp->value = ft_itoa(g_exit_status);
 		if (temp->token != S_QUOTE && ft_strchr(temp->value, '$'))
 			expand_node(temp, &head->h_env);
 		remove_quotes(temp);

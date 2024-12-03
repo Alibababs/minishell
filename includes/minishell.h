@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:47 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/03 14:00:39 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:33:07 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define ERROR 1
 # define SUCCESS 0
+
+extern int				g_exit_status;
 
 typedef enum s_type
 {

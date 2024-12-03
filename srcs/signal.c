@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:01:02 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/02 11:20:07 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:37:44 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			g_exit_status = 0;
 
 static void	handle_sigint(int sig)
 {
