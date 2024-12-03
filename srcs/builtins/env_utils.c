@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:35 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/20 16:36:59 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:11:35 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*get_var(char *name, t_env **h_env)
 	temp = *h_env;
 	while (temp)
 	{
-		if (!ft_strncmp(name, temp->name, len))
+		if (!ft_strcmp(name, temp->name))
 			return (temp->value);
 		temp = temp->next;
 	}

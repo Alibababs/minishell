@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_argv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:12:28 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/02 12:26:20 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:57:46 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static char	**in_first_cmd(t_token *h_current, t_head **head)
 	int		i;
 	t_token	*temp;
 
+	temp = NULL;
 	if (h_current->next->next)
 		temp = h_current->next->next;
 	i = 0;

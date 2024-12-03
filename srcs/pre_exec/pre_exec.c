@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:22:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/02 12:26:05 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:08:25 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	pre_exec(t_token **h_token, t_cmd **h_cmd, t_head *head)
 			return (1);
 		temp = temp->next;
 	}
-	if (check_exec_cmds(h_cmd))
-		return (1);
+	// if (check_exec_cmds(h_cmd))
+	// 	return (1); move to exec/
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_is_token_bis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:00:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 13:51:36 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:12:39 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_builtin_bis(char *str, t_token **h_token)
 	i = 0;
 	while (builtin[i])
 	{
-		if (!ft_strncmp(str, builtin[i], ft_strlen(str)))
+		if (!ft_strcmp(str, builtin[i]))
 			return (free(builtin), 1);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:11:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/02 11:01:21 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:07:48 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	close_pipes(t_cmd **h_cmd)
 	{
 		if (temp->to_read > -1)
 			close(temp->to_read);
+		temp->to_read = -1;
 		if (temp->to_write > -1)
 			close(temp->to_write);
+		temp->to_write = -1;
 		temp = temp->next;
 	}
 }
@@ -72,15 +74,17 @@ static int	exec_cmds(t_cmd **h_cmd, char **envp, t_env **h_env)
 	temp = *h_cmd;
 	while (temp)
 	{
-		dprintf(1, "CMD SIZE: %d\n", count_cmds(h_cmd));
-		dprintf(1, "WTF\n");
-		if (!exec_is_builtin(temp->path))
+		// dprintf(1, "CMD SIZE: %d\n", count_cmds(h_cmd));
+		// dprintf(1, "WTF\n");
+		if (!exec_is_builtin(temp->path) && !check_exec_cmds(h_cmd))
 		{
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
-				dup2(temp->to_read, STDIN_FILENO);
-				dup2(temp->to_write, STDOUT_FILENO);
+				if (dup2(temp->to_read, STDIN_FILENO) == -1)
+					perror("dup2");
+				if (dup2(temp->to_write, STDOUT_FILENO) == -1)
+					perror("dup2");
 				close_pipes(h_cmd);
 				execve(temp->path, temp->argv, envp);
 			}

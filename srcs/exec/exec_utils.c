@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:51:07 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/28 11:51:03 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/03 13:12:07 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	exec_builtin(t_cmd *current, t_env **h_env)
 {
-	if (!ft_strncmp(current->path, "cd", 3))
+	if (!ft_strcmp(current->path, "cd"))
 		ft_cd(current->argv);
-	else if (!ft_strncmp(current->path, "echo", 3))
+	else if (!ft_strcmp(current->path, "echo"))
 		echo(current->argv);
-	else if (!ft_strncmp(current->path, "pwd", 3))
+	else if (!ft_strcmp(current->path, "pwd"))
 		ft_pwd();
-	else if (!ft_strncmp(current->path, "export", 3))
+	else if (!ft_strcmp(current->path, "export"))
 		export_var(current->argv[1], h_env);
-	else if (!ft_strncmp(current->path, "unset", 3))
+	else if (!ft_strcmp(current->path, "unset"))
 		unset(current->argv[1], h_env);
-	else if (!ft_strncmp(current->path, "env", 3))
+	else if (!ft_strcmp(current->path, "env"))
 		print_env(h_env);
-	else if (!ft_strncmp(current->path, "exit", 3))
+	else if (!ft_strcmp(current->path, "exit"))
 		ft_exit(current->argv);
 	return (0);
 }
@@ -42,7 +42,7 @@ int	exec_is_builtin(char *str)
 	i = 0;
 	while (builtin[i])
 	{
-		if (!ft_strncmp(str, builtin[i], ft_strlen(str)))
+		if (!ft_strcmp(str, builtin[i]))
 			return (free(builtin), 1);
 		i++;
 	}

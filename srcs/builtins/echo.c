@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:52:46 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/27 16:18:31 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:09:16 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	echo_write(char *argv[], int newline_flag)
 {
-	int		i;
+	int	i;
 
 	if (newline_flag == 1)
 		i = 1;
@@ -28,7 +28,7 @@ static void	echo_write(char *argv[], int newline_flag)
 
 void	echo(char *argv[])
 {
-	if (!ft_strncmp(argv[1], "-n", 3))
+	if (!ft_strcmp(argv[1], "-n"))
 		echo_write(argv, 1);
 	else
 		echo_write(argv, 0);
