@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:01:04 by alibaba           #+#    #+#             */
-/*   Updated: 2024/05/25 18:11:39 by alibaba          ###   ########.fr       */
+/*   Created: 2024/05/17 09:45:15 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/17 11:54:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	dlen;
-	size_t	slen;
+	size_t	dst_len;
+	size_t	src_len;
 	size_t	i;
 	size_t	j;
 
-	dlen = ft_strlen(dst);
-	slen = ft_strlen(src);
-	i = dlen;
-	j = 0;
-	if (!size)
-		return (slen);
-	while (src[j] && i < size - 1)
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	i = 0;
+	j = dst_len;
+	if (dst_len < (size - 1) && size > 0)
 	{
-		dst[i] = src[j];
-		i++;
-		j++;
+		while (src[i] != '\0' && (dst_len + i) < (size - 1))
+		{
+			dst[j] = src[i];
+			i++;
+			j++;
+		}
+		dst[j] = '\0';
 	}
-	dst[i] = '\0';
-	if (size < dlen)
-		return (slen + size);
-	else
-		return (dlen + slen);
+	if (dst_len >= size)
+	{
+		dst_len = size;
+	}
+	return (dst_len + src_len);
 }

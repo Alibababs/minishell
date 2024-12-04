@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 16:26:41 by alibaba           #+#    #+#             */
-/*   Updated: 2024/05/25 18:06:07 by alibaba          ###   ########.fr       */
+/*   Created: 2024/05/15 18:01:55 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/16 15:42:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 }

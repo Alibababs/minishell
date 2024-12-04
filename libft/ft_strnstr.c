@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 20:21:05 by alibaba           #+#    #+#             */
-/*   Updated: 2024/05/25 21:22:43 by alibaba          ###   ########.fr       */
+/*   Created: 2024/05/17 11:06:19 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/17 11:57:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,25 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
-	if (!*little)
-		return ((char *)big);
 	i = 0;
-	while (big[i] && i < len)
+	j = 0;
+	if (ft_strlen(little) == 0)
 	{
-		if (big[i] == little[0])
+		return ((char *)big);
+	}
+	while (big[i] != '\0' && i < len)
+	{
+		if (big[i] == little[j])
 		{
-			j = 0;
-			while (little[j] && big[i + j] == little[j] && i + j < len)
+			while (big[i + j] == little[j] && (i + j) < len)
+			{
+				if (little[j + 1] == '\0')
+					return ((char *)(big + i));
 				j++;
-			if (little[j] == '\0')
-				return ((char *)big + i);
+			}
+			j = 0;
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

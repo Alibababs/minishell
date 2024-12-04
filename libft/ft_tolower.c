@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:21:32 by alibaba           #+#    #+#             */
-/*   Updated: 2024/05/27 14:16:49 by pbailly          ###   ########.fr       */
+/*   Created: 2024/05/16 14:54:57 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/16 14:56:15 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
+	if (c > 64 && c < 91)
+	{
 		return (c + 32);
-	return (c);
+	}
+	else
+	{
+		return (c);
+	}
 }

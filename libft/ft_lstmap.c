@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 09:46:11 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/18 15:03:39 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/28 14:41:07 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/29 10:30:40 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned char	*memo;
-	size_t			i;
+	t_list	*new_list;
+	t_list	*new_item;
+	void	*temp;
 
-	if (nmemb < 1 || size < 1)
-	{
-		memo = NULL;
-		return (memo);
-	}
-	if (nmemb > SIZE_MAX / size)
+	if (lst == NULL || (*f) == NULL || (*del) == NULL)
 		return (NULL);
-	memo = malloc(nmemb * size);
-	if (memo == NULL)
-		return (NULL);
-	i = 0;
-	while (i < nmemb * size)
+	new_list = NULL;
+	while (lst != NULL)
 	{
-		memo[i] = 0;
-		i++;
+		temp = (*f)(lst->content);
+		new_item = ft_lstnew(temp);
+		if (new_item == NULL)
+		{
+			(*del)(temp);
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_item);
+		lst = lst->next;
 	}
-	return (memo);
+	return (new_list);
 }

@@ -3,57 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 14:50:21 by pbailly           #+#    #+#             */
-/*   Updated: 2024/05/27 15:52:13 by pbailly          ###   ########.fr       */
+/*   Created: 2024/05/21 10:23:22 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/21 16:27:46 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_size(long int n)
+static int	int_len(int n)
 {
-	size_t	i;
+	long	nb;
+	int		len;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		n *= -1;
-	while (n)
+	nb = n;
+	len = 0;
+	if (nb < 0)
 	{
-		n /= 10;
-		i++;
+		nb *= -1;
+		len++;
 	}
-	return (i);
+	if (nb == 0)
+		len++;
+	while (nb != 0)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	long int	nb;
-	size_t		count;
-	char		*str;
+	long	nb;
+	int		len;
+	int		i;
+	char	*result;
 
 	nb = n;
-	count = count_size(nb);
-	if (n < 0)
-		count++;
-	str = malloc(sizeof(char) * count + 1);
-	if (!str)
+	len = int_len(nb);
+	i = len - 1;
+	result = malloc(sizeof(char) * len + 1);
+	if (result == NULL)
 		return (NULL);
-	str[count] = '\0';
-	if (nb == 0)
-		(str[0] = '0');
+	result[0] = '0';
 	if (nb < 0)
 	{
+		result[0] = '-';
 		nb *= -1;
-		str[0] = '-';
 	}
-	while (nb)
+	while (nb != 0)
 	{
-		str[--count] = nb % 10 + '0';
+		result[i] = (nb % 10) + 48;
 		nb /= 10;
+		i--;
 	}
-	return (str);
+	result[len] = '\0';
+	return (result);
 }

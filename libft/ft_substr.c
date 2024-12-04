@@ -5,37 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 18:25:55 by pbailly           #+#    #+#             */
-/*   Updated: 2024/11/08 15:08:18 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/20 10:29:07 by phautena          #+#    #+#             */
+/*   Updated: 2024/08/01 11:18:31 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
+	char	*sub;
 	size_t	i;
-	size_t	j;
+	size_t	len_s;
 
-	i = 0;
-	j = 0;
-	if (start + len > ft_strlen(s))
-		len = ft_strlen(s) - start;
-	if (ft_strlen(s) < start)
-		len = 0;
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
+	len_s = ft_strlen(s);
+	if (s == NULL)
 		return (NULL);
-	while (s[i])
+	if (start >= len_s)
+		return (ft_strdup(""));
+	if (len > len_s - start)
+		len = len_s - start;
+	sub = malloc(sizeof(char) * (len + 1));
+	if (sub == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		if (i >= start && j < len)
-		{
-			str[j] = s[i];
-			j++;
-		}
+		sub[i] = s[start + i];
 		i++;
 	}
-	str[j] = '\0';
-	return (str);
+	sub[i] = '\0';
+	return (sub);
 }

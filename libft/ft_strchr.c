@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:23:47 by alibaba           #+#    #+#             */
-/*   Updated: 2024/11/08 14:46:42 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/17 10:54:47 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/24 13:46:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	int	i;
 
-	if (s == NULL)
-		return (NULL);
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
+		if (s[i] == (char) c)
+		{
+			return ((char *)(s + i));
+		}
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
+	if (c == '\0')
+	{
+		return ((char *)(s + i));
+	}
 	return (NULL);
 }

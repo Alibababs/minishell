@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 16:06:44 by alibaba           #+#    #+#             */
-/*   Updated: 2024/05/25 17:58:15 by alibaba          ###   ########.fr       */
+/*   Created: 2024/05/17 13:31:16 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/24 13:10:51 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	char	*d;
-	char	*s;
+	char	*dst_ptr;
+	char	*src_ptr;
 	size_t	i;
 
-	d = (char *)dest;
-	s = (char *)src;
+	dst_ptr = (char *)dst;
+	src_ptr = (char *)src;
 	i = 0;
-	if (!dest && !src)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (d > s)
+	if (dst_ptr > src_ptr)
 	{
-		while (n--)
-		{
-			d[n] = s[n];
-		}
+		while (n-- > 0)
+			dst_ptr[n] = src_ptr[n];
 	}
 	else
 	{
 		while (i < n)
 		{
-			d[i] = s[i];
+			dst_ptr[i] = src_ptr[i];
 			i++;
 		}
 	}
-	return (dest);
+	return (dst);
 }

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 16:45:21 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/15 16:46:43 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/28 11:26:54 by phautena          #+#    #+#             */
+/*   Updated: 2024/05/28 11:36:45 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+int	ft_lstsize(t_list *lst)
 {
-	if (c > 31 && c < 127)
+	int		i;
+	t_list	*ptr;
+
+	i = 0;
+	ptr = lst;
+	while (ptr != NULL)
 	{
-		return (1);
+		i++;
+		ptr = ptr->next;
 	}
-	else
-	{
-		return (0);
-	}
+	return (i);
 }

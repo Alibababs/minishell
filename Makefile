@@ -1,9 +1,14 @@
-GREEN	= \033[1;32m
-RED		= \033[0;31m
-BLUE	= \033[0;34m
-YELLOW	= \033[1;33m
-CYAN	= \033[0;36m
-RESET	= \033[0m
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/30 11:30:32 by p0ulp1            #+#    #+#              #
+#    Updated: 2024/11/30 12:29:10 by p0ulp1           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME		=	minishell
 
@@ -17,37 +22,18 @@ LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
-C_FILE		=	main	 									\
-				signal										\
-				lexer/lexer									\
-				lexer/lexer_list							\
-				lexer/lexer_fix_redir						\
-				lexer/lexer_is_token						\
-				lexer/lexer_is_token_bis					\
-				lexer/lexer_assign_token					\
-				lexer/lexer_is_cmd							\
-				lexer/lexer_fix_argv						\
-				builtins/env_list							\
-				builtins/env_utils							\
-				builtins/env_parsing						\
-				builtins/unset								\
-				builtins/pwd								\
-				builtins/echo								\
-				builtins/cd									\
-				builtins/exit								\
-				pre_exec/expander							\
-				pre_exec/pre_exec							\
-				pre_exec/cmd_list							\
-				pre_exec/cmd_argv							\
-				pre_exec/pre_exec_redirs					\
-				pre_exec/pre_exec_utils						\
-				exec/exec									\
-				exec/exec_utils								\
-				parsing/parsing								\
-				parsing/parsing_errors						\
-				parsing/parsing_utils						\
-				free										\
-				free_bis									\
+GNL_PATH	=	./get_next_line/
+
+GNL_FILE	=	gnl.a
+
+GNL_LIB		=	$(addprefix $(GNL_PATH), $(GNL_FILE))
+
+C_FILE		=	main/main	 									\
+				main/signals									\
+				main/free										\
+				main/print										\
+				env/init_env									\
+				env/env_list									\
 
 SRC_DIR		=	./srcs/
 
@@ -61,28 +47,33 @@ OBJ			=	$(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBFT_LIB):
-	@echo "$(BLUE)Compiling $(LIBFT_PATH)...$(RESET)"
+	@echo "COMPILING $(LIBFT_PATH)\n"
 	@make -sC $(LIBFT_PATH)
-	@echo "$(GREEN)libft.a created$(RESET)"
+	@echo "libft.a created\n"
 
-$(NAME): $(LIBFT_LIB) $(OBJ)
-	@echo "$(BLUE)Compiling $(NAME)...$(RESET)"
+$(GNL_LIB):
+	@echo "COMPILING $(GNL_PATH)\n"
+	@make -sC $(GNL_PATH)
+	@echo "gnl.a created\n"
+
+$(NAME): $(LIBFT_LIB) $(GNL_LIB) $(OBJ)
+	@echo "COMPILING $(NAME)...\n"
 	@$(CC) $(OBJ) $(LIBFT_LIB) $(FLAG) -lreadline -o $(NAME)
-	@echo "$(GREEN)Executable $(NAME) created$(RESET)"
+	@echo "./$(NAME) created\n"
 
 clean:
-	@echo "$(RED)Deleting object files in $(LIBFT_PATH)...$(RESET)"
+	@echo "\nDeleting obj file in $(LIBFT_PATH)...\n"
 	@make clean -sC $(LIBFT_PATH)
-	@echo "$(GREEN)Done$(RESET)"
-	@echo "$(RED)Deleting $(NAME) object files...$(RESET)"
+	@echo "Done\n"
+	@echo "Deleting $(NAME) object...\n"
 	@rm -f $(OBJ)
-	@echo "$(GREEN)Done$(RESET)"
+	@echo "Done\n"
 
 fclean: clean
-	@echo "$(RED)Deleting $(NAME) executable...$(RESET)"
+	@echo "Deleting $(NAME) executable...\n"
 	@rm -f $(NAME)
 	@make fclean -sC $(LIBFT_PATH)
-	@echo "$(GREEN)Done$(RESET)"
+	@echo "Done\n"
 
 re: fclean all
 
