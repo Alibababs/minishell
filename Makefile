@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+         #
+#    By: phautena <phautena@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/30 11:30:32 by p0ulp1            #+#    #+#              #
-#    Updated: 2024/11/30 12:29:10 by p0ulp1           ###   ########.fr        #
+#    Updated: 2024/12/05 11:10:15 by phautena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	minishell
 
 CC			=	cc
 
-FLAG		=	-Wall -Werror -Wextra -g3 -fPIE -I./includes
+FLAG		=	-Wall -Werror -Wextra -ggdb -fPIE -I./includes
 
 LIBFT_PATH	=	./libft/
 

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:06:24 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/11/30 12:42:13 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/05 10:58:51 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_env(t_data *data, char *envp[])
+void	init_env(t_data **data, char *envp[])
 {
 	int		i;
 	char	*name;
 	char	*value;
 
-	data->envp = envp;
-	if (!data->envp)
+	(*data)->envp = envp;
+	if (!(*data)->envp)
 		return (ft_error(data, "Please provide ENV variables\n"));
 	i = 0;
 	while (envp[i])

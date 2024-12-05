@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/11/30 12:44:50 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/05 11:28:27 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,18 @@ typedef struct s_data
 ///signals.c
 void	ft_signals(int mode);
 ///free.c
-void	ft_error(t_data *data, char *msg);
-void	mem_error(t_data *data);
+void	ft_error(t_data **data, char *msg);
+void	mem_error(t_data **data);
+void	free_env(t_data **data);
+void	free_data(t_data **data);
 ///print.c
-void	print_env(t_data *data);
+void	print_env(t_data **data);
 
 ///////////////ENV///////////////
 ///env_list.c
-void	add_env_end(char *name, char *value, t_data *data);
+void	add_env_end(char *name, char *value, t_data **data);
 ///init_env.c
-void	init_env(t_data *data, char *envp[]);
+void	init_env(t_data **data, char *envp[]);
 char	*parse_env_name(char *var);
 char	*parse_env_value(char *var);
 

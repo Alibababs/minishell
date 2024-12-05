@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:26:33 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/11/30 12:41:01 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/05 11:29:39 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_data *data)
+void	print_env(t_data **data)
 {
 	t_env	*temp;
 
-	printf("HEAD VALUE: %p\n", data->h_env);
-	if (!data->h_env)
+	if (!(*data)->h_env)
 		return ;
-	temp = data->h_env;
+	temp = (*data)->h_env;
 	while (temp)
 	{
 		if (temp->value)
