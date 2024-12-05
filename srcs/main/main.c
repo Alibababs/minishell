@@ -6,14 +6,15 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 11:35:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:17:57 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	process_command(t_data **data)
+static void	process_command(t_data **data, char *input)
 {
+	lexer(data, input);
 	(void)data;
 	return ;
 }
@@ -48,7 +49,7 @@ int	main(int argc, char *argv[], char *envp[])
 		else if (input)
 		{
 			ft_signals(2);
-			process_command(&data);
+			process_command(&data, input);
 			add_history(input);
 		}
 	}

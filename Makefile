@@ -6,7 +6,7 @@
 #    By: phautena <phautena@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/30 11:30:32 by p0ulp1            #+#    #+#              #
-#    Updated: 2024/12/05 11:10:15 by phautena         ###   ########.fr        #
+#    Updated: 2024/12/05 12:58:45 by phautena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ C_FILE		=	main/main	 									\
 				main/print										\
 				env/init_env									\
 				env/env_list									\
+				lexer/lexer										\
+				lexer/lexer_utils								\
 
 SRC_DIR		=	./srcs/
 

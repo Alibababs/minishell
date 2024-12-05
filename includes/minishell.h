@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 11:28:27 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:01:10 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,10 @@ void	init_env(t_data **data, char *envp[]);
 char	*parse_env_name(char *var);
 char	*parse_env_value(char *var);
 
+/////////////LEXER///////////////
+///lexer.c
+void	lexer(t_data **data, char *input);
+///lexer_utils.c
+bool	quotes_closed(char *input);
 
 #endif
