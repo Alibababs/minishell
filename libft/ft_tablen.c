@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 13:31:44 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/28 13:47:06 by phautena         ###   ########.fr       */
+/*   Created: 2024/10/02 13:39:07 by phautena          #+#    #+#             */
+/*   Updated: 2024/11/08 11:43:18 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	tab_len(char **tab)
 {
-	t_list	*ptr;
+	int	i;
 
-	while (*lst != NULL)
-	{
-		ptr = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = ptr;
-	}
-	free(*lst);
-	*lst = NULL;
+	i = 0;
+	if (!tab)
+		return (1);
+	while (tab[i])
+		i++;
+	return (i);
 }

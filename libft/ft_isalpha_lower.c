@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha_lower.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 11:34:02 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/28 11:39:50 by phautena         ###   ########.fr       */
+/*   Created: 2024/11/08 13:24:03 by phautena          #+#    #+#             */
+/*   Updated: 2024/11/08 13:24:27 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_isalpha_lower(int c)
 {
-	t_list	*ptr;
-	int		i;
-
-	i = ft_lstsize(lst);
-	ptr = lst;
-	while (i > 1)
-	{
-		ptr = ptr->next;
-		i--;
-	}
-	return (ptr);
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	return (0);
 }

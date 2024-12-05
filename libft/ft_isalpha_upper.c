@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_isalpha_upper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 13:23:17 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/28 13:29:49 by phautena         ###   ########.fr       */
+/*   Created: 2024/11/08 13:23:41 by phautena          #+#    #+#             */
+/*   Updated: 2024/11/08 13:24:32 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	ft_isalpha_upper(int c)
 {
-	(*del)(lst->content);
-	free(lst);
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 18:23:47 by alibaba           #+#    #+#             */
-/*   Updated: 2024/11/08 14:46:42 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/24 14:19:00 by pbailly           #+#    #+#             */
+/*   Updated: 2024/11/07 13:46:57 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
+# include <stdarg.h>
+# include <stddef.h>
+# include <unistd.h>
+# include "libft.h"
 
-	if (s == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
-}
+int	ft_printf(const char *str, ...);
+int	ft_printfchar(char c);
+int	ft_printfstr(char *str);
+int	ft_printfnbr(int n);
+int	ft_printf_unsigned_nbr(unsigned int n);
+int	ft_printf_x(unsigned int n, char form);
+int	ft_printf_p(void *n, char form);
+
+#endif

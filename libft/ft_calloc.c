@@ -3,35 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 09:46:11 by phautena          #+#    #+#             */
-/*   Updated: 2024/11/18 15:03:39 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/25 21:46:18 by alibaba           #+#    #+#             */
+/*   Updated: 2024/05/25 21:53:19 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*memo;
-	size_t			i;
+	char	*temp;
+	size_t	i;
 
-	if (nmemb < 1 || size < 1)
-	{
-		memo = NULL;
-		return (memo);
-	}
-	if (nmemb > SIZE_MAX / size)
-		return (NULL);
-	memo = malloc(nmemb * size);
-	if (memo == NULL)
-		return (NULL);
 	i = 0;
-	while (i < nmemb * size)
+	temp = malloc(count * size);
+	if (!temp)
+		return (NULL);
+	while (temp[i])
 	{
-		memo[i] = 0;
+		temp[i] = 0;
 		i++;
 	}
-	return (memo);
+	return (temp);
 }

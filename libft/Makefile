@@ -1,51 +1,36 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: phautena <phautena@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/21 14:09:23 by phautena          #+#    #+#              #
-#    Updated: 2024/12/05 11:47:17 by phautena         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = 	libft.a
 
-SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c \
-       ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-       ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c \
-       ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
-       ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
-       ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_isspace.c \
+CC = 	gcc
 
-OBJS = ${SRCS:.c=.o}
+FLAGS = -Wall -Wextra -Werror -ggdb
 
-BSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRC = 	ft_isalnum.c  ft_isascii.c  ft_isprint.c  ft_memmove.c  ft_strlen.c \
+		ft_bzero.c ft_isalpha.c ft_isdigit.c ft_memcpy.c ft_memset.c \
+		ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
+		ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c \
+		ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
+		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
+		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+        ft_printf.c ft_printf_hexa.c ft_printf_utils.c \
+		get_next_line.c ft_atol.c ft_strcmp.c ft_tablen.c ft_isspace.c \
+		ft_isalpha_lower.c ft_isalpha_upper.c
 
-BOBJS = ${BSRCS:.c=.o}
+OBJ = ${SRC:.c=.o}
 
-COMPILER = cc
-CFLAGS = -Wall -Wextra -Werror -c -I.
-RM = rm -f
+all: 	${NAME}
 
-NAME = libft.a
+${NAME}: 	${OBJ}
+		ar rc ${NAME} ${OBJ}
 
-all: ${NAME}
-
-${NAME}:
-	${COMPILER} ${CFLAGS} ${SRCS}
-	ar rc ${NAME} ${OBJS}
-
-bonus: ${NAME}
-	${COMPILER} ${CFLAGS} ${BSRCS}
-	ar r ${NAME} ${BOBJS}
+.c.o:
+		${CC} ${FLAGS} -c $< -o $@
 
 clean:
-	${RM} ${OBJS} ${BOBJS}
+		rm -f ${OBJ} ${B_OBJ}
 
 fclean: clean
-	${RM} ${NAME}
+		rm -f ${NAME}
 
-re: fclean all
+re: 	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

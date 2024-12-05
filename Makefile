@@ -1,32 +1,21 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: phautena <phautena@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/30 11:30:32 by p0ulp1            #+#    #+#              #
-#    Updated: 2024/12/05 12:58:45 by phautena         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+GREEN	= \033[1;32m
+RED		= \033[0;31m
+BLUE	= \033[0;34m
+YELLOW	= \033[1;33m
+CYAN	= \033[0;36m
+RESET	= \033[0m
 
 NAME		=	minishell
 
 CC			=	cc
 
-FLAG		=	-Wall -Werror -Wextra -ggdb -fPIE -I./includes
+FLAG		=	-Wall -Werror -Wextra -g3 -fPIE -I./includes
 
 LIBFT_PATH	=	./libft/
 
 LIBFT_FILE	=	libft.a
 
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
-
-GNL_PATH	=	./get_next_line/
-
-GNL_FILE	=	gnl.a
-
-GNL_LIB		=	$(addprefix $(GNL_PATH), $(GNL_FILE))
 
 C_FILE		=	main/main	 									\
 				main/signals									\
@@ -49,33 +38,28 @@ OBJ			=	$(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBFT_LIB):
-	@echo "COMPILING $(LIBFT_PATH)\n"
+	@echo "$(BLUE)Compiling $(LIBFT_PATH)...$(RESET)"
 	@make -sC $(LIBFT_PATH)
-	@echo "libft.a created\n"
+	@echo "$(GREEN)libft.a created$(RESET)"
 
-$(GNL_LIB):
-	@echo "COMPILING $(GNL_PATH)\n"
-	@make -sC $(GNL_PATH)
-	@echo "gnl.a created\n"
-
-$(NAME): $(LIBFT_LIB) $(GNL_LIB) $(OBJ)
-	@echo "COMPILING $(NAME)...\n"
+$(NAME): $(LIBFT_LIB) $(OBJ)
+	@echo "$(BLUE)Compiling $(NAME)...$(RESET)"
 	@$(CC) $(OBJ) $(LIBFT_LIB) $(FLAG) -lreadline -o $(NAME)
-	@echo "./$(NAME) created\n"
+	@echo "$(GREEN)Executable $(NAME) created$(RESET)"
 
 clean:
-	@echo "\nDeleting obj file in $(LIBFT_PATH)...\n"
+	@echo "$(RED)Deleting object files in $(LIBFT_PATH)...$(RESET)"
 	@make clean -sC $(LIBFT_PATH)
-	@echo "Done\n"
-	@echo "Deleting $(NAME) object...\n"
+	@echo "$(GREEN)Done$(RESET)"
+	@echo "$(RED)Deleting $(NAME) object files...$(RESET)"
 	@rm -f $(OBJ)
-	@echo "Done\n"
+	@echo "$(GREEN)Done$(RESET)"
 
 fclean: clean
-	@echo "Deleting $(NAME) executable...\n"
+	@echo "$(RED)Deleting $(NAME) executable...$(RESET)"
 	@rm -f $(NAME)
 	@make fclean -sC $(LIBFT_PATH)
-	@echo "Done\n"
+	@echo "$(GREEN)Done$(RESET)"
 
 re: fclean all
 

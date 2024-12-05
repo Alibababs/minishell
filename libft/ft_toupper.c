@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:49:08 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/17 10:47:48 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/25 18:18:53 by alibaba           #+#    #+#             */
+/*   Updated: 2024/05/27 14:16:34 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	ft_toupper(int c)
 {
-	if (c > 96 && c < 123)
-	{
+	if (c >= 'a' && c <= 'z')
 		return (c - 32);
-	}
-	else
-	{
-		return (c);
-	}
+	return (c);
 }

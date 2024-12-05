@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:32:12 by phautena          #+#    #+#             */
-/*   Updated: 2024/05/16 15:50:33 by phautena         ###   ########.fr       */
+/*   Created: 2024/05/25 16:33:50 by alibaba           #+#    #+#             */
+/*   Updated: 2024/05/25 17:01:45 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*tmp_ptr;
-
-	tmp_ptr = (char *) s;
-	while (n > 0)
-	{
-		*tmp_ptr = 0;
-		tmp_ptr++;
-		n--;
-	}
+	ft_memset(s, 0, n);
 }
