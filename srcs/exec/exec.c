@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:11:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/03 18:38:26 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/04 13:11:46 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,16 @@ static int	exec_cmds(t_cmd **h_cmd, char **envp, t_env **h_env)
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
-				if (dup2(temp->to_read, STDIN_FILENO) == -1)
-					perror("dup2");
-				if (dup2(temp->to_write, STDOUT_FILENO) == -1)
-					perror("dup2");
+				if (temp->to_read != -1)
+				{
+					if (dup2(temp->to_read, STDIN_FILENO) == -1)
+						perror("dup2_read");
+				}
+				if (temp->to_write != -1)
+				{
+					if (dup2(temp->to_write, STDOUT_FILENO) == -1)
+						perror("dup2_write");
+				}
 				close_pipes(h_cmd);
 				execve(temp->path, temp->argv, envp);
 			}
@@ -114,8 +120,8 @@ int	exec(t_cmd **h_cmd, char **envp, t_env **h_env)
 {
 	if (init_pipes(h_cmd))
 		return (printf("Failed to initialize pipes\n"));
-	if ((*h_cmd)->to_read > -1)
-		dup2((*h_cmd)->to_read, STDIN_FILENO);
+	// if ((*h_cmd)->to_read > -1)
+		// dup2((*h_cmd)->to_read, STDIN_FILENO);
 	if (exec_cmds(h_cmd, envp, h_env))
 		return (printf("An error occured while executing commands\n"));
 	return (0);
