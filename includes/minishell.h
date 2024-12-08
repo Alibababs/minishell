@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 13:45:13 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/08 14:54:13 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ typedef struct s_data	t_data;
 
 typedef enum s_type
 {
-	CMD,
-	ARGV,
+	WORD,
 	REDIR,
 	PIPE,
+	S_QUOTE,
+	D_QUOTE,
 }						t_type;
 
 typedef struct s_token
@@ -73,6 +74,8 @@ typedef struct s_data
 	t_token				*h_tokens;
 	t_cmd				*h_cmds;
 	char				**envp;
+	char				*str;
+	struct s_data		*next;
 }						t_data;
 
 ////////////////MAIN/////////////
@@ -96,8 +99,9 @@ char					*parse_env_value(char *var);
 
 /////////////LEXER///////////////
 /// lexer.c
-void					lexer(t_data **data, char *input);
+void					lexer(t_token **data, char *input);
 /// lexer_utils.c
-bool					quotes_closed(char *input);
+int						is_sep(char c);
+int						is_quote(char c);
 
 #endif

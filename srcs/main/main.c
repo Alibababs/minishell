@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 13:46:37 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/08 14:26:49 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	process_command(t_data **data, char *input)
 {
-	lexer(data, input);
+	lexer(&(*data)->h_tokens, input);
 	(void)data;
 	return ;
 }
@@ -36,10 +36,10 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*input;
 
 	data = NULL;
-	init_data(&data, envp);
 	while (argc && argv)
 	{
 		ft_signals(1);
+		init_data(&data, envp);
 		input = readline("minishell> ");
 		if (!input)
 		{
