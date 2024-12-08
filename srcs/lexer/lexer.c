@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/08 15:05:50 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:47:46 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,19 @@ static void	tokenize_sep(t_token **data, int *ip, char *input)
 		(*ip)++;
 	}
 	add_token(data, REDIR, &input[start], len);
-	printf("sep: [%.*s]\n", len, &input[start]);
+}
+
+static void	handle_closed_quote(t_token **data, char *input, int *ip, int start,
+		int len)
+{
+	if (input[*ip] == '"')
+		add_token(data, D_QUOTE, &input[start], len);
+	else if (input[*ip] == '\'')
+		add_token(data, S_QUOTE, &input[start], len);
+	else
+		ft_putstr_fd("Error: quotes are not closed\n", 2);
+	if (input[*ip] == '"' || input[*ip] == '\'')
+		(*ip)++;
 }
 
 static void	tokenize_quote(t_token **data, int *ip, char *input)
@@ -63,23 +75,19 @@ static void	tokenize_quote(t_token **data, int *ip, char *input)
 
 	quote = input[*ip];
 	start = (*ip)++;
-	len = 1;
+	len = 2;
 	while (input[*ip] && input[*ip] != quote)
 	{
 		(*ip)++;
 		len++;
+		if (input[*ip] == quote && input[*ip + 1] == quote && input[*ip
+			+ 2] != quote)
+		{
+			len += 2;
+			(*ip) += 2;
+		}
 	}
-	if (input[*ip] == quote)
-	{
-		len++;
-		if (quote == '"')
-			add_token(data, D_QUOTE, &input[start], len);
-		else
-			add_token(data, S_QUOTE, &input[start], len);
-		(*ip)++;
-	}
-	else
-		ft_putstr_fd("Error: quotes are not closed\n", 2);
+	handle_closed_quote(data, input, ip, start, len);
 }
 
 static void	tokenize_str(t_token **data, int *ip, char *input)
@@ -91,16 +99,6 @@ static void	tokenize_str(t_token **data, int *ip, char *input)
 		&& !is_quote(input[*ip]))
 		(*ip)++;
 	add_token(data, WORD, &input[start], *ip - start);
-}
-
-// Delete later
-static void	print_tokens(t_token *data)
-{
-	while (data)
-	{
-		printf("Token: [%s], Type: %d\n", data->value, data->token);
-		data = data->next;
-	}
 }
 
 void	lexer(t_token **data, char *input)

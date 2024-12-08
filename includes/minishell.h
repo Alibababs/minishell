@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/08 14:54:13 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:11:54 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void					free_env(t_data **data);
 void					free_data(t_data **data);
 /// print.c
 void					print_env(t_data **data);
+void					print_tokens(t_token *data);
 
 ///////////////ENV///////////////
 /// env_list.c

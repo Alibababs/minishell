@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/08 14:26:49 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:10:51 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	process_command(t_data **data, char *input)
 {
 	lexer(&(*data)->h_tokens, input);
-	(void)data;
 	return ;
 }
 
@@ -49,8 +48,8 @@ int	main(int argc, char *argv[], char *envp[])
 		else if (input)
 		{
 			ft_signals(2);
-			process_command(&data, input);
 			add_history(input);
+			process_command(&data, input);
 		}
 	}
 	free_data(&data);
