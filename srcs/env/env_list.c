@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:08:40 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 11:28:50 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:04:22 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ void	add_env_end(char *name, char *value, t_data **data)
 		new_env->prev = temp;
 	}
 }
-
-

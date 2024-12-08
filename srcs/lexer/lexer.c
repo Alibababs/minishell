@@ -6,37 +6,38 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/08 18:47:46 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:09:16 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_token(t_token **data, t_type type, char *str, int len)
+static void	add_token(t_token **h_tokens, t_type type, char *str, int len)
 {
 	t_token	*new_token;
 	t_token	*temp;
 
-	if (len <= 0 || !(new_token = malloc(sizeof(t_token))))
+	if (len <= 0)
 		return ;
-	if (!(new_token->value = ft_substr(str, 0, len)))
-	{
-		free(new_token);
-		return ;
-	}
+	new_token = malloc(sizeof(t_token));
+	if (!new_token)
+		mem_error_tokens(h_tokens);
+	new_token->value = ft_substr(str, 0, len);
+	if (!new_token->value)
+		mem_error_tokens(h_tokens);
 	new_token->token = type;
 	new_token->next = NULL;
 	new_token->prev = NULL;
-	if (!*data)
-		*data = new_token;
-	else
+	if (!*h_tokens)
 	{
-		temp = *data;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new_token;
-		new_token->prev = temp;
+		*h_tokens = new_token;
+		return ;
 	}
+	temp = *h_tokens;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_token;
+	new_token->prev = temp;
 }
 
 static void	tokenize_sep(t_token **data, int *ip, char *input)
@@ -54,27 +55,10 @@ static void	tokenize_sep(t_token **data, int *ip, char *input)
 	add_token(data, REDIR, &input[start], len);
 }
 
-static void	handle_closed_quote(t_token **data, char *input, int *ip, int start,
-		int len)
+static int	get_token_length(char *input, int *ip, char quote)
 {
-	if (input[*ip] == '"')
-		add_token(data, D_QUOTE, &input[start], len);
-	else if (input[*ip] == '\'')
-		add_token(data, S_QUOTE, &input[start], len);
-	else
-		ft_putstr_fd("Error: quotes are not closed\n", 2);
-	if (input[*ip] == '"' || input[*ip] == '\'')
-		(*ip)++;
-}
+	int	len;
 
-static void	tokenize_quote(t_token **data, int *ip, char *input)
-{
-	char	quote;
-	int		start;
-	int		len;
-
-	quote = input[*ip];
-	start = (*ip)++;
 	len = 2;
 	while (input[*ip] && input[*ip] != quote)
 	{
@@ -87,7 +71,28 @@ static void	tokenize_quote(t_token **data, int *ip, char *input)
 			(*ip) += 2;
 		}
 	}
-	handle_closed_quote(data, input, ip, start, len);
+	return (len);
+}
+
+static void	tokenize_quote(t_token **data, int *ip, char *input)
+{
+	char	quote;
+	int		start;
+	int		len;
+
+	quote = input[*ip];
+	start = (*ip)++;
+	len = get_token_length(input, ip, quote);
+	if (input[*ip] == quote)
+	{
+		if (quote == '"')
+			add_token(data, D_QUOTE, &input[start], len);
+		else
+			add_token(data, S_QUOTE, &input[start], len);
+		(*ip)++;
+	}
+	else
+		ft_putstr_fd("Error: quotes are not closed\n", 2);
 }
 
 static void	tokenize_str(t_token **data, int *ip, char *input)

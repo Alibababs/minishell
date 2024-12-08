@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/05 11:35:25 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:02:41 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ void	ft_error(t_data **data, char *msg)
 	printf("An error occured:\n");
 	printf("%s\n", msg);
 	(void)data;
+}
+
+void	mem_error_tokens(t_token **h_tokens)
+{
+	printf("A memory allocation has failed.\n");
+	printf("Please provide more memory to the process.\nExiting\n");
+	exit(1);
+	(void)h_tokens;
 }
 
 void	mem_error(t_data **data)
