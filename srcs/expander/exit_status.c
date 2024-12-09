@@ -6,27 +6,11 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 16:51:23 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:57:24 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	in_single_quotes(char *str, char *ptr)
-{
-	int	in_single_quote;
-	int	i;
-
-	in_single_quote = 0;
-	i = 0;
-	while (str[i] && &str[i] < ptr)
-	{
-		if (str[i] == '\'')
-			in_single_quote = !in_single_quote;
-		i++;
-	}
-	return (in_single_quote);
-}
 
 static int	get_new_len(char *value, int status_len)
 {

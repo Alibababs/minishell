@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 16:52:38 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:58:08 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,12 @@ void					lexer(t_token **h_tokens, char *input);
 int						is_sep(char c);
 int						is_quote(char c);
 bool					quotes_closed(char *input);
+
 /////////////EXPANDER/////////////
 /// expander.c
 void					expander(t_token **h_tokens);
+/// expander_utils.c
+int						in_single_quotes(char *str, char *ptr);
 /// exit_status.c
 char					*handle_exit_status(char *value, t_token **h_token);
 
