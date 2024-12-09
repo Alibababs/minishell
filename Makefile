@@ -25,6 +25,7 @@ C_FILE		=	main/main	 									\
 				env/env_list									\
 				lexer/lexer										\
 				lexer/lexer_utils								\
+				expander/expander								\
 
 SRC_DIR		=	./srcs/
 

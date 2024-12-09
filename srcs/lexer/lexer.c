@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/09 13:39:52 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:24:10 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	add_token(t_token **h_tokens, t_type type, char *str, int len)
 	new_token->prev = temp;
 }
 
-static void	tokenize_sep(t_token **data, int *ip, char *input)
+static void	tokenize_sep(t_token **h_tokens, int *ip, char *input)
 {
 	int	start;
 	int	len;
@@ -52,10 +52,10 @@ static void	tokenize_sep(t_token **data, int *ip, char *input)
 		len++;
 		(*ip)++;
 	}
-	add_token(data, REDIR, &input[start], len);
+	add_token(h_tokens, REDIR, &input[start], len);
 }
 
-static void	tokenize_quote(t_token **data, int *ip, char *input)
+static void	tokenize_quote(t_token **h_tokens, int *ip, char *input)
 {
 	int		start;
 	char	quote;
@@ -78,13 +78,13 @@ static void	tokenize_quote(t_token **data, int *ip, char *input)
 		else
 			(*ip)++;
 	}
-	if (quotes_closed(input) == true)
-		add_token(data, QUOTES, &input[start], *ip - start);
+	if (quotes_closed(input) == 1)
+		add_token(h_tokens, QUOTES, &input[start], *ip - start);
 	else
 		ft_putstr_fd("Error : Quotes are not closed\n", 2);
 }
 
-static void	tokenize_str(t_token **data, int *ip, char *input)
+static void	tokenize_str(t_token **h_tokens, int *ip, char *input)
 {
 	int	start;
 
@@ -94,15 +94,15 @@ static void	tokenize_str(t_token **data, int *ip, char *input)
 		if (is_quote(input[*ip]))
 		{
 			*ip = start;
-			tokenize_quote(data, ip, input);
+			tokenize_quote(h_tokens, ip, input);
 			return ;
 		}
 		(*ip)++;
 	}
-	add_token(data, WORD, &input[start], *ip - start);
+	add_token(h_tokens, WORD, &input[start], *ip - start);
 }
 
-void	lexer(t_token **data, char *input)
+void	lexer(t_token **h_tokens, char *input)
 {
 	int	i;
 
@@ -112,9 +112,8 @@ void	lexer(t_token **data, char *input)
 		if (ft_isspace(input[i]))
 			i++;
 		else if (is_sep(input[i]))
-			tokenize_sep(data, &i, input);
+			tokenize_sep(h_tokens, &i, input);
 		else
-			tokenize_str(data, &i, input);
+			tokenize_str(h_tokens, &i, input);
 	}
-	print_tokens(*data);
 }

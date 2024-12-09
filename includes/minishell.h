@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 12:19:50 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:35:38 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+extern int				exit_status;
 
 typedef struct s_data	t_data;
 
@@ -90,7 +92,7 @@ void					free_data(t_data **data);
 void					print_env(t_data **data);
 void					print_tokens(t_token *data);
 
-///////////////ENV///////////////
+/////////////ENV/////////////////
 /// env_list.c
 void					add_env_end(char *name, char *value, t_data **data);
 /// init_env.c
@@ -100,10 +102,12 @@ char					*parse_env_value(char *var);
 
 /////////////LEXER///////////////
 /// lexer.c
-void					lexer(t_token **data, char *input);
+void					lexer(t_token **h_tokens, char *input);
 /// lexer_utils.c
 int						is_sep(char c);
 int						is_quote(char c);
 bool					quotes_closed(char *input);
+/////////////EXPANDER/////////////
+void					expander(t_token **h_tokens);
 
 #endif
