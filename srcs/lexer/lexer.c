@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/09 13:11:17 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:27:51 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	tokenize_quote(t_token **data, int *ip, char *input)
 
 	start = *ip;
 	quote = input[*ip];
-	(*ip)++;
 	while (input[*ip] && input[*ip] != quote)
 		(*ip)++;
 	if (input[*ip] == quote)
