@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 16:46:41 by alibabab         ###   ########.fr       */
+/*   Created: 2024/12/09 15:44:58 by alibabab          #+#    #+#             */
+/*   Updated: 2024/12/09 15:45:05 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	expander(t_token **h_tokens)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	t_token	*temp;
+	char	*dst;
 
-	temp = *h_tokens;
-	while (temp)
+	dst = dest;
+	while (*src)
 	{
-		if (ft_strstr(temp->value, "$?"))
-			temp->value = handle_exit_status(temp->value, h_tokens);
-		temp = temp->next;
+		*dst = *src;
+		dst++;
+		src++;
 	}
-	print_tokens(*h_tokens);
+	*dst = '\0';
+	return (dest);
 }

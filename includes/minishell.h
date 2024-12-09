@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 14:35:38 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:52:38 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-extern int				exit_status;
+extern int				g_exit_status;
 
 typedef struct s_data	t_data;
 
@@ -108,6 +108,9 @@ int						is_sep(char c);
 int						is_quote(char c);
 bool					quotes_closed(char *input);
 /////////////EXPANDER/////////////
+/// expander.c
 void					expander(t_token **h_tokens);
+/// exit_status.c
+char					*handle_exit_status(char *value, t_token **h_token);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:53:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 14:35:46 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:52:24 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			exit_status = 0;
+int			g_exit_status = 0;
 
 static void	handle_sigint(int sig)
 {

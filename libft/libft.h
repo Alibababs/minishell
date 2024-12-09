@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:53:30 by alibaba           #+#    #+#             */
-/*   Updated: 2024/12/09 15:00:33 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:45:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strncpy(char *dst, const char *src, size_t n);
 char	*ft_strstr(char *haystack, const char *needle);
 char	*ft_strcat(char *dest, const char *src);
+char	*ft_strcpy(char *dest, const char *src);
 
 long	ft_atol(const char *str);
 int		tab_len(char **tab);
