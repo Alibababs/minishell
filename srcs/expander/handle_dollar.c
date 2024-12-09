@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:00:39 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 21:09:05 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 21:20:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static int	calculate_new_len(char *value, t_env **h_env)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && ft_isalnum(value[i + 1]) && value[i - 1] != '\\')
+		if (value[i] == '$' && ft_isalnum(value[i + 1]) && (i == 0 || value[i
+				- 1] != '\\'))
 			i = var_len(value, h_env, i, &new_len);
 		else
 		{
@@ -69,20 +70,6 @@ static char	*handle_var_replacement(char *ptr, t_env **h_env, char **new_ptr)
 	}
 	free(var_name);
 	return (ptr + j);
-}
-
-static int	in_backslash(char *ptr, char *start)
-{
-	int	backslash_count;
-
-	backslash_count = 0;
-	ptr--;
-	while (ptr >= start && *ptr == '\\')
-	{
-		backslash_count++;
-		ptr--;
-	}
-	return (backslash_count % 2 != 0);
 }
 
 static void	replace_dollars(char *value, t_env **h_env, char *new_value)

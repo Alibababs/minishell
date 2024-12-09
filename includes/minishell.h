@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 20:01:15 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 21:16:06 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void					expander(t_token **h_tokens, t_env **h_env);
 char					*handle_dollar(char *value, t_env **h_env);
 /// expander_utils.c
 int						in_s_quotes(char *str, char *ptr);
+int						in_backslash(char *ptr, char *start);
 void					remove_empty_tokens(t_token **h_tokens);
 char					*get_var(char *value, t_env **h_env);
 
