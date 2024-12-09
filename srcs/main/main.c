@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 14:18:47 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:05:49 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	process_command(t_data **data, char *input)
 {
 	lexer(&(*data)->h_tokens, input);
-	expander(&(*data)->h_tokens);
+	expander(&(*data)->h_tokens, &(*data)->h_env);
 	return ;
 }
 

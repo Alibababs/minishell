@@ -28,6 +28,7 @@ C_FILE		=	main/main	 									\
 				expander/expander								\
 				expander/expander_utils							\
 				expander/exit_status							\
+				expander/handle_dollar							\
 
 SRC_DIR		=	./srcs/
 

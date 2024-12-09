@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 17:19:21 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:50:22 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_exit_status(char *value, t_token **h_token)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && value[i + 1] == '?' && in_single_quotes(value,
+		if (value[i] == '$' && value[i + 1] == '?' && in_s_quotes(value,
 				&value[i]))
 			return (value);
 		i++;
