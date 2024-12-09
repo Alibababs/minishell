@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 11:36:31 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:19:50 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum s_type
 	WORD,
 	REDIR,
 	PIPE,
-	QUOTE,
+	QUOTES,
 }						t_type;
 
 typedef struct s_token
@@ -104,5 +104,6 @@ void					lexer(t_token **data, char *input);
 /// lexer_utils.c
 int						is_sep(char c);
 int						is_quote(char c);
+bool					quotes_closed(char *input);
 
 #endif

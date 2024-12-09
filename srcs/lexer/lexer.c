@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/09 11:45:58 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:11:17 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,42 +55,24 @@ static void	tokenize_sep(t_token **data, int *ip, char *input)
 	add_token(data, REDIR, &input[start], len);
 }
 
-static int	get_token_length(char *input, int *ip, char quote)
-{
-	int	len;
-
-	len = 2;
-	while (input[*ip] && input[*ip] != quote)
-	{
-		(*ip)++;
-		len++;
-		if (input[*ip] == quote && is_quote(input[*ip + 1])
-			&& !is_quote(input[*ip + 2]))
-		{
-			quote = input[*ip + 1];
-			len += 2;
-			(*ip) += 2;
-		}
-	}
-	return (len);
-}
-
 static void	tokenize_quote(t_token **data, int *ip, char *input)
 {
-	char	quote;
 	int		start;
-	int		len;
+	char	quote;
 
+	start = *ip;
 	quote = input[*ip];
-	start = (*ip)++;
-	len = get_token_length(input, ip, quote);
-	if (is_quote(input[*ip]))
-	{
-		add_token(data, QUOTE, &input[start], len);
+	(*ip)++;
+	while (input[*ip] && input[*ip] != quote)
 		(*ip)++;
-	}
+	if (input[*ip] == quote)
+		(*ip)++;
+	while (input[*ip] && !ft_isspace(input[*ip]) && !is_sep(input[*ip]))
+		(*ip)++;
+	if (quotes_closed(input) == true)
+		add_token(data, QUOTES, &input[start], *ip - start);
 	else
-		ft_putstr_fd("Error: quotes are not closed\n", 2);
+		ft_putstr_fd("Error : Quotes are not closed\n", 2);
 }
 
 static void	tokenize_str(t_token **data, int *ip, char *input)
@@ -98,9 +80,16 @@ static void	tokenize_str(t_token **data, int *ip, char *input)
 	int	start;
 
 	start = *ip;
-	while (input[*ip] && !ft_isspace(input[*ip]) && !is_sep(input[*ip])
-		&& !is_quote(input[*ip]))
+	while (input[*ip] && !ft_isspace(input[*ip]) && !is_sep(input[*ip]))
+	{
+		if (is_quote(input[*ip]))
+		{
+			*ip = start;
+			tokenize_quote(data, ip, input);
+			return ;
+		}
 		(*ip)++;
+	}
 	add_token(data, WORD, &input[start], *ip - start);
 }
 
@@ -113,8 +102,6 @@ void	lexer(t_token **data, char *input)
 	{
 		if (ft_isspace(input[i]))
 			i++;
-		else if (is_quote(input[i]))
-			tokenize_quote(data, &i, input);
 		else if (is_sep(input[i]))
 			tokenize_sep(data, &i, input);
 		else

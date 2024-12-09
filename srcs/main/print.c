@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:26:33 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/08 19:07:10 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:28:41 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_tokens(t_token *data)
 {
 	while (data)
 	{
-		printf("Token: [%s], Type: %d\n", data->value, data->token);
+		printf("Value: [%s], Token: [%d]\n", data->value, data->token);
 		data = data->next;
 	}
 }
