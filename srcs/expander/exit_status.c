@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 19:50:22 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:00:39 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	get_new_len(char *value, int status_len)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && value[i + 1] == '?')
+		if (value[i] == '$' && value[i + 1] == '?' && !in_backslash(&value[i],
+				value))
 		{
 			new_len += status_len;
 			i += 2;
@@ -42,7 +43,7 @@ static void	process_exit_status(char *status_str, char *new_value, char *ptr)
 	i = 0;
 	while (ptr[i])
 	{
-		if (ptr[i] == '$' && ptr[i + 1] == '?')
+		if (ptr[i] == '$' && ptr[i + 1] == '?' && !in_backslash(&ptr[i], ptr))
 		{
 			ft_strcpy(new_value, status_str);
 			new_value += ft_strlen(status_str);
