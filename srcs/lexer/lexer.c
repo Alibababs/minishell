@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/09 13:27:51 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:39:52 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,20 @@ static void	tokenize_quote(t_token **data, int *ip, char *input)
 	quote = input[*ip];
 	while (input[*ip] && input[*ip] != quote)
 		(*ip)++;
-	if (input[*ip] == quote)
-		(*ip)++;
 	while (input[*ip] && !ft_isspace(input[*ip]) && !is_sep(input[*ip]))
-		(*ip)++;
+	{
+		if (is_quote(input[*ip]))
+		{
+			quote = input[*ip];
+			(*ip)++;
+			while (input[*ip] && input[*ip] != quote)
+				(*ip)++;
+			if (input[*ip] == quote)
+				(*ip)++;
+		}
+		else
+			(*ip)++;
+	}
 	if (quotes_closed(input) == true)
 		add_token(data, QUOTES, &input[start], *ip - start);
 	else
