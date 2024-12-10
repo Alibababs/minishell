@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 16:10:47 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:56:11 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char					*parse_env_value(char *var);
 
 /////////////LEXER///////////////
 /// lexer.c
-void					lexer(t_data *data, char *input);
+int						lexer(t_data *data, char *input);
 /// lexer_utils.c
 int						is_sep(char c);
 int						is_quote(char c);
@@ -119,5 +119,11 @@ char					*get_var(char *value, t_data *data);
 char					*handle_dollar(char *value, t_data *h_data);
 /// exit_status.c
 char					*handle_exit_status(char *value, t_data *data);
+//////////////PARSING///////////////
+/// parsing.c
+int						parsing(t_data *data);
+/// parsing_error.c
+bool					valid_syntax(t_data *data);
+void					syntax_error_msg(char *token);
 
 #endif

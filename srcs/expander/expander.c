@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 16:02:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:45:21 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,4 @@ void	expander(t_data *data)
 	}
 	remove_empty_tokens(data);
 	remove_useless_char(data);
-	print_tokens(data->h_tokens);
 }

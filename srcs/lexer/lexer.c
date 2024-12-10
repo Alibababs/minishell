@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/10 16:11:08 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:47:42 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,7 @@ static void	add_token(t_data *data, t_type type, char *str, int len)
 	new_token->prev = temp;
 }
 
-static void	tokenize_sep(t_data *data, int *ip, char *input)
-{
-	int	start;
-	int	len;
-
-	start = *ip;
-	len = 0;
-	while (input[*ip] && is_sep(input[*ip]))
-	{
-		len++;
-		(*ip)++;
-	}
-	add_token(data, REDIR, &input[start], len);
-}
-
-static void	tokenize_quote(t_data *data, int *ip, char *input)
+static int	tokenize_quote(t_data *data, int *ip, char *input)
 {
 	int		start;
 	char	quote;
@@ -78,13 +63,13 @@ static void	tokenize_quote(t_data *data, int *ip, char *input)
 		else
 			(*ip)++;
 	}
-	if (quotes_closed(input) == 1)
-		add_token(data, QUOTES, &input[start], *ip - start);
-	else
-		ft_error("Error : Quotes are not closed\n", &data);
+	if (quotes_closed(input) == false)
+		return (write(2, "minishell : missing closing quote\n", 35), 1);
+	add_token(data, WORD, &input[start], *ip - start);
+	return (0);
 }
 
-static void	tokenize_str(t_data *data, int *ip, char *input)
+static int	tokenize_str(t_data *data, int *ip, char *input)
 {
 	int	start;
 
@@ -94,15 +79,43 @@ static void	tokenize_str(t_data *data, int *ip, char *input)
 		if (is_quote(input[*ip]))
 		{
 			*ip = start;
-			tokenize_quote(data, ip, input);
-			return ;
+			if (tokenize_quote(data, ip, input))
+				return (1);
+			return (0);
 		}
 		(*ip)++;
 	}
 	add_token(data, WORD, &input[start], *ip - start);
+	return (0);
 }
 
-void	lexer(t_data *data, char *input)
+static int	tokenize_sep(t_data *data, int *ip, char *input)
+{
+	int	start;
+	int	len;
+
+	start = *ip;
+	len = 0;
+	if (input[*ip] == '|')
+	{
+		add_token(data, PIPE, &input[start], 1);
+		(*ip)++;
+	}
+	else if (is_sep(input[*ip]))
+	{
+		while (input[*ip] && is_sep(input[*ip]))
+		{
+			len++;
+			(*ip)++;
+		}
+		if (len > 2)
+			return (syntax_error_msg(&input[start]), 1);
+		add_token(data, REDIR, &input[start], len);
+	}
+	return (0);
+}
+
+int	lexer(t_data *data, char *input)
 {
 	int	i;
 
@@ -112,8 +125,15 @@ void	lexer(t_data *data, char *input)
 		if (ft_isspace(input[i]))
 			i++;
 		else if (is_sep(input[i]))
-			tokenize_sep(data, &i, input);
+		{
+			if (tokenize_sep(data, &i, input))
+				return (1);
+		}
 		else
-			tokenize_str(data, &i, input);
+		{
+			if (tokenize_str(data, &i, input))
+				return (1);
+		}
 	}
+	return (0);
 }

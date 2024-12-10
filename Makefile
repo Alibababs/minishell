@@ -29,6 +29,8 @@ C_FILE		=	main/main	 									\
 				expander/expander_utils							\
 				expander/exit_status							\
 				expander/handle_dollar							\
+				parsing/parsing									\
+				parsing/parsing_error							\
 
 SRC_DIR		=	./srcs/
 

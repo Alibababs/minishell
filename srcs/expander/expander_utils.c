@@ -6,11 +6,27 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:17 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:56:28 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:49:51 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*get_var(char *value, t_data *data)
+{
+	t_env	*temp;
+	char	*var_name;
+
+	var_name = value;
+	temp = data->h_env;
+	while (temp)
+	{
+		if (!ft_strcmp(var_name, temp->name))
+			return (temp->value);
+		temp = temp->next;
+	}
+	return (NULL);
+}
 
 int	in_s_quotes(char *str, char *ptr)
 {
@@ -98,20 +114,4 @@ void	remove_empty_tokens(t_data *data)
 			temp = temp->next;
 		}
 	}
-}
-
-char	*get_var(char *value, t_data *data)
-{
-	t_env	*temp;
-	char	*var_name;
-
-	var_name = value;
-	temp = data->h_env;
-	while (temp)
-	{
-		if (!ft_strcmp(var_name, temp->name))
-			return (temp->value);
-		temp = temp->next;
-	}
-	return (NULL);
 }
