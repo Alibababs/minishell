@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 14:29:03 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:48:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 		if ((current->value[i] == 34 || current->value[i] == 39) && mode == 1)
 			mode = current->value[i];
 		else if (current->value[i] == mode)
-			i++;
+			mode = 1;
 		else
 		{
 			res[j] = current->value[i];
 			j++;
-			i++;
 		}
+		i++;
 	}
 	res[j] = '\0';
 	free(current->value);
