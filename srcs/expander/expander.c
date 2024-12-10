@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 14:48:50 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:05:46 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 
 static int	quote_before(char *value, int i)
 {
-	int	len;
 	int	j;
 
-	len = ft_strlen(value);
 	j = 0;
 	while (value[j])
 	{
@@ -77,7 +75,8 @@ static void	remove_useless_dollars(t_data *data, t_token *current)
 		mem_error(&data);
 	while (current->value[i])
 	{
-		if (current->value[i] == '$' && !quote_before(current->value, i) && current->value[i + 1] != '=')
+		if (current->value[i] == '$' && !quote_before(current->value, i)
+			&& current->value[i + 1] != '=')
 			i++;
 		else
 		{

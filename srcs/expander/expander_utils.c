@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:17 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 01:15:36 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:06:07 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,24 @@
 int	in_s_quotes(char *str, char *ptr)
 {
 	int	in_single_quote;
+	int	in_double_quote;
 	int	i;
 
 	in_single_quote = 0;
+	in_double_quote = 0;
 	i = 0;
 	while (str[i] && &str[i] < ptr)
 	{
-		if (str[i] == '\'')
-			in_single_quote = !in_single_quote;
+		if (str[i] == '"')
+		{
+			if (!in_single_quote)
+				in_double_quote = !in_double_quote;
+		}
+		else if (str[i] == '\'')
+		{
+			if (!in_double_quote)
+				in_single_quote = !in_single_quote;
+		}
 		i++;
 	}
 	return (in_single_quote);
