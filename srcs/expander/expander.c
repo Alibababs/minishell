@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:05:46 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:18:29 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 		else if (current->value[i] == mode)
 			mode = 1;
 		else
-		{
-			res[j] = current->value[i];
-			j++;
-		}
+			res[j++] = current->value[i];
 		i++;
 	}
 	res[j] = '\0';
