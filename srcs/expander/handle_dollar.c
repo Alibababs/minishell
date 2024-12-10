@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:00:39 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 14:25:52 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:43:41 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ static int	calculate_new_len(char *value, t_data *data)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && ft_isalnum(value[i + 1])
-			&& !in_backslash(&value[i], value))
+		if (value[i] == '$' && ft_isalnum(value[i + 1]))
 			i = var_len(value, data, i, &new_len);
 		else
 		{
-			if (value[i] == '\\' && value[i + 1] == '$')
-				new_len++;
 			new_len++;
 			i++;
 		}
@@ -81,7 +78,7 @@ static void	replace_dollars(char *value, t_data *data, char *new_value)
 	ptr = value;
 	while (*ptr)
 	{
-		if (*ptr == '$' && ft_isalnum(*(ptr + 1)) && !in_backslash(ptr, value))
+		if (*ptr == '$' && ft_isalnum(*(ptr + 1)))
 			ptr = handle_var_replacement(ptr, data, &new_ptr);
 		else
 		{
