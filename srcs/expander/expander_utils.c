@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:17 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:44:33 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:56:28 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@ int	in_s_quotes(char *str, char *ptr)
 		i++;
 	}
 	return (in_single_quote);
+}
+
+int	in_d_quotes(char *str, char *ptr)
+{
+	int	in_single_quote;
+	int	in_double_quote;
+	int	i;
+
+	in_single_quote = 0;
+	in_double_quote = 0;
+	i = 0;
+	while (str[i] && &str[i] < ptr)
+	{
+		if (str[i] == '"')
+		{
+			if (!in_single_quote)
+				in_double_quote = !in_double_quote;
+		}
+		else if (str[i] == '\'')
+		{
+			if (!in_double_quote)
+				in_single_quote = !in_single_quote;
+		}
+		i++;
+	}
+	return (in_double_quote);
 }
 
 static void	remove_empty_tokens_utils(t_data *data, t_token *prev,

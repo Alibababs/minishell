@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 15:44:44 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:56:43 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ bool					quotes_closed(char *input);
 void					expander(t_data *data);
 /// expander_utils.c
 int						in_s_quotes(char *str, char *ptr);
+int						in_d_quotes(char *str, char *ptr);
 void					remove_empty_tokens(t_data *data);
 char					*get_var(char *value, t_data *data);
 /// handle_dollar.c

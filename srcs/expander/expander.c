@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:18:29 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:02:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,6 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 	current->value = res;
 }
 
-static int	quote_before(char *value, int i)
-{
-	int	j;
-
-	j = 0;
-	while (value[j])
-	{
-		if (value[j] == '$' && j == 0)
-			return (0);
-		j++;
-	}
-	if (value[i - 1])
-	{
-		if (value[i - 1] == 34 || value[i - 1] == 39)
-			return (1);
-	}
-	return (0);
-}
-
 static void	remove_useless_dollars(t_data *data, t_token *current)
 {
 	int		i;
@@ -72,15 +53,12 @@ static void	remove_useless_dollars(t_data *data, t_token *current)
 		mem_error(&data);
 	while (current->value[i])
 	{
-		if (current->value[i] == '$' && !quote_before(current->value, i)
-			&& current->value[i + 1] != '=')
+		if (current->value[i] == '$' && !in_s_quotes(current->value,
+				&current->value[i]) && !in_d_quotes(current->value,
+				&current->value[i]) && current->value[i + 1] != '=')
 			i++;
 		else
-		{
-			res[j] = current->value[i];
-			i++;
-			j++;
-		}
+			res[j++] = current->value[i++];
 	}
 	res[j] = '\0';
 	free(current->value);
