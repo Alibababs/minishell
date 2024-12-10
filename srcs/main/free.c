@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 02:13:54 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:50:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	mem_error(t_data **data)
 	printf("Please provide more memory to the process.\nExiting\n");
 	free_data(data);
 	exit(1);
-	(void)data;
 }
 
 void	free_env(t_data *data)
