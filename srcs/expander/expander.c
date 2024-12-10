@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 19:45:21 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:21:54 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ static void	remove_useless_dollars(t_data *data, t_token *current)
 		mem_error(&data);
 	while (current->value[i])
 	{
-		if (current->value[i] == '$' && !in_s_quotes(current->value,
-				&current->value[i]) && !in_d_quotes(current->value,
-				&current->value[i]) && current->value[i + 1] != '=')
+		if (current->value[i] == '$' && is_quote(current->value[i + 1])
+			&& !in_s_quotes(current->value, &current->value[i])
+			&& !in_d_quotes(current->value, &current->value[i])
+			&& current->value[i + 1] != '=')
 			i++;
 		else
 			res[j++] = current->value[i++];
