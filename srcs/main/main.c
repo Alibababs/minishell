@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 01:16:15 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 01:38:04 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	init_data(t_data **data, char *envp[])
 	(*data)->h_env = NULL;
 	(*data)->h_tokens = NULL;
 	(*data)->h_cmds = NULL;
+	(*data)->envp = envp;
+	(*data)->str = NULL;
 	init_env(data, envp);
 }
 

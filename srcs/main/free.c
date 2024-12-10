@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 19:23:43 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 01:58:41 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,59 @@ void	mem_error_env(t_env **h_env)
 	(void)h_env;
 }
 
-void	mem_error_tokens(t_token **h_tokens)
-{
-	printf("A memory allocation has failed.\n");
-	printf("Please provide more memory to the process.\nExiting\n");
-	exit(1);
-	(void)h_tokens;
-}
-
 void	mem_error(t_data **data)
 {
 	printf("A memory allocation has failed.\n");
 	printf("Please provide more memory to the process.\nExiting\n");
+	free_data(data);
 	exit(1);
 	(void)data;
 }
 
-void	free_env(t_data **data)
+void	free_env(t_data *data)
 {
 	t_env	*temp;
 	t_env	*next;
 
-	temp = (*data)->h_env;
+	temp = data->h_env;
 	while (temp)
 	{
 		next = temp->next;
-		if (temp->name)
-			free(temp->name);
-		if (temp->value)
-			free(temp->value);
-		if (temp)
-			free(temp);
+		free(temp->name);
+		free(temp->value);
+		free(temp);
 		temp = next;
 	}
+	data->h_env = NULL;
+}
+
+void	free_tokens(t_data *data)
+{
+	t_token	*temp;
+	t_token	*next;
+
+	if (!data || !data->h_tokens)
+		return ;
+	temp = data->h_tokens;
+	while (temp)
+	{
+		next = temp->next;
+		if (temp->value)
+			free(temp->value);
+		free(temp);
+		temp = next;
+	}
+	data->h_tokens = NULL;
 }
 
 void	free_data(t_data **data)
 {
-	free_env(data);
+	if (!data || !*data)
+		return ;
+	if ((*data)->h_tokens)
+		free_tokens(*data);
+	if ((*data)->h_env)
+		free_env(*data);
 	free(*data);
+	*data = NULL;
 }

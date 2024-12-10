@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 01:16:27 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 01:48:09 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ void					ft_signals(int mode);
 /// free.c
 void					ft_error(t_data **data, char *msg);
 void					mem_error(t_data **data);
-void					mem_error_tokens(t_token **h_tokens);
-void					mem_error_env(t_env **h_env);
-void					free_env(t_data **data);
+void					free_env(t_data *data);
 void					free_data(t_data **data);
 /// print.c
 void					print_env(t_data **data);
