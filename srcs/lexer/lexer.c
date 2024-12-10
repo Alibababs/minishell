@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/10 00:52:22 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:11:08 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	tokenize_quote(t_data *data, int *ip, char *input)
 	if (quotes_closed(input) == 1)
 		add_token(data, QUOTES, &input[start], *ip - start);
 	else
-		ft_putstr_fd("Error : Quotes are not closed\n", 2);
+		ft_error("Error : Quotes are not closed\n", &data);
 }
 
 static void	tokenize_str(t_data *data, int *ip, char *input)

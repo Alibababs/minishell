@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 11:50:00 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:18:28 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(t_data **data, char *msg)
+void	ft_error(char *msg, t_data **data)
 {
-	printf("An error occured:\n");
-	printf("%s\n", msg);
-	(void)data;
+	ft_putstr_fd(msg, 2);
+	free_data(data);
+	exit(1);
 }
 
 void	mem_error(t_data **data)
 {
-	printf("A memory allocation has failed.\n");
-	printf("Please provide more memory to the process.\nExiting\n");
+	perror("Memory allocation failed");
 	free_data(data);
 	exit(1);
 }

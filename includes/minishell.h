@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 15:56:43 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:10:47 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 /// signals.c
 void					ft_signals(int mode);
 /// free.c
-void					ft_error(t_data **data, char *msg);
+void					ft_error(char *msg, t_data **data);
 void					mem_error(t_data **data);
 void					free_env(t_data *data);
 void					free_data(t_data **data);

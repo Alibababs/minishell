@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:08:40 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/08 19:04:22 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:12:49 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	add_env_end(char *name, char *value, t_data **data)
 	{
 		new_env = malloc(sizeof(t_env));
 		if (!new_env)
-			return (ft_error(data, "Memory Allocation"));
+			return (mem_error(data));
 		temp = (*data)->h_env;
 		while (temp->next)
 			temp = temp->next;
