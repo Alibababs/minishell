@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/09 23:00:39 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 00:57:54 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	process_exit_status(char *status_str, char *new_value, char *ptr)
 	*new_value = '\0';
 }
 
-char	*handle_exit_status(char *value, t_token **h_token)
+char	*handle_exit_status(char *value, t_data *data)
 {
 	char	*status_str;
 	char	*new_value;
@@ -77,7 +77,7 @@ char	*handle_exit_status(char *value, t_token **h_token)
 	status_str = ft_itoa(g_exit_status);
 	new_value = malloc(get_new_len(value, ft_strlen(status_str)) + 1);
 	if (!new_value)
-		mem_error_tokens(h_token);
+		mem_error(&data);
 	ptr = value;
 	process_exit_status(status_str, new_value, ptr);
 	return (new_value);

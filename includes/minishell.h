@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 21:16:06 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 01:16:27 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char					*parse_env_value(char *var);
 
 /////////////LEXER///////////////
 /// lexer.c
-void					lexer(t_token **h_tokens, char *input);
+void					lexer(t_data *data, char *input);
 /// lexer_utils.c
 int						is_sep(char c);
 int						is_quote(char c);
@@ -111,16 +111,15 @@ bool					quotes_closed(char *input);
 
 /////////////EXPANDER/////////////
 /// expander.c
-void					expander(t_token **h_tokens, t_env **h_env);
-/// handle_dollar.c
-char					*handle_dollar(char *value, t_env **h_env);
+void					expander(t_data *data);
 /// expander_utils.c
 int						in_s_quotes(char *str, char *ptr);
 int						in_backslash(char *ptr, char *start);
-void					remove_empty_tokens(t_token **h_tokens);
-char					*get_var(char *value, t_env **h_env);
-
+void					remove_empty_tokens(t_data *data);
+char					*get_var(char *value, t_data *data);
+/// handle_dollar.c
+char					*handle_dollar(char *value, t_data *h_data);
 /// exit_status.c
-char					*handle_exit_status(char *value, t_token **h_token);
+char					*handle_exit_status(char *value, t_data *data);
 
 #endif
