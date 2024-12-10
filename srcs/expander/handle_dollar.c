@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:00:39 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:43:41 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:47:07 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	var_len(char *value, t_data *data, int i, int *new_len)
 	char	*var_value;
 
 	j = i + 1;
+	if (ft_isdigit(value[j]))
+		return (j + 1);
 	while (ft_isalnum(value[j]))
 		j++;
 	var_name = ft_substr(value, i + 1, j - i - 1);
@@ -38,7 +40,7 @@ static int	calculate_new_len(char *value, t_data *data)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && ft_isalnum(value[i + 1]))
+		if (value[i] == '$' && (ft_isalnum(value[i + 1])))
 			i = var_len(value, data, i, &new_len);
 		else
 		{
@@ -55,6 +57,8 @@ static char	*handle_var_replacement(char *ptr, t_data *data, char **new_ptr)
 	char	*var_name;
 	char	*var_value;
 
+	if (ft_isdigit(ptr[1]))
+		return (ptr + 2);
 	j = 1;
 	while (ft_isalnum(ptr[j]))
 		j++;
@@ -78,7 +82,7 @@ static void	replace_dollars(char *value, t_data *data, char *new_value)
 	ptr = value;
 	while (*ptr)
 	{
-		if (*ptr == '$' && ft_isalnum(*(ptr + 1)))
+		if (*ptr == '$' && (ft_isalnum(*(ptr + 1))))
 			ptr = handle_var_replacement(ptr, data, &new_ptr);
 		else
 		{
