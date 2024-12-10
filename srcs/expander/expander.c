@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 21:21:54 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:44:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	expander(t_data *data)
 	{
 		if (ft_strstr(temp->value, "$?"))
 			temp->value = handle_exit_status(temp->value, data);
-		else if (ft_strchr(temp->value, '$'))
+		if (ft_strchr(temp->value, '$'))
 			temp->value = handle_dollar(temp->value, data);
 		temp = temp->next;
 	}
