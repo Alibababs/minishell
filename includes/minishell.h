@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/12 11:57:48 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:56:42 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_cmd
 	int					pid;
 	bool				here_doc;
 	bool				was_quote;
+	struct s_cmd		*next;
+	struct s_cmd		*prev;
 	t_data				*data;
 }						t_cmd;
 
@@ -88,9 +90,12 @@ void					ft_error(char *msg, t_data **data);
 void					mem_error(t_data **data);
 void					free_env(t_data *data);
 void					free_data(t_data **data);
+///free_bis.c
+void					free_array(char **array);
 /// print.c
 void					print_env(t_data **data);
 void					print_tokens(t_token *temp);
+void					print_cmds(t_cmd *temp);
 
 /////////////ENV/////////////////
 /// env_list.c
@@ -120,11 +125,24 @@ char					*get_var(char *value, t_data *data);
 char					*handle_dollar(char *value, t_data *h_data);
 /// exit_status.c
 char					*handle_exit_status(char *value, t_data *data);
+
 //////////////PARSING///////////////
 /// parsing.c
 int						parsing(t_data *data);
 /// parsing_error.c
 bool					valid_syntax(t_data *data);
 void					syntax_error_msg(char *token);
+
+/////////////EXEC//////////////////
+///exec.c
+int						exec(t_data *data);
+
+///exec_utils.c
+void					add_cmd_end(t_data *data);
+int						count_cmds(t_data *data);
+int						is_builtin(t_token *current);
+
+///exec_path.c
+void					set_path_cmd(t_token *current, t_cmd *cmd, t_data *data);
 
 #endif
