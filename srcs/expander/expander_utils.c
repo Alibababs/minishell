@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:17 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 19:49:51 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:25:48 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	remove_empty_tokens_utils(t_data *data, t_token *prev,
 	free(temp);
 }
 
-void	remove_empty_tokens(t_data *data)
+int	remove_empty_tokens(t_data *data)
 {
 	t_token	*temp;
 	t_token	*prev;
@@ -114,4 +114,8 @@ void	remove_empty_tokens(t_data *data)
 			temp = temp->next;
 		}
 	}
+	temp = data->h_tokens;
+	if (temp == NULL)
+		return (1);
+	return (0);
 }

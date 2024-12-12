@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 21:44:35 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:26:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	remove_useless_char(t_data *data)
 	}
 }
 
-void	expander(t_data *data)
+int	expander(t_data *data)
 {
 	t_token	*temp;
 
@@ -92,6 +92,8 @@ void	expander(t_data *data)
 			temp->value = handle_dollar(temp->value, data);
 		temp = temp->next;
 	}
-	remove_empty_tokens(data);
+	if (remove_empty_tokens(data))
+		return (1);
 	remove_useless_char(data);
+	return (0);
 }

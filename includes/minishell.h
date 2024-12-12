@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/12 12:56:42 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:26:00 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void					ft_error(char *msg, t_data **data);
 void					mem_error(t_data **data);
 void					free_env(t_data *data);
 void					free_data(t_data **data);
-///free_bis.c
+/// free_bis.c
 void					free_array(char **array);
 /// print.c
 void					print_env(t_data **data);
@@ -115,11 +115,11 @@ bool					quotes_closed(char *input);
 
 /////////////EXPANDER/////////////
 /// expander.c
-void					expander(t_data *data);
+int						expander(t_data *data);
 /// expander_utils.c
 int						in_s_quotes(char *str, char *ptr);
 int						in_d_quotes(char *str, char *ptr);
-void					remove_empty_tokens(t_data *data);
+int						remove_empty_tokens(t_data *data);
 char					*get_var(char *value, t_data *data);
 /// handle_dollar.c
 char					*handle_dollar(char *value, t_data *h_data);
@@ -134,15 +134,16 @@ bool					valid_syntax(t_data *data);
 void					syntax_error_msg(char *token);
 
 /////////////EXEC//////////////////
-///exec.c
+/// exec.c
 int						exec(t_data *data);
 
-///exec_utils.c
+/// exec_utils.c
 void					add_cmd_end(t_data *data);
 int						count_cmds(t_data *data);
 int						is_builtin(t_token *current);
 
-///exec_path.c
-void					set_path_cmd(t_token *current, t_cmd *cmd, t_data *data);
+/// exec_path.c
+void					set_path_cmd(t_token *current, t_cmd *cmd,
+							t_data *data);
 
 #endif
