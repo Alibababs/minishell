@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 20:07:16 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:57:48 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_token
 {
 	t_type				token;
 	char				*value;
+	bool				was_quote;
 	struct s_token		*next;
 	struct s_token		*prev;
 	t_data				*data;
@@ -65,6 +66,7 @@ typedef struct s_cmd
 	int					to_write;
 	int					pid;
 	bool				here_doc;
+	bool				was_quote;
 	t_data				*data;
 }						t_cmd;
 
@@ -88,7 +90,7 @@ void					free_env(t_data *data);
 void					free_data(t_data **data);
 /// print.c
 void					print_env(t_data **data);
-void					print_tokens(t_token *data);
+void					print_tokens(t_token *temp);
 
 /////////////ENV/////////////////
 /// env_list.c

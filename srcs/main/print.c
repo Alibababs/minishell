@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:26:33 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 11:39:01 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:58:14 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	print_env(t_data **data)
 	}
 }
 
-void	print_tokens(t_token *data)
+void	print_tokens(t_token *temp)
 {
-	while (data)
+	while (temp)
 	{
-		printf("Value: [%s], Token: [%d]\n", data->value, data->token);
-		data = data->next;
+		printf("Value: [%s], Token: [%d], Quote: [%d]\n", temp->value, temp->token);
+		temp = temp->next;
 	}
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/10 20:07:50 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:56:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_token(t_data *data, t_type type, char *str, int len)
+static void	add_token(t_data *data, t_type type, char *str, int len, bool quote)
 {
 	t_token	*new_token;
 	t_token	*temp;
@@ -26,6 +26,7 @@ static void	add_token(t_data *data, t_type type, char *str, int len)
 	if (!new_token->value)
 		mem_error(&data);
 	new_token->token = type;
+	new_token->was_quote = quote;
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	if (!data->h_tokens)
@@ -65,7 +66,7 @@ static int	tokenize_quote(t_data *data, int *ip, char *input)
 	}
 	if (quotes_closed(input) == false)
 		return (write(2, "minishell : missing closing quote\n", 35), 1);
-	add_token(data, WORD, &input[start], *ip - start);
+	add_token(data, WORD, &input[start], *ip - start, true);
 	return (0);
 }
 
@@ -85,7 +86,7 @@ static int	tokenize_str(t_data *data, int *ip, char *input)
 		}
 		(*ip)++;
 	}
-	add_token(data, WORD, &input[start], *ip - start);
+	add_token(data, WORD, &input[start], *ip - start, false);
 	return (0);
 }
 
@@ -98,7 +99,7 @@ static int	tokenize_sep(t_data *data, int *ip, char *input)
 	len = 0;
 	if (input[*ip] == '|')
 	{
-		add_token(data, PIPE, &input[start], 1);
+		add_token(data, PIPE, &input[start], 1, false);
 		(*ip)++;
 	}
 	else if (is_sep(input[*ip]))
@@ -110,7 +111,7 @@ static int	tokenize_sep(t_data *data, int *ip, char *input)
 		}
 		if (len > 2)
 			return (syntax_error_msg(&input[start]), 1);
-		add_token(data, REDIR, &input[start], len);
+		add_token(data, REDIR, &input[start], len, false);
 	}
 	return (0);
 }
