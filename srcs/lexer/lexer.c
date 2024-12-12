@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/12 11:56:08 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:09:13 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,7 @@ int	lexer(t_data *data, char *input)
 				return (1);
 		}
 	}
+	if (!data->h_tokens)
+		return (1);
 	return (0);
 }

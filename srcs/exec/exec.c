@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/12 12:53:13 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:33:14 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	set_path(t_data *data)
 	cmd_n = count_cmds(data);
 	cmd_temp = data->h_cmds;
 	token_temp = data->h_tokens;
-	while (cmd_n > 0)
+	while (cmd_n-- > 0)
 	{
 		if (is_builtin(token_temp))
 		{
@@ -31,10 +31,13 @@ static void	set_path(t_data *data)
 		}
 		else
 			set_path_cmd(token_temp, cmd_temp, data);
-		cmd_n--;
 		cmd_temp = cmd_temp->next;
-		while (token_temp && token_temp->token != PIPE)
+		if (cmd_n > 0)
+		{
+			while (token_temp->token != PIPE)
+				token_temp = token_temp->next;
 			token_temp = token_temp->next;
+		}
 	}
 }
 
