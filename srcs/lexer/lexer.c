@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/12 13:09:13 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:28:01 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	tokenize_quote(t_data *data, int *ip, char *input)
 			(*ip)++;
 	}
 	if (quotes_closed(input) == false)
-		return (write(2, "minishell : missing closing quote\n", 35), 1);
+		return (write(2, "minishell : missing closing quote\n", 34), 1);
 	add_token(data, WORD, &input[start], *ip - start, true);
 	return (0);
 }
