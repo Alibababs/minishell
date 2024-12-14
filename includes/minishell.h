@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/14 13:21:21 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/14 13:31:19 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ void					set_path_cmd(t_token *current, t_cmd *cmd,
 
 /// exec_argv.c
 int						count_argv(t_token *token_temp);
+void					set_argv(t_data *data);
 
 #endif

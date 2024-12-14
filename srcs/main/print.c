@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:26:33 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/12 12:56:35 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:30:22 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	print_cmds(t_cmd *temp)
 	while (temp)
 	{
 		printf("Path: [%s]\n", temp->path);
+		for (int i = 0; temp->argv[i]; i++)
+			printf("Argv [%d]: [%s]\n", i, temp->argv[i]);
 		temp = temp->next;
 	}
 }

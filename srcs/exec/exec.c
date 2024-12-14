@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/14 13:09:53 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/14 13:42:29 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	exec(t_data *data)
 {
 	init_cmd_nodes(data);
 	set_path(data);
+	set_argv(data);
 	return (0);
 }
 
