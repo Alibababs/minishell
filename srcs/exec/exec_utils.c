@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/12 12:58:02 by phautena         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:25:13 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// int	count_argv(t_token *token_temp)
+// {
+// 	int	argv_n;
+
+// 	argv_n = 0;
+// 	while (token_temp && token_temp->token != REDIR && token_temp->token != PIPE)
+// 	{
+// 		argv_n++;
+// 		token_temp = token_temp->next;
+// 	}
+// 	return (argv_n);
+// }
 
 static void	init_cmd_values(t_cmd *current)
 {
@@ -25,6 +38,7 @@ static void	init_cmd_values(t_cmd *current)
 	current->pid = -1;
 	current->here_doc = false;
 	current->was_quote = false;
+	current->no_cmd = false;
 	current->next = NULL;
 	current->prev = NULL;
 }

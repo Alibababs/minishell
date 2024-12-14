@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/12 15:26:00 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:21:21 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_cmd
 	int					pid;
 	bool				here_doc;
 	bool				was_quote;
+	bool				no_cmd;
 	struct s_cmd		*next;
 	struct s_cmd		*prev;
 	t_data				*data;
@@ -141,9 +142,13 @@ int						exec(t_data *data);
 void					add_cmd_end(t_data *data);
 int						count_cmds(t_data *data);
 int						is_builtin(t_token *current);
+int						count_argv(t_token *token_temp);
 
 /// exec_path.c
 void					set_path_cmd(t_token *current, t_cmd *cmd,
 							t_data *data);
+
+/// exec_argv.c
+int						count_argv(t_token *token_temp);
 
 #endif
