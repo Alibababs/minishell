@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:09:10 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/17 14:46:02 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/17 15:04:22 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,19 @@ static void	count_redirs(t_token *token_temp, t_cmd *cmd)
 	cmd->nb_outfiles = redir_out;
 }
 
+static void	set_heredoc(t_token *token_temp, t_cmd *cmd)
+{
+	while (token_temp && token_temp->token != PIPE)
+	{
+		if (!ft_strcmp(token_temp->value, "<<"))
+		{
+			cmd->here_doc = true;
+			cmd->hd_del = token_temp->next;
+		}
+		token_temp = token_temp->next;
+	}
+}
+
 int	set_redirs(t_data *data)
 {
 	int		cmd_n;
@@ -95,6 +108,7 @@ int	set_redirs(t_data *data)
 			return (1);
 		if (set_outfiles(token_temp, cmd_temp, data))
 			return (2);
+		set_heredoc(token_temp, cmd_temp);
 		cmd_temp = cmd_temp->next;
 		if (cmd_n > 0)
 		{

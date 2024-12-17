@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/14 13:27:02 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/17 14:53:31 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	init_cmd_values(t_cmd *current)
 	current->to_write = -1;
 	current->pid = -1;
 	current->here_doc = false;
-	current->was_quote = false;
 	current->no_cmd = false;
+	current->hd_del = NULL;
 	current->next = NULL;
 	current->prev = NULL;
 }

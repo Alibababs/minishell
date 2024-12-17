@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/17 14:44:00 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/17 14:53:38 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ typedef struct s_cmd
 	int					to_write;
 	int					pid;
 	bool				here_doc;
-	bool				was_quote;
 	bool				no_cmd;
+	t_token				*hd_del;
 	struct s_cmd		*next;
 	struct s_cmd		*prev;
 	t_data				*data;
