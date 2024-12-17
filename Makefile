@@ -36,6 +36,7 @@ C_FILE		=	main/main	 									\
 				exec/exec_utils									\
 				exec/exec_path									\
 				exec/exec_argv									\
+				exec/exec_redirs								\
 
 SRC_DIR		=	./srcs/
 
