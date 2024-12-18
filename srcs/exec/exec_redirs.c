@@ -6,13 +6,13 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:09:10 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/17 15:04:22 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/18 17:26:24 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
+static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -26,15 +26,14 @@ static int	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 		{
 			cmd->outfiles[i] = open(token_temp->next->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (cmd->outfiles[i] < 0)
-				return (perror(token_temp->next->value), 1);
+				perror(token_temp->next->value);
 			i++;
 		}
 		token_temp = token_temp->next;
 	}
-	return (0);
 }
 
-static int	set_infiles(t_token *token_temp, t_cmd *cmd, t_data *data)
+static void	set_infiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -48,12 +47,11 @@ static int	set_infiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 		{
 			cmd->infiles[i] = open(token_temp->next->value, O_RDONLY);
 			if (cmd->infiles[i] < 0)
-				return (perror(token_temp->next->value), 1);
+				perror(token_temp->next->value);
 			i++;
 		}
 		token_temp = token_temp->next;
 	}
-	return (0);
 }
 
 static void	count_redirs(t_token *token_temp, t_cmd *cmd)
@@ -104,10 +102,8 @@ int	set_redirs(t_data *data)
 	while (cmd_n-- > 0)
 	{
 		count_redirs(token_temp, cmd_temp);
-		if (set_infiles(token_temp, cmd_temp, data))
-			return (1);
-		if (set_outfiles(token_temp, cmd_temp, data))
-			return (2);
+		set_infiles(token_temp, cmd_temp, data);
+		set_outfiles(token_temp, cmd_temp, data);
 		set_heredoc(token_temp, cmd_temp);
 		cmd_temp = cmd_temp->next;
 		if (cmd_n > 0)

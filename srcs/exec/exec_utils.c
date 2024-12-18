@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/17 14:53:31 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/18 17:48:24 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,21 @@ int	count_cmds(t_data *data)
 	return (res);
 }
 
-int	is_builtin(t_token *current)
+int	is_builtin(char *value)
 {
-	if (!ft_strcmp(current->value, "echo"))
+	if (!ft_strcmp(value, "echo"))
 		return (1);
-	else if (!ft_strcmp(current->value, "cd"))
+	else if (!ft_strcmp(value, "cd"))
 		return (1);
-	else if (!ft_strcmp(current->value, "export"))
+	else if (!ft_strcmp(value, "export"))
 		return (1);
-	else if (!ft_strcmp(current->value, "unset"))
+	else if (!ft_strcmp(value, "unset"))
 		return (1);
-	else if (!ft_strcmp(current->value, "pwd"))
+	else if (!ft_strcmp(value, "pwd"))
 		return (1);
-	else if (!ft_strcmp(current->value, "exit"))
+	else if (!ft_strcmp(value, "exit"))
 		return (1);
-	else if (!ft_strcmp(current->value, "env"))
+	else if (!ft_strcmp(value, "env"))
 		return (1);
 	else
 		return (0);

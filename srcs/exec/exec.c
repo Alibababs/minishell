@@ -6,7 +6,7 @@
 /*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/17 15:01:46 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/18 17:47:20 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	set_path(t_data *data)
 	token_temp = data->h_tokens;
 	while (cmd_n-- > 0)
 	{
-		if (is_builtin(token_temp))
+		if (is_builtin(token_temp->value))
 		{
 			cmd_temp->path = ft_strdup(token_temp->value);
 			if (!cmd_temp->path)
@@ -68,6 +68,7 @@ int	exec(t_data *data)
 	set_argv(data);
 	if (set_redirs(data))
 		return (1);
+	exec_cmds(data);
 	return (0);
 }
 
