@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/18 17:59:23 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/19 22:22:43 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	process_command(t_data **data, char *input)
 		return ;
 	if (parsing(*data))
 		return ;
-	print_tokens((*data)->h_tokens);
+	// print_tokens((*data)->h_tokens);
 	if (exec(*data))
 		return ;
-	print_cmds((*data)->h_cmds);
+	// print_cmds((*data)->h_cmds);
 	return ;
 }
 

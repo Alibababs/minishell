@@ -39,6 +39,8 @@ C_FILE		=	main/main	 									\
 				exec/exec_redirs								\
 				exec/exec_cmds									\
 				builtins/builtins								\
+				builtins/echo									\
+
 
 SRC_DIR		=	./srcs/
 

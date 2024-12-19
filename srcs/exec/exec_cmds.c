@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/18 18:03:00 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/19 22:16:17 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_pipes(t_data *data)
 	cmd = data->h_cmds;
 	if (cmd->nb_infiles > 0)
 		cmd->to_read = cmd->infiles[cmd->nb_infiles - 1];
-	//Need an else? If no infile, what value?
+	// Need an else? If no infile, what value?
 	while (nb_process > 0)
 	{
 		if (pipe(pipefd) < 0)
@@ -40,5 +40,6 @@ static void	init_pipes(t_data *data)
 int	exec_cmds(t_data *data)
 {
 	init_pipes(data);
+	exec_builtin(data->h_cmds, data);
 	return (0);
 }
