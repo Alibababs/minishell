@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/19 22:45:13 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/19 23:01:52 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,9 @@ int						exec_builtin(t_cmd *cmd, t_data *data);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c
-void					ft_cd(t_cmd *cmd, t_data *data);
+void					ft_cd(char **argv);
 void					ft_echo(char *argv[]);
-void					ft_pwd(t_cmd *cmd, t_data *data);
+void					ft_pwd(void);
 void					ft_export(t_cmd *cmd, t_data *data);
 void					ft_unset(t_cmd *cmd, t_data *data);
 void					ft_env(t_cmd *cmd, t_data *data);

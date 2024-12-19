@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:35:28 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/19 22:47:05 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/19 23:03:41 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 int	exec_builtin(t_cmd *cmd, t_data *data)
 {
 	if (!ft_strcmp(cmd->path, "cd"))
-		ft_cd(cmd, data);
+		ft_cd(cmd->argv);
 	else if (!ft_strcmp(cmd->path, "echo"))
 		ft_echo(cmd->argv);
-	// else if (!ft_strcmp(cmd->path, "pwd"))
-	// 	ft_pwd(cmd, data);
+	else if (!ft_strcmp(cmd->path, "pwd"))
+		ft_pwd();
 	// else if (!ft_strcmp(cmd->path, "export"))
 	// 	export_var(cmd, data);
 	// else if (!ft_strcmp(cmd->path, "unset"))
@@ -30,23 +30,8 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 	// 	print_env(data);
 	else if (!ft_strcmp(cmd->path, "exit"))
 		ft_exit(cmd->argv);
+	(void)data;
 	return (0);
-}
-
-void	ft_cd(t_cmd *cmd, t_data *data)
-{
-	(void)cmd;
-	(void)data;
-	printf("CD builtin\n");
-	return ;
-}
-
-void	ft_pwd(t_cmd *cmd, t_data *data)
-{
-	(void)cmd;
-	(void)data;
-	printf("pwd builtin\n");
-	return ;
 }
 
 void	ft_export(t_cmd *cmd, t_data *data)

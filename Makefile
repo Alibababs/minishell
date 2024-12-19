@@ -41,6 +41,8 @@ C_FILE		=	main/main	 									\
 				builtins/builtins								\
 				builtins/echo									\
 				builtins/exit									\
+				builtins/pwd									\
+				builtins/cd 									\
 
 
 SRC_DIR		=	./srcs/
