@@ -40,6 +40,7 @@ C_FILE		=	main/main	 									\
 				exec/exec_cmds									\
 				builtins/builtins								\
 				builtins/echo									\
+				builtins/exit									\
 
 
 SRC_DIR		=	./srcs/

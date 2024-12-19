@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/18 17:49:18 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/19 22:45:13 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,20 +155,20 @@ void					set_argv(t_data *data);
 /// exec_redirs.c
 int						set_redirs(t_data *data);
 
-///exec_cmds.c
+/// exec_cmds.c
 int						exec_cmds(t_data *data);
 
-///exec_cmds_utils.c
+/// exec_cmds_utils.c
 int						exec_builtin(t_cmd *cmd, t_data *data);
 
 //////////////////BUILTINS//////////////////
-///builtins.c
+/// builtins.c
 void					ft_cd(t_cmd *cmd, t_data *data);
-void					ft_echo(t_cmd *cmd, t_data *data);
+void					ft_echo(char *argv[]);
 void					ft_pwd(t_cmd *cmd, t_data *data);
 void					ft_export(t_cmd *cmd, t_data *data);
 void					ft_unset(t_cmd *cmd, t_data *data);
 void					ft_env(t_cmd *cmd, t_data *data);
-void					ft_exit(t_cmd *cmd, t_data *data);
+void					ft_exit(char **argv);
 
 #endif

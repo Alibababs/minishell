@@ -6,7 +6,7 @@
 /*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:52:46 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/19 22:28:41 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/19 22:45:29 by pbailly          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_n(char *str)
 	return (1);
 }
 
-static int	echo_print(char *argv[])
+void	ft_echo(char *argv[])
 {
 	int	i;
 
@@ -46,11 +46,4 @@ static int	echo_print(char *argv[])
 	}
 	if (is_n(argv[1]))
 		printf("\n");
-	return (0);
-}
-
-void	ft_echo(t_cmd *cmd, t_data *data)
-{
-	echo_print(cmd->argv);
-	(void)data;
 }
