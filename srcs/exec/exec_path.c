@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/14 13:43:33 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:39:18 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ void	set_path_cmd(t_token *current, t_cmd *cmd, t_data *data)
 			set_path_bis(current, cmd, data);
 			return ;
 		}
-		else if (current->token == REDIR && (!current->next->next || current->next->next->token == PIPE))
+		else if (current->token == REDIR && (!current->next->next
+				|| current->next->next->token == PIPE))
 		{
 			cmd->no_cmd = true;
 			cmd->path = ft_strdup("no_cmd");

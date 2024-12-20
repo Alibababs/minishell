@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 14:22:33 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:37:58 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	process_command(t_data **data, char *input)
 	if (exec(*data))
 		return ;
 	// print_cmds((*data)->h_cmds);
+	// print_env(data);
 	return ;
 }
 
@@ -38,7 +39,6 @@ static void	init_data(t_data **data, char *envp[])
 	(*data)->envp = envp;
 	(*data)->str = NULL;
 	init_env(data, envp);
-	// print_env(data);
 }
 
 int	main(int argc, char *argv[], char *envp[])

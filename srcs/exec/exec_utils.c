@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/18 17:48:24 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:39:23 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	count_argv(t_token *token_temp)
 	int	argv_n;
 
 	argv_n = 0;
-	while (token_temp && token_temp->token != REDIR && token_temp->token != PIPE)
+	while (token_temp && token_temp->token != REDIR
+		&& token_temp->token != PIPE)
 	{
 		argv_n++;
 		token_temp = token_temp->next;

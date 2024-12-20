@@ -6,13 +6,13 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 18:55:07 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:40:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_getenv(char *name, t_data *data)
+static char	*ft_getenv(char *name, t_data *data)
 {
 	t_env	*temp;
 
@@ -28,45 +28,51 @@ char	*ft_getenv(char *name, t_data *data)
 	return (NULL);
 }
 
+static int	update_pwd(t_data *data, char *new_pwd)
+{
+	t_env	*temp;
+
+	temp = data->h_env;
+	while (temp)
+	{
+		if (!ft_strcmp(temp->name, "PWD"))
+		{
+			free(temp->value);
+			temp->value = ft_strdup(new_pwd);
+			if (!temp->value)
+				mem_error(&data);
+			return (0);
+		}
+		temp = temp->next;
+	}
+	add_env_end("PWD", new_pwd, &data);
+	return (0);
+}
+
 int	ft_cd(char **argv, t_data *data)
 {
-	char	*oldpwd;
-	char	*pwd;
-	char	*home;
 	int		ret;
+	char	*path;
+	char	*oldpwd;
 
 	if (!argv[1])
 	{
-		home = getenv("HOME");
-		if (!home)
-			return (perror("cd"), 1);
-		ret = chdir(home);
-	}
-	else if (!ft_strcmp(argv[1], "-"))
-	{
-		oldpwd = getenv("OLDPWD");
-		if (!oldpwd)
-			return (ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2), 1);
-		ret = chdir(oldpwd);
+		path = ft_getenv("HOME", data);
+		if (!path)
+			return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
 	}
 	else
-		ret = chdir(argv[1]);
-	if (ret == -1)
-		return (perror("cd"), 1);
-	oldpwd = getenv("PWD");
+		path = argv[1];
+	oldpwd = ft_getenv("PWD", data);
 	if (oldpwd)
 		add_env_end("OLDPWD", oldpwd, &data);
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		add_env_end("PWD", pwd, &data);
-		free(pwd);
-	}
-	else
-	{
-		perror("getcwd");
-		return (1);
-	}
-	// print_env(&data);
+	ret = chdir(path);
+	if (ret == -1)
+		return (perror("minishell: cd"), 1);
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (perror("getcwd"), 1);
+	update_pwd(data, path);
+	free(path);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:09:10 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/18 17:26:24 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:39:26 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 		mem_error(&data);
 	while (i < cmd->nb_outfiles)
 	{
-		if (!ft_strcmp(token_temp->value, ">") || !ft_strcmp(token_temp->value, ">>"))
+		if (!ft_strcmp(token_temp->value, ">") || !ft_strcmp(token_temp->value,
+				">>"))
 		{
-			cmd->outfiles[i] = open(token_temp->next->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
+			cmd->outfiles[i] = open(token_temp->next->value,
+					O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (cmd->outfiles[i] < 0)
 				perror(token_temp->next->value);
 			i++;
