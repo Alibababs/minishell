@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 15:09:42 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:00:04 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int	ft_cd(char **argv, t_data *data)
 			if (!ft_strcmp(env->name, "OLDPWD"))
 			{
 				if (chdir(env->value) == -1)
-				{
-					perror("cd");
-					return (1);
-				}
+					return (perror("cd"), 1);
 				printf("%s\n", env->value);
 				return (0);
 			}
@@ -58,16 +55,10 @@ int	ft_cd(char **argv, t_data *data)
 	}
 	ret = chdir(argv[1]);
 	if (ret == -1)
-	{
-		perror("cd");
-		return (1);
-	}
+		return (perror("cd"), 1);
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
-	{
-		perror("getcwd");
-		return (1);
-	}
+		return (perror("getcwd"), 1);
 	while (env)
 	{
 		if (!ft_strcmp(env->name, "PWD"))

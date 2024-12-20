@@ -6,13 +6,11 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:35:28 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 15:19:33 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:54:57 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/// Only the function's prototype, need to add the actual builtins.
 
 int	exec_builtin(t_cmd *cmd, t_data *data)
 {
