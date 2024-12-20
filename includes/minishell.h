@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 15:18:42 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:51:38 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int						exec_builtin(t_cmd *cmd, t_data *data);
 int						ft_cd(char **argv, t_data *data);
 void					ft_echo(char *argv[]);
 void					ft_pwd(void);
-void					ft_export(t_cmd *cmd, t_data *data);
+int						ft_export(char **argv, t_data *data);
 void					ft_unset(t_cmd *cmd, t_data *data);
 void					ft_env(t_data *data);
 int						ft_exit(char **argv);

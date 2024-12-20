@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:10:12 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/20 19:10:27 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:54:30 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*skip_delim(char *str, char delim)
 	return (str);
 }
 
-char	*ft_strtok(char *str, const char *delim)
+char	*ft_strtok(char *str, char *delim)
 {
 	static char	*last = NULL;
 	char		*start;

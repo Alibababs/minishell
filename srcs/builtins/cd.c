@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 21:40:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 21:49:55 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	update_pwd(t_data *data, char *new_pwd)
 		}
 		temp = temp->next;
 	}
-	add_env_end("PWD", new_pwd, &data);
 	return (0);
 }
 
