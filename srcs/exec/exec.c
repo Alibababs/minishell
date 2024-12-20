@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/18 17:47:20 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2024/12/20 13:02:50 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int	exec(t_data *data)
 	set_argv(data);
 	if (set_redirs(data))
 		return (1);
-	exec_cmds(data);
+	if (exec_cmds(data))
+		return (1);
 	return (0);
 }
-
-

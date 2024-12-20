@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/19 22:16:17 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/20 13:03:07 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	init_pipes(t_data *data)
 int	exec_cmds(t_data *data)
 {
 	init_pipes(data);
-	exec_builtin(data->h_cmds, data);
+	if (exec_builtin(data->h_cmds, data))
+		return (1);
 	return (0);
 }

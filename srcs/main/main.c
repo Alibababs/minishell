@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbailly <pbailly@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/19 22:22:43 by pbailly          ###   ########.fr       */
+/*   Updated: 2024/12/20 14:22:33 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	init_data(t_data **data, char *envp[])
 	(*data)->envp = envp;
 	(*data)->str = NULL;
 	init_env(data, envp);
+	// print_env(data);
 }
 
 int	main(int argc, char *argv[], char *envp[])

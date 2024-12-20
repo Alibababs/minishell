@@ -43,6 +43,7 @@ C_FILE		=	main/main	 									\
 				builtins/exit									\
 				builtins/pwd									\
 				builtins/cd 									\
+				builtins/env									\
 
 
 SRC_DIR		=	./srcs/
