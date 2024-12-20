@@ -45,6 +45,7 @@ C_FILE		=	main/main	 									\
 				builtins/cd 									\
 				builtins/env									\
 				builtins/export									\
+				builtins/unset									\
 
 SRC_DIR		=	./srcs/
 

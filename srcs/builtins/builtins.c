@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:35:28 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 21:53:05 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 22:08:11 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 		ft_echo(cmd->argv);
 	else if (!ft_strcmp(cmd->path, "pwd"))
 		ft_pwd();
-	else if (!ft_strcmp(cmd->path, "export"))
-		ft_export(cmd->argv, data);
-	// else if (!ft_strcmp(cmd->path, "unset"))
-	// 	unset(cmd, data);
+	// else if (!ft_strcmp(cmd->path, "export"))
+	// 	ft_export(cmd->argv, data);
+	else if (!ft_strcmp(cmd->path, "unset"))
+		ft_unset(cmd->argv, data);
 	else if (!ft_strcmp(cmd->path, "env"))
 		ft_env(data);
 	else if (!ft_strcmp(cmd->path, "exit"))
@@ -35,12 +35,4 @@ int	exec_builtin(t_cmd *cmd, t_data *data)
 			return (1);
 	}
 	return (0);
-}
-
-void	ft_unset(t_cmd *cmd, t_data *data)
-{
-	(void)cmd;
-	(void)data;
-	printf("unset builtin\n");
-	return ;
 }
