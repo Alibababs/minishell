@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 17:32:03 by alibabab         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:37:18 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,11 @@ int	ft_cd(char **argv, t_data *data)
 		add_env_end("PWD", pwd, &data);
 		free(pwd);
 	}
+	else
+	{
+		perror("getcwd");
+		return (1);
+	}
+	print_env(&data);
 	return (0);
 }
