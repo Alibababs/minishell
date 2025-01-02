@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:35:28 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 22:08:11 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:25:23 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_builtin(t_cmd *cmd, t_data *data)
+int	exec_builtin(t_cmd *cmd, t_data **data)
 {
 	if (!ft_strcmp(cmd->path, "cd"))
 	{

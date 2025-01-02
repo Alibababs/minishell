@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/20 13:02:50 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:25:07 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static void	init_cmd_nodes(t_data *data)
 	}
 }
 
-int	exec(t_data *data)
+int	exec(t_data **data)
 {
-	init_cmd_nodes(data);
-	set_path(data);
-	set_argv(data);
-	if (set_redirs(data))
+	init_cmd_nodes(*data);
+	set_path(*data);
+	set_argv(*data);
+	if (set_redirs(*data))
 		return (1);
 	if (exec_cmds(data))
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 13:03:07 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:25:12 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	init_pipes(t_data *data)
 		cmd->to_write = cmd->outfiles[cmd->nb_outfiles - 1];
 }
 
-int	exec_cmds(t_data *data)
+int	exec_cmds(t_data **data)
 {
-	init_pipes(data);
-	if (exec_builtin(data->h_cmds, data))
+	init_pipes(*data);
+	if (exec_builtin((*data)->h_cmds, data))
 		return (1);
 	return (0);
 }

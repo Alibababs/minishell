@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 22:07:14 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:26:05 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void					syntax_error_msg(char *token);
 
 /////////////EXEC//////////////////
 /// exec.c
-int						exec(t_data *data);
+int						exec(t_data **data);
 
 /// exec_utils.c
 void					add_cmd_end(t_data *data);
@@ -156,19 +156,19 @@ void					set_argv(t_data *data);
 int						set_redirs(t_data *data);
 
 /// exec_cmds.c
-int						exec_cmds(t_data *data);
+int						exec_cmds(t_data **data);
 
 /// exec_cmds_utils.c
-int						exec_builtin(t_cmd *cmd, t_data *data);
+int						exec_builtin(t_cmd *cmd, t_data **data);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c
-int						ft_cd(char **argv, t_data *data);
+int						ft_cd(char **argv, t_data **data);
 void					ft_echo(char *argv[]);
 void					ft_pwd(void);
 int						ft_export(char **argv, t_data *data);
-void					ft_unset(char **argv, t_data *data);
-void					ft_env(t_data *data);
+void					ft_unset(char **argv, t_data **data);
+void					ft_env(t_data **data);
 int						ft_exit(char **argv);
 
 #endif

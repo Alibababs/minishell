@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 21:49:55 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:27:23 by p0ulp1           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_getenv(char *name, t_data *data)
+static char	*ft_getenv(char *name, t_data **data)
 {
 	t_env	*temp;
 
 	if (!name || !data)
 		return (NULL);
-	temp = data->h_env;
+	temp = (*data)->h_env;
 	while (temp)
 	{
 		if (!ft_strcmp(temp->name, name))
@@ -28,31 +28,31 @@ static char	*ft_getenv(char *name, t_data *data)
 	return (NULL);
 }
 
-static int	update_pwd(t_data *data, char *new_pwd)
-{
-	t_env	*temp;
+// static int	update_pwd(t_data *data, char *new_pwd)
+// {
+// 	t_env	*temp;
 
-	temp = data->h_env;
-	while (temp)
-	{
-		if (!ft_strcmp(temp->name, "PWD"))
-		{
-			free(temp->value);
-			temp->value = ft_strdup(new_pwd);
-			if (!temp->value)
-				mem_error(&data);
-			return (0);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
+// 	temp = data->h_env;
+// 	while (temp)
+// 	{
+// 		if (!ft_strcmp(temp->name, "PWD"))
+// 		{
+// 			free(temp->value);
+// 			temp->value = ft_strdup(new_pwd);
+// 			if (!temp->value)
+// 				mem_error(&data);
+// 			return (0);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }
 
-int	ft_cd(char **argv, t_data *data)
+int	ft_cd(char **argv, t_data **data)
 {
 	int		ret;
 	char	*path;
-	char	*oldpwd;
+	// char	*oldpwd;
 
 	if (!argv[1])
 	{
@@ -62,16 +62,16 @@ int	ft_cd(char **argv, t_data *data)
 	}
 	else
 		path = argv[1];
-	oldpwd = ft_getenv("PWD", data);
-	if (oldpwd)
-		add_env_end("OLDPWD", oldpwd, &data);
+	// oldpwd = ft_getenv("PWD", data); Another way is possible... Long live export
+	// if (oldpwd)
+		// add_env_end("OLDPWD", oldpwd, &data);
 	ret = chdir(path);
 	if (ret == -1)
 		return (perror("minishell: cd"), 1);
 	path = getcwd(NULL, 0);
 	if (!path)
 		return (perror("getcwd"), 1);
-	update_pwd(data, path);
+	// update_pwd(data, path);
 	free(path);
 	return (0);
 }
