@@ -3,14 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/02 16:25:12 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2025/01/06 16:11:55 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	wait_for_all(t_data **data)
+{
+	t_cmd	*temp;
+
+	temp = (*data)->h_cmds;
+	while (temp)
+	{
+		if (temp->pid > -1)
+			waitpid(temp->pid, NULL, 0);
+		temp = temp->next;
+	}
+}
+
+static void	close_pipes(t_data **data)
+{
+	t_cmd	*temp;
+
+	temp = (*data)->h_cmds;
+	while (temp)
+	{
+		if (temp->to_read > -1)
+			close(temp->to_read);
+		if (temp->to_write > -1)
+			close(temp->to_write);
+		temp = temp->next;
+	}
+}
+
+static int	exec_now(t_data **data)
+{
+	t_cmd	*temp;
+
+	temp = (*data)->h_cmds;
+	while (temp)
+	{
+		if (exec_builtin(temp, data))
+			return (1);
+		else
+		{
+			temp->pid = fork();
+			if (temp->pid == 0)
+			{
+				printf("%s will read from: %d\n", temp->path, temp->to_read);
+				printf("%s will write to: %d\n", temp->path, temp->to_write);
+				dup2(temp->to_read, STDIN_FILENO);
+				dup2(temp->to_write, STDOUT_FILENO);
+				close_pipes(data);
+				execve(temp->path, temp->argv, (*data)->envp);
+			}
+			if (temp->pid < 0)
+				return (2);
+		}
+		temp = temp->next;
+	}
+	close_pipes(data);
+	wait_for_all(data);
+	return (0);
+}
+
 
 static void	init_pipes(t_data *data)
 {
@@ -22,7 +82,8 @@ static void	init_pipes(t_data *data)
 	cmd = data->h_cmds;
 	if (cmd->nb_infiles > 0)
 		cmd->to_read = cmd->infiles[cmd->nb_infiles - 1];
-	// Need an else? If no infile, what value?
+	else
+		cmd->to_read = STDIN_FILENO;
 	while (nb_process > 0)
 	{
 		if (pipe(pipefd) < 0)
@@ -40,7 +101,6 @@ static void	init_pipes(t_data *data)
 int	exec_cmds(t_data **data)
 {
 	init_pipes(*data);
-	if (exec_builtin((*data)->h_cmds, data))
-		return (1);
+	exec_now(data);
 	return (0);
 }
