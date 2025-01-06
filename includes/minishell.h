@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/02 16:26:05 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2025/01/06 14:43:57 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ int						exec_cmds(t_data **data);
 
 /// exec_cmds_utils.c
 int						exec_builtin(t_cmd *cmd, t_data **data);
+
+/// exec_hd.c
+int						exec_hd(t_data **data);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c

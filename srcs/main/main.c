@@ -20,10 +20,10 @@ static void	process_command(t_data **data, char *input)
 		return ;
 	if (parsing(*data))
 		return ;
-	// print_tokens((*data)->h_tokens);
+	print_tokens((*data)->h_tokens);
 	if (exec(data))
 		return ;
-	// print_cmds((*data)->h_cmds);
+	print_cmds((*data)->h_cmds);
 	// print_env(data);
 	return ;
 }

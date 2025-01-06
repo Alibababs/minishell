@@ -38,6 +38,7 @@ C_FILE		=	main/main	 									\
 				exec/exec_argv									\
 				exec/exec_redirs								\
 				exec/exec_cmds									\
+				exec/exec_hd									\
 				builtins/builtins								\
 				builtins/echo									\
 				builtins/exit									\
