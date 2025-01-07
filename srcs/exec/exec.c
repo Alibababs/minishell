@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/06 14:44:25 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:18:19 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	exec(t_data **data)
 		return (1);
 	if (exec_hd(data))
 		return (2);
+	print_cmds((*data)->h_cmds);
 	if (exec_cmds(data))
 		return (3);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/06 14:43:57 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:13:20 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ int						exec_builtin(t_cmd *cmd, t_data **data);
 
 /// exec_hd.c
 int						exec_hd(t_data **data);
+int						check_cmd(t_cmd *cmd);
+void					exec_error(t_cmd *cmd);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c

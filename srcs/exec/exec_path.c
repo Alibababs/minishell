@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/20 20:39:18 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:37:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,7 @@ void	set_path_cmd(t_token *current, t_cmd *cmd, t_data *data)
 				mem_error(&data);
 			return ;
 		}
-		else if (current->token == REDIR && current->next->next)
-		{
+		else
 			current = current->next->next;
-			set_path_bis(current, cmd, data);
-			return ;
-		}
 	}
 }

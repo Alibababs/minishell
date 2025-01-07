@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/06 16:15:27 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:22:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	init_cmd_values(t_cmd *current)
 	current->outfiles = NULL;
 	current->nb_infiles = 0;
 	current->nb_outfiles = 0;
-	current->to_read = -1;
-	current->to_write = -1;
+	current->to_read = STDIN_FILENO;
+	current->to_write = STDOUT_FILENO;
 	current->pid = -1;
 	current->here_doc = false;
 	current->no_cmd = false;

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/06 14:45:54 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:42:01 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,24 @@ int	exec_hd(t_data **data)
 		temp = temp->next;
 	}
 	return (0);
+}
+
+int	check_cmd(t_cmd *cmd)
+{
+	if (!cmd->path)
+		return (1);
+	if (access(cmd->path, X_OK) != 0)
+		return (2);
+	if (cmd->to_read < 0)
+		return (3);
+	if (cmd->to_write < 0)
+		return (4);
+	return (0);
+}
+
+void	exec_error(t_cmd *cmd)
+{
+	if (cmd->no_cmd == false)
+		printf("%s: command not found\n", cmd->argv[0]);
+	exit(1);
 }

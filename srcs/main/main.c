@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/06 16:24:11 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:35:22 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	process_command(t_data **data, char *input)
 	// print_tokens((*data)->h_tokens);
 	if (exec(data))
 		return ;
-	// print_cmds((*data)->h_cmds);
 	// print_env(data);
 	return ;
 }

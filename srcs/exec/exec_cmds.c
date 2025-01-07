@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/06 16:31:16 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:30:33 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ static void	close_pipes(t_data **data)
 	while (temp)
 	{
 		// if (temp->to_read > -1)
-		close(temp->to_read);
+		if (temp->to_read > -1 && temp->to_read != 0)
+			close(temp->to_read);
 		// if (temp->to_write > -1)
-		close(temp->to_write);
+		if (temp->to_write > -1 && temp->to_write != 1)
+			close(temp->to_write);
 		temp = temp->next;
 	}
 }
 
 static int	exec_now(t_data **data)
 {
-	t_cmd	*temp;
+	t_cmd		*temp;
 
 	temp = (*data)->h_cmds;
 	while (temp)
@@ -54,14 +56,11 @@ static int	exec_now(t_data **data)
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
-				printf("%s will read from: %d\n", temp->path, temp->to_read);
-				printf("%s will write to: %d\n", temp->path, temp->to_write);
-				for (int i = 0; i < 2; i++)
-					dprintf(0, "Value: [%s]\n", temp->argv[i]);
-				// if (temp->to_read > -1)
-					// dup2(temp->to_read, STDIN_FILENO);
-				// if (temp->to_write > -1)
-					// dup2(temp->to_write, STDOUT_FILENO);
+				if (check_cmd(temp))
+					exec_error(temp);
+				dup2(temp->to_read, STDIN_FILENO);
+				dup2(temp->to_write, STDOUT_FILENO);
+				dprintf(1, "Read: [%d] Write: [%d]\n", temp->to_read, temp->to_write);
 				close_pipes(data);
 				execve(temp->path, temp->argv, (*data)->envp);
 			}
@@ -84,22 +83,17 @@ static void	init_pipes(t_data *data)
 	cmd = data->h_cmds;
 	if (cmd->nb_infiles > 0)
 		cmd->to_read = cmd->infiles[cmd->nb_infiles - 1];
-	else
-		cmd->to_read = STDIN_FILENO;
 	while (nb_process > 0)
 	{
 		if (pipe(pipefd) < 0)
 			ft_error("Error initializing pipes\n", &data);
 		cmd->to_write = pipefd[1];
-		if (nb_process > 1)
-			cmd->next->to_read = pipefd[0];
+		cmd->next->to_read = pipefd[0];
 		nb_process--;
-		printf("Pipe created\n");
+		// printf("Pipe: to_read [%d], to_write [%d]\n", cmd->to_read, cmd->to_write);
 	}
 	if (cmd->nb_outfiles > 0)
 		cmd->to_write = cmd->outfiles[cmd->nb_outfiles - 1];
-	// else
-		// cmd->to_write = STDOUT_FILENO;
 }
 
 int	exec_cmds(t_data **data)
