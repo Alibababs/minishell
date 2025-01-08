@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/07 17:30:33 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:31:54 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static int	exec_now(t_data **data)
 	temp = (*data)->h_cmds;
 	while (temp)
 	{
-		if (exec_builtin(temp, data))
-			return (1);
+		if (is_builtin(temp->path))
+			exec_builtin(temp, data);
 		else
 		{
 			temp->pid = fork();
@@ -60,7 +60,6 @@ static int	exec_now(t_data **data)
 					exec_error(temp);
 				dup2(temp->to_read, STDIN_FILENO);
 				dup2(temp->to_write, STDOUT_FILENO);
-				dprintf(1, "Read: [%d] Write: [%d]\n", temp->to_read, temp->to_write);
 				close_pipes(data);
 				execve(temp->path, temp->argv, (*data)->envp);
 			}
@@ -75,22 +74,22 @@ static int	exec_now(t_data **data)
 
 static void	init_pipes(t_data *data)
 {
-	int		nb_process;
+	int		nb_pipes;
 	int		pipefd[2];
 	t_cmd	*cmd;
 
-	nb_process = count_cmds(data) - 1;
+	nb_pipes = count_cmds(data) - 1;
 	cmd = data->h_cmds;
 	if (cmd->nb_infiles > 0)
 		cmd->to_read = cmd->infiles[cmd->nb_infiles - 1];
-	while (nb_process > 0)
+	while (nb_pipes > 0)
 	{
 		if (pipe(pipefd) < 0)
 			ft_error("Error initializing pipes\n", &data);
 		cmd->to_write = pipefd[1];
 		cmd->next->to_read = pipefd[0];
-		nb_process--;
-		// printf("Pipe: to_read [%d], to_write [%d]\n", cmd->to_read, cmd->to_write);
+		nb_pipes--;
+		cmd = cmd->next;
 	}
 	if (cmd->nb_outfiles > 0)
 		cmd->to_write = cmd->outfiles[cmd->nb_outfiles - 1];

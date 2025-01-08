@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:42:01 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:36:20 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	exec_error(t_cmd *cmd)
 {
 	if (cmd->no_cmd == false)
 		printf("%s: command not found\n", cmd->argv[0]);
+	// kill(cmd->pid, 0);
 	exit(1);
 }

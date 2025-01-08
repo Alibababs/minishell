@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:51:54 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 20:26:44 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:56 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,32 @@ static bool	invalid_pipe(t_data *data)
 	return (false);
 }
 
+static	bool invalid_dir(t_data *data)
+{
+	t_token	*temp;
+	int		i;
+
+	temp = data->h_tokens;
+	i = 0;
+	while (temp)
+	{
+		if (!temp->prev || temp->prev->token == PIPE)
+		{
+			while (temp->value[i])
+			{
+				if (temp->value[i] != '.' && temp->value[i] != '/')
+					return (false);
+				i++;
+			}
+			printf("%s: Is a directory\n", temp->value);
+			return (true);
+		}
+		temp = temp->next;
+	}
+	return (false);
+}
+
+
 static bool	invalid_redir(t_data *data)
 {
 	t_token	*temp;
@@ -63,6 +89,8 @@ bool	valid_syntax(t_data *data)
 	if (invalid_pipe(data))
 		return (false);
 	if (invalid_redir(data))
+		return (false);
+	if (invalid_dir(data) == true)
 		return (false);
 	return (true);
 }
