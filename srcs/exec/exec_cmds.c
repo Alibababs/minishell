@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/09 16:00:47 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:08:47 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ static void	close_pipes(t_data **data)
 	temp = (*data)->h_cmds;
 	while (temp)
 	{
-		// if (temp->to_read > -1)
 		if (temp->to_read > -1 && temp->to_read != 0)
 			close(temp->to_read);
-		// if (temp->to_write > -1)
 		if (temp->to_write > -1 && temp->to_write != 1)
 			close(temp->to_write);
 		temp = temp->next;
@@ -63,7 +61,7 @@ static int	exec_now(t_data **data)
 			temp->pid = fork();
 			if (temp->pid == 0)
 			{
-				if (check_cmd(temp))
+				if (check_cmd(temp, data))
 					return (exec_error(temp, data), 127);
 				dup2(temp->to_read, STDIN_FILENO);
 				dup2(temp->to_write, STDOUT_FILENO);

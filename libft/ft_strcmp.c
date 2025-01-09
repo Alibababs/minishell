@@ -6,11 +6,12 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:48:15 by alibaba           #+#    #+#             */
-/*   Updated: 2024/08/28 18:13:55 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:26:14 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_strcmp(char *s1, char *s2)
 {

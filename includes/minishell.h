@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/09 16:00:36 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:13:38 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include <dirent.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -21,6 +22,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
@@ -147,6 +149,7 @@ int						count_argv(t_token *token_temp);
 /// exec_path.c
 void					set_path_cmd(t_token *current, t_cmd *cmd,
 							t_data *data);
+char					*get_cmd_path(char *binary);
 
 /// exec_argv.c
 int						count_argv(t_token *token_temp);
@@ -163,7 +166,7 @@ int						exec_builtin(t_cmd *cmd, t_data **data);
 
 /// exec_hd.c
 int						exec_hd(t_data **data);
-int						check_cmd(t_cmd *cmd);
+int						check_cmd(t_cmd *cmd, t_data **data);
 void					exec_error(t_cmd *cmd, t_data **data);
 
 //////////////////BUILTINS//////////////////

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/07 14:37:08 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:13:21 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	**get_path(void)
 	return (fixed);
 }
 
-static char	*get_cmd_path(char *binary)
+char	*get_cmd_path(char *binary)
 {
 	int		i;
 	char	**path;

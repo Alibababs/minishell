@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 16:00:27 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:29:57 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,32 @@ int	exec_hd(t_data **data)
 	return (0);
 }
 
-int	check_cmd(t_cmd *cmd)
+void	is_dir(t_cmd *cmd, t_data **data)
 {
-	if (!cmd->path)
+	struct stat	stats;
+
+	stat(cmd->path, &stats);
+	if (S_ISDIR(stats.st_mode))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->path, 2);
+		ft_putstr_fd(" : Is a directory\n", 2);
+		g_exit_status = 126;
+		free_data(data);
+		exit(126);
+	}
+}
+
+int	check_cmd(t_cmd *cmd, t_data **data)
+{
+	struct stat	stats;
+
+	stat(cmd->path, &stats);
+	if (ft_strchr(cmd->path, '/'))
+		is_dir(cmd, data);
+	if (!cmd->path || cmd->to_read < 0 || cmd->to_write < 0)
 		return (1);
-	if (access(cmd->path, X_OK) != 0)
-		return (2);
-	if (cmd->to_read < 0)
-		return (3);
-	if (cmd->to_write < 0)
-		return (4);
+	//////THERE WAS AN ACCESS, NEED TO HANDLE
 	return (0);
 }
 
