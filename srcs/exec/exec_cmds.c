@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/09 12:35:01 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:00:47 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	exec_now(t_data **data)
 			if (temp->pid == 0)
 			{
 				if (check_cmd(temp))
-					exec_error(temp);
+					return (exec_error(temp, data), 127);
 				dup2(temp->to_read, STDIN_FILENO);
 				dup2(temp->to_write, STDOUT_FILENO);
 				close_pipes(data);
@@ -104,6 +104,7 @@ static void	init_pipes(t_data *data)
 int	exec_cmds(t_data **data)
 {
 	init_pipes(*data);
-	exec_now(data);
+	if (exec_now(data))
+		return (1);
 	return (0);
 }

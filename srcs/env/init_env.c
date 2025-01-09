@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:06:24 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/10 16:12:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:53:52 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	init_env(t_data **data, char *envp[])
 		if (!value)
 			return (free(name), mem_error(data));
 		add_env_end(name, value, data);
+		free(name);
+		free(value);
 		i++;
 	}
 }

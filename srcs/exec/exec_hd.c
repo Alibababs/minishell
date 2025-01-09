@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 12:38:07 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:00:27 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_cmd(t_cmd *cmd)
 	return (0);
 }
 
-void	exec_error(t_cmd *cmd)
+void	exec_error(t_cmd *cmd, t_data **data)
 {
 	if (cmd->no_cmd == false)
 	{
@@ -77,6 +77,7 @@ void	exec_error(t_cmd *cmd)
 		ft_putstr_fd(cmd->argv[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
-	// kill(cmd->pid, 0);
+	g_exit_status = 127;
+	free_data(data);
 	exit(127);
 }

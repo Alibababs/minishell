@@ -6,7 +6,7 @@
 /*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/09 12:36:22 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:00:36 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ void					ft_error(char *msg, t_data **data);
 void					mem_error(t_data **data);
 void					free_env(t_data *data);
 void					free_data(t_data **data);
+void					free_tokens(t_data **data);
 /// free_bis.c
 void					free_array(char **array);
+void					free_cmds(t_data **data);
 /// print.c
 void					print_env(t_data **data);
 void					print_tokens(t_token *temp);
@@ -130,8 +132,6 @@ char					*handle_exit_status(char *value, t_data *data);
 //////////////PARSING///////////////
 /// parsing.c
 int						parsing(t_data *data);
-/// parsing_error.c
-bool					valid_syntax(t_data *data);
 void					syntax_error_msg(char *token);
 
 /////////////EXEC//////////////////
@@ -164,14 +164,14 @@ int						exec_builtin(t_cmd *cmd, t_data **data);
 /// exec_hd.c
 int						exec_hd(t_data **data);
 int						check_cmd(t_cmd *cmd);
-void					exec_error(t_cmd *cmd);
+void					exec_error(t_cmd *cmd, t_data **data);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c
 int						ft_cd(char **argv, t_data **data);
 void					ft_echo(char *argv[]);
 void					ft_pwd(void);
-int						ft_export(char **argv, t_data *data);
+int						ft_export(char **argv, t_data **data);
 void					ft_unset(char **argv, t_data **data);
 void					ft_env(t_data **data);
 int						ft_exit(char **argv);

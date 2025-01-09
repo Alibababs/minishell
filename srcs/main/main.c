@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/08 13:45:39 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:00:07 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	cleanup(t_data **data)
+{
+	free_tokens(data);
+	free_cmds(data);
+}
 
 static void	process_command(t_data **data, char *input)
 {
@@ -46,10 +52,10 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*input;
 
 	data = NULL;
+	init_data(&data, envp);
 	while (argc && argv)
 	{
 		ft_signals(1);
-		init_data(&data, envp);
 		input = readline("minishell> ");
 		if (!input)
 		{
@@ -61,6 +67,7 @@ int	main(int argc, char *argv[], char *envp[])
 			ft_signals(2);
 			add_history(input);
 			process_command(&data, input);
+			cleanup(&data);
 		}
 	}
 	free_data(&data);

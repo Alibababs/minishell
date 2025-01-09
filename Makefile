@@ -31,7 +31,6 @@ C_FILE		=	main/main	 									\
 				expander/exit_status							\
 				expander/handle_dollar							\
 				parsing/parsing									\
-				parsing/parsing_error							\
 				exec/exec										\
 				exec/exec_utils									\
 				exec/exec_path									\
