@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/02 16:27:23 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2025/01/09 12:45:44 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ int	ft_cd(char **argv, t_data **data)
 {
 	int		ret;
 	char	*path;
-	// char	*oldpwd;
 
+	// char	*oldpwd;
+	if (argv[1] && argv[2])
+		return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	if (!argv[1])
 	{
 		path = ft_getenv("HOME", data);
@@ -62,9 +64,10 @@ int	ft_cd(char **argv, t_data **data)
 	}
 	else
 		path = argv[1];
-	// oldpwd = ft_getenv("PWD", data); Another way is possible... Long live export
+	// oldpwd = ft_getenv("PWD", data);
+	// Another way is possible... Long live export
 	// if (oldpwd)
-		// add_env_end("OLDPWD", oldpwd, &data);
+	// add_env_end("OLDPWD", oldpwd, &data);
 	ret = chdir(path);
 	if (ret == -1)
 		return (perror("minishell: cd"), 1);

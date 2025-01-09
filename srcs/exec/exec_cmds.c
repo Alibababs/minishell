@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/08 13:31:54 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:35:01 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 static void	wait_for_all(t_data **data)
 {
 	t_cmd	*temp;
+	int		status;
 
 	temp = (*data)->h_cmds;
 	while (temp)
 	{
 		if (temp->pid > -1)
-			waitpid(temp->pid, NULL, 0);
+		{
+			waitpid(temp->pid, &status, 0);
+			if (WIFEXITED(status))
+				g_exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				g_exit_status = 128 + WTERMSIG(status);
+		}
 		temp = temp->next;
 	}
 }
@@ -44,13 +51,13 @@ static void	close_pipes(t_data **data)
 
 static int	exec_now(t_data **data)
 {
-	t_cmd		*temp;
+	t_cmd	*temp;
 
 	temp = (*data)->h_cmds;
 	while (temp)
 	{
 		if (is_builtin(temp->path))
-			exec_builtin(temp, data);
+			g_exit_status = exec_builtin(temp, data);
 		else
 		{
 			temp->pid = fork();
@@ -70,7 +77,6 @@ static int	exec_now(t_data **data)
 	wait_for_all(data);
 	return (0);
 }
-
 
 static void	init_pipes(t_data *data)
 {

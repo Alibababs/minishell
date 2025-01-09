@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/08 13:23:57 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:36:22 by alibaba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int						set_redirs(t_data *data);
 int						exec_cmds(t_data **data);
 
 /// exec_cmds_utils.c
-void					exec_builtin(t_cmd *cmd, t_data **data);
+int						exec_builtin(t_cmd *cmd, t_data **data);
 
 /// exec_hd.c
 int						exec_hd(t_data **data);
