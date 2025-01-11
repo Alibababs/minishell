@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:39:53 by pbailly           #+#    #+#             */
-/*   Updated: 2024/12/20 13:01:36 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/11 17:38:06 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,15 @@ int	ft_exit_error(char *current, int has_next)
 	}
 	if (has_next)
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-		return (1);
+		return (printf("exit\n"),
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2), 1);
 	}
 	error = 0;
 	ft_atoll_exit(current, &error);
 	if (error == 1)
 	{
-		ft_putstr_fd("exit\nbash: exit: ", 2);
+		printf("exit\n");
+		ft_putstr_fd("bash: exit: ", 2);
 		ft_putstr_fd(current, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit(2);
