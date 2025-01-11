@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 15:53:48 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/11 16:25:57 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ static int	tokenize_sep(t_data *data, int *ip, char *input)
 	if (input[*ip] == '|')
 	{
 		add_token(data, PIPE, &input[start], 1, false);
+		if (input[*ip + 1] && ft_isspace(input[*ip + 1]) && input[*ip + 2]
+			&& input[*ip + 2] == '|')
+			add_token(data, USELESSSPACE, &input[start], 1, false);
 		(*ip)++;
 	}
 	else if (is_sep(input[*ip]))
