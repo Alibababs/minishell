@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:51:54 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/11 17:06:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/11 17:28:43 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static bool	invalid_redir(t_data *data)
 	{
 		if (temp->token == REDIR)
 		{
-			if (temp->next && (temp->next->token == REDIR))
+			if (temp->prev && (temp->prev->token == REDIR))
 				return (syntax_error_msg(temp->value), true);
-			if (!temp->next || (temp->next->token != WORD))
+			if (!temp->next)
 				return (syntax_error_msg("newline"), true);
 		}
 		temp = temp->next;
