@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/11 16:20:42 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:57:56 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef enum s_type
 	WORD,
 	REDIR,
 	PIPE,
-	USELESSSPACE,
 }						t_type;
 
 typedef struct s_token

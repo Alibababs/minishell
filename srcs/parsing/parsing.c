@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:51:54 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/09 15:50:23 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:06:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static bool	invalid_pipe(t_data *data)
 	{
 		if (temp->token == PIPE && temp->next->token != WORD
 			&& temp->next->token != REDIR)
+			return (syntax_error_msg("|"), true);
+		if (temp->token == PIPE && temp->prev && temp->prev->token == REDIR)
 			return (syntax_error_msg("|"), true);
 		temp = temp->next;
 	}
