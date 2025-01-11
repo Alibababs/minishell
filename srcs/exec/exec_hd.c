@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_hd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 17:29:57 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/11 15:30:56 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,15 @@ void	is_dir(t_cmd *cmd, t_data **data)
 {
 	struct stat	stats;
 
-	stat(cmd->path, &stats);
+	if (stat(cmd->path, &stats) != 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->path, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		g_exit_status = 127;
+		free_data(data);
+		exit(127);
+	}
 	if (S_ISDIR(stats.st_mode))
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -77,11 +85,19 @@ int	check_cmd(t_cmd *cmd, t_data **data)
 	struct stat	stats;
 
 	stat(cmd->path, &stats);
-	if (ft_strchr(cmd->path, '/'))
+	if (cmd->path && ft_strchr(cmd->path, '/'))
 		is_dir(cmd, data);
-	if (!cmd->path || cmd->to_read < 0 || cmd->to_write < 0)
+	if (cmd->path && access(cmd->path, X_OK) != 0 && ft_strstr(cmd->path, "./"))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->path, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+		g_exit_status = 126;
+		exit(126);
+	}
+	if (!cmd->path || cmd->to_read < 0 || cmd->to_write < 0 || access(cmd->path,
+			X_OK) != 0 || S_ISDIR(stats.st_mode))
 		return (1);
-	//////THERE WAS AN ACCESS, NEED TO HANDLE
 	return (0);
 }
 
