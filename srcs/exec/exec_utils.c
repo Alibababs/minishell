@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/07 13:22:50 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:07:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ int	count_argv(t_token *token_temp)
 	int	argv_n;
 
 	argv_n = 0;
-	while (token_temp && token_temp->token != REDIR
-		&& token_temp->token != PIPE)
+	while (token_temp && token_temp->token != PIPE)
 	{
-		argv_n++;
-		token_temp = token_temp->next;
+		if (token_temp->token == REDIR)
+			token_temp = token_temp->next->next;
+		else if (token_temp)
+		{
+			argv_n++;
+			token_temp = token_temp->next;
+		}
 	}
 	return (argv_n);
 }

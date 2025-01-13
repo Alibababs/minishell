@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_hd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:32:41 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/11 15:40:06 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:13:04 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,14 @@ int	check_cmd(t_cmd *cmd, t_data **data)
 		g_exit_status = 126;
 		exit(126);
 	}
-	if (!cmd->path || cmd->to_read < 0 || cmd->to_write < 0 || access(cmd->path,
+	if (!cmd->path || access(cmd->path,
 			X_OK) != 0 || S_ISDIR(stats.st_mode))
 		return (1);
+	else if (cmd->to_read < 0 || cmd->to_write < 0)
+	{
+		cmd->no_cmd = true;
+		return (1);
+	}
 	return (0);
 }
 
@@ -108,8 +113,14 @@ void	exec_error(t_cmd *cmd, t_data **data)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
+		g_exit_status = 127;
+		free_data(data);
+		exit(127);
 	}
-	g_exit_status = 127;
-	free_data(data);
-	exit(127);
+	else
+	{
+		g_exit_status = 1;
+		free_data(data);
+		exit(1);
+	}
 }

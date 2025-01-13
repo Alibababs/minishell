@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p0ulp1 <p0ulp1@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 13:09:53 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/17 15:03:30 by p0ulp1           ###   ########.fr       */
+/*   Updated: 2025/01/13 14:08:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data *data)
 		mem_error(&data);
 	while (argv_n > 0)
 	{
-		res[i] = ft_strdup(token_temp->value);
-		if (!res[i])
-			mem_error(&data);
-		token_temp = token_temp->next;
-		argv_n--;
-		i++;
+		if (token_temp->token == REDIR)
+			token_temp = token_temp->next->next;
+		else
+		{
+			res[i] = ft_strdup(token_temp->value);
+			if (!res[i])
+				mem_error(&data);
+			token_temp = token_temp->next;
+			argv_n--;
+			i++;
+		}
 	}
 	res[i] = NULL;
 	cmd->argv = res;
