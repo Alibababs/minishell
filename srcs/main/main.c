@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/14 23:06:36 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:38:10 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[], char *envp[])
 		input = readline("minishell> ");
 		if (!input)
 		{
-			write(1, "exit\n", 6);
+			printf("exit\n");
 			break ;
 		}
 		else if (input)
