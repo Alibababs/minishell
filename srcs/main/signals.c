@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:53:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/09 16:52:24 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:06:53 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int			g_exit_status = 0;
 static void	handle_sigint(int sig)
 {
 	(void)sig;
-	printf("\n");
+	g_exit_status = 130;
+	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -26,13 +27,13 @@ static void	handle_sigint(int sig)
 static void	handle_child_slash(int sig)
 {
 	(void)sig;
-	printf("Quit (core dumped)\n");
+	write(1, "Quit (core dumped)\n", 20);
 }
 
 static void	handle_child_c(int sig)
 {
 	(void)sig;
-	printf("\n");
+	write(1, "\n", 1);
 }
 
 void	ft_signals(int mode)
