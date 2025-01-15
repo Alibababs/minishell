@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/09 12:45:44 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/15 21:10:59 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_getenv(char *name, t_data **data)
-{
-	t_env	*temp;
-
-	if (!name || !data)
-		return (NULL);
-	temp = (*data)->h_env;
-	while (temp)
-	{
-		if (!ft_strcmp(temp->name, name))
-			return (temp->value);
-		temp = temp->next;
-	}
-	return (NULL);
-}
 
 // static int	update_pwd(t_data *data, char *new_pwd)
 // {

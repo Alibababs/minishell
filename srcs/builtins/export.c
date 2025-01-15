@@ -6,13 +6,13 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/11 14:30:19 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:57:53 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	check_export(char *str)
+static bool	valid_export(char *str)
 {
 	int	i;
 	int	flag;
@@ -39,7 +39,7 @@ static void	print_export(t_data **data)
 	temp = (*data)->h_env;
 	while (temp)
 	{
-		if (temp->value)
+		if (temp->value && *temp->value)
 			printf("export %s=\"%s\"\n", temp->name, temp->value);
 		else
 			printf("export %s\n", temp->name);
@@ -47,78 +47,69 @@ static void	print_export(t_data **data)
 	}
 }
 
-static bool	export_exists(char *str, t_data **data)
+static void	ft_set_env(t_data **data, char *name, char *value)
 {
-	t_env	*temp;
-	char	*name;
-	char	*value;
+	char	*env_value;
 
-	temp = (*data)->h_env;
-	name = parse_env_name(str);
-	if (!name)
-		mem_error(data);
-	value = parse_env_value(str);
-	if (!value)
-		return (free(name), mem_error(data), false);
-	while (temp)
+	env_value = ft_getenv(name, data);
+	if (env_value)
 	{
-		if (!ft_strcmp(name, temp->name))
-		{
-			free(temp->value);
-			temp->value = ft_strdup(value);
-			if (!temp->value)
-				return (free(value), free(name), mem_error(data), false);
-			return (free(name), free(value), true);
-		}
-		temp = temp->next;
+		free(env_value);
+		env_value = ft_strdup(value);
+		if (!env_value)
+			mem_error(data);
 	}
-	return (free(name), false);
-}
-
-static void	export_variable(char *str, t_data **data)
-{
-	char	*name;
-	char	*value;
-
-	name = parse_env_name(str);
-	if (!name)
-		mem_error(data);
-	value = parse_env_value(str);
-	if (!value)
-	{
-		free(name);
-		mem_error(data);
-	}
-	if (export_exists(str, data) == true)
-		;
 	else
 		add_env_end(name, value, data);
-	free(name);
-	free(value);
+}
+
+static int	get_name_and_value(char *str, char **name, char **value,
+		t_data **data)
+{
+	char	*equals;
+	char	*env_value;
+
+	equals = ft_strchr(str, '=');
+	if (equals)
+	{
+		*name = ft_substr(str, 0, equals - str);
+		*value = ft_strdup(equals + 1);
+	}
+	else
+	{
+		*name = ft_strdup(str);
+		env_value = ft_getenv(*name, data);
+		if (env_value)
+			*value = ft_strdup(env_value);
+		else
+			*value = ft_strdup("");
+	}
+	return (0);
 }
 
 int	ft_export(char **argv, t_data **data)
 {
-	int	i;
-	int	flag;
+	int		i;
+	int		flag;
+	char	*name;
+	char	*value;
 
 	flag = 0;
-	i = 0;
+	i = 1;
 	if (!argv[1])
 		print_export(data);
 	else
 	{
-		while (argv[++i])
+		while (argv[i])
 		{
-			if (check_export(argv[i]) == false)
-			{
-				ft_putstr_fd("export: ", 2);
-				ft_putstr_fd(argv[1], 2);
-				ft_putstr_fd(": not a valid identifier\n", 2);
-				flag = 1;
-			}
+			get_name_and_value(argv[i], &name, &value, data);
+			if (valid_export(name) == false)
+				flag = msg_invalid_export(argv[i]);
 			else
-				export_variable(argv[i], data);
+				ft_set_env(data, name, value);
+			free(name);
+			free(value);
+			i++;
 		}
 	}
 	return (flag);

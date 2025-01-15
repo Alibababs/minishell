@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:53:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/14 23:06:53 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:24:52 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	handle_sigint(int sig)
 static void	handle_child_slash(int sig)
 {
 	(void)sig;
-	write(1, "Quit (core dumped)\n", 20);
+	ft_putstr_fd("Quit (core dumped)\n", 2);
 }
 
 static void	handle_child_c(int sig)
