@@ -6,38 +6,28 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 23:02:01 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/15 21:10:59 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:53:44 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int	update_pwd(t_data *data, char *new_pwd)
-// {
-// 	t_env	*temp;
-
-// 	temp = data->h_env;
-// 	while (temp)
-// 	{
-// 		if (!ft_strcmp(temp->name, "PWD"))
-// 		{
-// 			free(temp->value);
-// 			temp->value = ft_strdup(new_pwd);
-// 			if (!temp->value)
-// 				mem_error(&data);
-// 			return (0);
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	return (0);
-// }
+static int	update_pwd(t_data **data, char *old_pwd, char *new_pwd)
+{
+	ft_set_env(data, "OLDPWD", old_pwd, false);
+	ft_set_env(data, "PWD", new_pwd, false);
+	free(old_pwd);
+	free(new_pwd);
+	return (0);
+}
 
 int	ft_cd(char **argv, t_data **data)
 {
 	int		ret;
 	char	*path;
+	char	*old_pwd;
+	char	*new_pwd;
 
-	// char	*oldpwd;
 	if (argv[1] && argv[2])
 		return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	if (!argv[1])
@@ -48,17 +38,14 @@ int	ft_cd(char **argv, t_data **data)
 	}
 	else
 		path = argv[1];
-	// oldpwd = ft_getenv("PWD", data);
-	// Another way is possible... Long live export
-	// if (oldpwd)
-	// add_env_end("OLDPWD", oldpwd, &data);
+	old_pwd = getcwd(NULL, 0);
+	if (!old_pwd)
+		return (mem_error(data), 1);
 	ret = chdir(path);
 	if (ret == -1)
 		return (perror("minishell: cd"), 1);
-	path = getcwd(NULL, 0);
-	if (!path)
-		return (perror("getcwd"), 1);
-	// update_pwd(data, path);
-	free(path);
-	return (0);
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
+		return (mem_error(data), 1);
+	return (update_pwd(data, old_pwd, new_pwd));
 }
