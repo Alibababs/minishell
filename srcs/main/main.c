@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 15:45:18 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:50:41 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static void	cleanup(t_data **data)
 	free_cmds(data);
 }
 
-static void	process_command(t_data **data, char *input)
+static int	process_command(t_data **data, char *input)
 {
 	if (lexer(data, input))
-		return ;
+		return (1);
 	// print_tokens((*data)->h_tokens);
 	if (expander(data))
-		return ;
+		return (1);
 	if (parsing(data))
-		return ;
-	if (exec(data))
-		return ;
-	// print_env(data);
-	return ;
+		return (1);
+	g_exit_status = exec(data);
+	if (g_exit_status > 0)
+		return (g_exit_status);
+	return (0);
 }
 
 static void	init_data(t_data **data, char *envp[])
