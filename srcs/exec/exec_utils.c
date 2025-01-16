@@ -6,40 +6,20 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 14:26:34 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:22:01 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_argv(t_token *token_temp)
-{
-	int	argv_n;
-
-	argv_n = 0;
-	while (token_temp && token_temp->token != PIPE)
-	{
-		if (token_temp->token == REDIR)
-			token_temp = token_temp->next->next;
-		else if (token_temp)
-		{
-			argv_n++;
-			token_temp = token_temp->next;
-		}
-	}
-	return (argv_n);
-}
-
 static void	init_cmd_values(t_cmd *current)
 {
 	current->path = NULL;
 	current->argv = NULL;
-	current->infiles = NULL;
-	current->outfiles = NULL;
-	current->nb_infiles = 0;
-	current->nb_outfiles = 0;
-	current->to_read = STDIN_FILENO;
-	current->to_write = STDOUT_FILENO;
+	current->to_read = -1;
+	current->to_write = -1;
+	current->infile = -1;
+	current->outfile = -1;
 	current->pid = -1;
 	current->here_doc = false;
 	current->no_cmd = false;
@@ -69,21 +49,6 @@ void	add_cmd_end(t_data **data)
 	new_cmd->prev = temp;
 }
 
-int	count_cmds(t_data **data)
-{
-	t_cmd	*temp;
-	int		res;
-
-	temp = (*data)->h_cmds;
-	res = 0;
-	while (temp)
-	{
-		res++;
-		temp = temp->next;
-	}
-	return (res);
-}
-
 int	is_builtin(char *value)
 {
 	if (!ft_strcmp(value, "echo"))
@@ -102,4 +67,48 @@ int	is_builtin(char *value)
 		return (1);
 	else
 		return (0);
+}
+
+void	init_cmd_nodes(t_data **data)
+{
+	t_token	*temp;
+	int		cmd_n;
+
+	temp = (*data)->h_tokens;
+	cmd_n = 1;
+	while (temp)
+	{
+		if (temp->token == PIPE)
+			cmd_n++;
+		temp = temp->next;
+	}
+	while (cmd_n > 0)
+	{
+		add_cmd_end(data);
+		cmd_n--;
+	}
+}
+
+int	init_pipes(t_data **data)
+{
+	t_cmd	*cmd;
+	int		pipefd[2];
+
+	cmd = (*data)->h_cmds;
+	if (cmd->to_read == -1)
+		cmd->to_read = STDIN_FILENO;
+	while (cmd)
+	{
+		if (cmd->next && cmd->to_write == -1 && cmd->next->to_read == -1)
+		{
+			if (pipe(pipefd) == -1)
+				return (1);
+			cmd->to_write = pipefd[1];
+			cmd->next->to_read = pipefd[0];
+		}
+		if (!cmd->next && cmd->to_write == -1)
+			cmd->to_write = STDOUT_FILENO;
+		cmd = cmd->next;
+	}
+	return (0);
 }

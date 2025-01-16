@@ -3,30 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_bis.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 14:21:37 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/13 14:56:24 by ubuntu           ###   ########.fr       */
+/*   Created: 2025/01/15 14:59:10 by phautena          #+#    #+#             */
+/*   Updated: 2025/01/16 11:16:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_files(t_cmd *cmd)
+int	count_argv(t_token *token_temp)
 {
-	int	i;
+	int	argv_n;
 
-	i = 0;
-	while (i < cmd->nb_infiles)
+	argv_n = 0;
+	while (token_temp && token_temp->token != PIPE)
 	{
-		if (cmd->infiles[i] < 0)
+		if (token_temp->token == REDIR)
+			token_temp = token_temp->next->next;
+		else if (token_temp)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd->infiles_names[i], 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
-			return (1);
+			argv_n++;
+			token_temp = token_temp->next;
 		}
-		i++;
 	}
-	return (0);
+	return (argv_n);
+}
+
+int	count_cmds(t_data **data)
+{
+	t_cmd	*temp;
+	int		res;
+
+	temp = (*data)->h_cmds;
+	res = 0;
+	while (temp)
+	{
+		res++;
+		temp = temp->next;
+	}
+	return (res);
 }

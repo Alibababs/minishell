@@ -6,11 +6,40 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 13:09:53 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 14:27:24 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:39:04 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_path(t_data **data)
+{
+	int		cmd_n;
+	t_cmd	*cmd_temp;
+	t_token	*token_temp;
+
+	cmd_n = count_cmds(data);
+	cmd_temp = (*data)->h_cmds;
+	token_temp = (*data)->h_tokens;
+	while (cmd_n-- > 0)
+	{
+		if (is_builtin(token_temp->value))
+		{
+			cmd_temp->path = ft_strdup(token_temp->value);
+			if (!cmd_temp->path)
+				mem_error(data);
+		}
+		else
+			set_path_cmd(token_temp, cmd_temp, data);
+		cmd_temp = cmd_temp->next;
+		if (cmd_n > 0)
+		{
+			while (token_temp->token != PIPE)
+				token_temp = token_temp->next;
+			token_temp = token_temp->next;
+		}
+	}
+}
 
 static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data **data)
 {

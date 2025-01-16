@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 14:24:35 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:39:27 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ typedef struct s_cmd
 {
 	char				*path;
 	char				**argv;
-	int					*infiles;
-	int					*outfiles;
-	int					nb_infiles;
-	int					nb_outfiles;
 	int					to_read;
 	int					to_write;
+	int					infile;
+	int					outfile;
 	int					pid;
 	bool				here_doc;
 	bool				no_cmd;
@@ -144,32 +142,26 @@ int						exec(t_data **data);
 
 /// exec_utils.c
 void					add_cmd_end(t_data **data);
-int						count_cmds(t_data **data);
 int						is_builtin(char *value);
-int						count_argv(t_token *token_temp);
+void					init_cmd_nodes(t_data **data);
+int						init_pipes(t_data **data);
 
-/// exec_path.c
-void					set_path_cmd(t_token *current, t_cmd *cmd,
-							t_data **data);
-char					*get_cmd_path(char *binary);
-
-/// exec_argv.c
+/// exec_utils_bis.c
 int						count_argv(t_token *token_temp);
-void					set_argv(t_data **data);
+int						count_cmds(t_data **data);
 
 /// exec_redirs.c
-int						set_redirs(t_data **data);
+void					make_dup(t_cmd *cmd);
+int						init_infiles(t_data **data);
+int						init_outfiles(t_data **data);
 
-/// exec_cmds.c
-int						exec_cmds(t_data **data);
+/// exec_path.c
+char					*get_cmd_path(char *binary);
+void					set_path_cmd(t_token *current, t_cmd *cmd, t_data **data);
 
-/// exec_cmds_utils.c
-int						exec_builtin(t_cmd *cmd, t_data **data);
-
-/// exec_hd.c
-int						exec_hd(t_data **data);
-int						check_cmd(t_cmd *cmd, t_data **data);
-void					exec_error(t_cmd *cmd, t_data **data);
+/// exec_argv.c
+void					set_path(t_data **data);
+void					set_argv(t_data **data);
 
 //////////////////BUILTINS//////////////////
 /// builtins.c
@@ -185,5 +177,6 @@ int						ft_export(char **argv, t_data **data);
 char					*ft_getenv(char *name, t_data **data);
 void					ft_set_env(t_data **data, char *name, char *value,
 							bool empty_value);
+void					launch_builtin(t_cmd *cmd, t_data **data);
 
 #endif

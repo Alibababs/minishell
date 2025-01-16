@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:54:56 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 14:56:11 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/16 15:41:12 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	free_cmds(t_data **data)
 			free(temp->path);
 		if (temp->argv)
 			free_array(temp->argv);
-		if (temp->infiles)
-			free(temp->infiles);
-		if (temp->outfiles)
-			free(temp->outfiles);
+		if (temp->infile)
+			close(temp->infile);
+		if (temp->outfile)
+			close(temp->outfile);
 		free(temp);
 		temp = next;
 	}

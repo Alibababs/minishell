@@ -5,115 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 14:09:10 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 14:28:39 by phautena         ###   ########.fr       */
+/*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
+/*   Updated: 2025/01/16 14:04:02 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data **data)
+void	make_dup(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
-	cmd->outfiles = malloc(sizeof(int) * cmd->nb_outfiles);
-	if (!cmd->outfiles)
-		mem_error(data);
-	while (i < cmd->nb_outfiles)
-	{
-		if (!ft_strcmp(token_temp->value, ">") || !ft_strcmp(token_temp->value,
-				">>"))
-		{
-			cmd->outfiles[i] = open(token_temp->next->value,
-					O_CREAT | O_RDWR | O_TRUNC, 0644);
-			if (cmd->outfiles[i] < 0)
-				perror(token_temp->next->value);
-			i++;
-		}
-		token_temp = token_temp->next;
-	}
+	if (cmd->infile > -1)
+		dup2(cmd->infile, STDIN_FILENO);
+	else
+		dup2(cmd->to_read, STDIN_FILENO);
+	if (cmd->outfile > -1)
+		dup2(cmd->outfile, STDOUT_FILENO);
+	else
+		dup2(cmd->to_write, STDOUT_FILENO);
 }
 
-static void	set_infiles(t_token *token_temp, t_cmd *cmd, t_data **data)
+int	init_infiles(t_data **data)
 {
-	int	i;
+	t_token	*tp;
+	t_cmd	*cmd;
 
-	i = 0;
-	cmd->infiles = malloc(sizeof(int) * cmd->nb_infiles);
-	if (!cmd->infiles)
-		mem_error(data);
-	while (i < cmd->nb_infiles)
+	tp = (*data)->h_tokens;
+	cmd = (*data)->h_cmds;
+	while (tp)
 	{
-		if (!ft_strcmp(token_temp->value, "<"))
+		if (tp->token == PIPE)
+			cmd = cmd->next;
+		else if (tp->token == REDIR && !ft_strcmp(tp->value, "<"))
 		{
-			cmd->infiles[i] = open(token_temp->next->value, O_RDONLY);
-			if (cmd->infiles[i] < 0)
-				perror(token_temp->next->value);
-			i++;
+			if (cmd->infile > -1)
+				close(cmd->infile);
+			cmd->infile = open(tp->next->value, O_RDONLY);
+			if (cmd->infile == -1)
+				return (perror(tp->next->value), 1);
 		}
-		token_temp = token_temp->next;
+		tp = tp->next;
 	}
+	cmd = cmd->next;
+	return (0);
 }
 
-static void	count_redirs(t_token *token_temp, t_cmd *cmd)
+int	init_outfiles(t_data **data)
 {
-	int	redir_in;
-	int	redir_out;
+	t_token	*tp;
+	t_cmd	*cmd;
 
-	redir_in = 0;
-	redir_out = 0;
-	while (token_temp && token_temp->token != PIPE)
+	tp = (*data)->h_tokens;
+	cmd = (*data)->h_cmds;
+	while (tp)
 	{
-		if (token_temp->token == REDIR)
+		if (tp->token == PIPE)
+			cmd = cmd->next;
+		else if (tp->token == REDIR && tp->value[0] == '>')
 		{
-			if (!ft_strcmp(token_temp->value, ">")
-				|| !ft_strcmp(token_temp->value, ">>"))
-				redir_out++;
-			else if (!ft_strcmp(token_temp->value, "<"))
-				redir_in++;
+			if (cmd->outfile > -1)
+				close(cmd->outfile);
+			if (!ft_strcmp(tp->value, ">"))
+				cmd->outfile = open(tp->next->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			else if (!ft_strcmp(tp->value, ">>"))
+				cmd->outfile = open(tp->next->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			if (cmd->outfile == -1)
+				return (perror(tp->value), 1);
 		}
-		token_temp = token_temp->next;
-	}
-	cmd->nb_infiles = redir_in;
-	cmd->nb_outfiles = redir_out;
-}
-
-static void	set_heredoc(t_token *token_temp, t_cmd *cmd)
-{
-	while (token_temp && token_temp->token != PIPE)
-	{
-		if (!ft_strcmp(token_temp->value, "<<"))
-		{
-			cmd->here_doc = true;
-			cmd->hd_del = token_temp->next;
-		}
-		token_temp = token_temp->next;
-	}
-}
-
-int	set_redirs(t_data **data)
-{
-	int		cmd_n;
-	t_cmd	*cmd_temp;
-	t_token	*token_temp;
-
-	cmd_n = count_cmds(data);
-	cmd_temp = (*data)->h_cmds;
-	token_temp = (*data)->h_tokens;
-	while (cmd_n-- > 0)
-	{
-		count_redirs(token_temp, cmd_temp);
-		set_infiles(token_temp, cmd_temp, data);
-		set_outfiles(token_temp, cmd_temp, data);
-		set_heredoc(token_temp, cmd_temp);
-		cmd_temp = cmd_temp->next;
-		if (cmd_n > 0)
-		{
-			while (token_temp->token != PIPE)
-				token_temp = token_temp->next;
-			token_temp = token_temp->next;
-		}
+		tp = tp->next;
 	}
 	return (0);
 }

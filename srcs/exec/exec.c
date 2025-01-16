@@ -6,72 +6,100 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 14:25:45 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:45:21 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_path(t_data **data)
+static void	wait_for_all(t_data **data)
 {
-	int		cmd_n;
-	t_cmd	*cmd_temp;
-	t_token	*token_temp;
+	t_cmd	*temp;
+	int		status;
 
-	cmd_n = count_cmds(data);
-	cmd_temp = (*data)->h_cmds;
-	token_temp = (*data)->h_tokens;
-	while (cmd_n-- > 0)
-	{
-		if (is_builtin(token_temp->value))
-		{
-			cmd_temp->path = ft_strdup(token_temp->value);
-			if (!cmd_temp->path)
-				mem_error(data);
-		}
-		else
-			set_path_cmd(token_temp, cmd_temp, data);
-		cmd_temp = cmd_temp->next;
-		if (cmd_n > 0)
-		{
-			while (token_temp->token != PIPE)
-				token_temp = token_temp->next;
-			token_temp = token_temp->next;
-		}
-	}
-}
-
-static void	init_cmd_nodes(t_data **data)
-{
-	t_token	*temp;
-	int		cmd_n;
-
-	temp = (*data)->h_tokens;
-	cmd_n = 1;
+	temp = (*data)->h_cmds;
 	while (temp)
 	{
-		if (temp->token == PIPE)
-			cmd_n++;
+		if (temp->pid > -1)
+		{
+			waitpid(temp->pid, &status, 0);
+			if (WIFEXITED(status))
+				g_exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				g_exit_status = 128 + WTERMSIG(status);
+		}
 		temp = temp->next;
 	}
-	while (cmd_n > 0)
+}
+
+static void	close_pipes(t_data **data)
+{
+	t_cmd	*cmd;
+
+	cmd =(*data)->h_cmds;
+	while (cmd)
 	{
-		add_cmd_end(data);
-		cmd_n--;
+		if (cmd->to_read > 2)
+			close(cmd->to_read);
+		if (cmd->to_write > 2)
+			close(cmd->to_write);
+		cmd = cmd->next;
 	}
 }
+
+static void	check_cmd(t_cmd *cmd,t_data **data)
+{
+	if (access(cmd->path, X_OK) == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->path, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		free_data(data);
+		g_exit_status = 127;
+		exit(127);
+	}
+}
+
+static int	launch_command(t_data **data)
+{
+	t_cmd	*cmd;
+
+	cmd = (*data)->h_cmds;
+	while (cmd)
+	{
+		cmd->pid = fork();
+		if (cmd->pid == 0)
+		{
+			if (is_builtin(cmd->path))
+				launch_builtin(cmd, data);
+			check_cmd(cmd, data);
+			make_dup(cmd);
+			close_pipes(data);
+			execve(cmd->path, cmd->argv, (*data)->envp);
+		}
+		cmd = cmd->next;
+	}
+	close_pipes(data);
+	wait_for_all(data);
+	return (0);
+}
+
 
 int	exec(t_data **data)
 {
+	int	flag;
+
+	flag = 0;
 	init_cmd_nodes(data);
 	set_path(data);
 	set_argv(data);
-	if (set_redirs(data))
+	if (init_pipes(data))
 		return (1);
-	if (exec_hd(data))
-		return (2);
+	flag += init_infiles(data);
+	flag += init_outfiles(data);
+	if (flag > 0)
+		return (1);
 	// print_cmds((*data)->h_cmds);
-	if (exec_cmds(data))
-		return (3);
+	launch_command(data);
 	return (0);
 }
