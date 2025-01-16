@@ -6,11 +6,19 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 12:18:57 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:58:16 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	msg_invalid_export(char *str)
+{
+	ft_putstr_fd("export: `", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	return (1);
+}
 
 static bool	valid_export(char *str)
 {
@@ -44,28 +52,6 @@ static void	print_export(t_data **data)
 			printf("export %s\n", temp->name);
 		temp = temp->next;
 	}
-}
-
-static void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
-{
-	t_env	*temp;
-
-	temp = (*data)->h_env;
-	while (temp)
-	{
-		if (!ft_strcmp(temp->name, name))
-		{
-			free(temp->value);
-			temp->value = ft_strdup(value);
-			if (!temp->value)
-				mem_error(data);
-			temp->empty_value = empty_value;
-			return ;
-		}
-		temp = temp->next;
-	}
-	add_env_end(name, value, data);
-	ft_set_env(data, name, value, empty_value);
 }
 
 static int	get_name_and_value(char *str, char **name, char **value,

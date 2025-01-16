@@ -39,13 +39,13 @@ C_FILE		=	main/main	 									\
 				exec/exec_cmds									\
 				exec/exec_hd									\
 				builtins/builtins								\
+				builtins/builtin_utils							\
 				builtins/echo									\
 				builtins/exit									\
 				builtins/pwd									\
 				builtins/cd 									\
 				builtins/env									\
 				builtins/export									\
-				builtins/export_utils							\
 				builtins/unset									\
 
 SRC_DIR		=	./srcs/

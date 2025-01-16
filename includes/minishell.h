@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 08:16:43 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:57:39 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,9 @@ void					ft_env(t_data **data);
 int						ft_exit(char **argv);
 int						ft_export(char **argv, t_data **data);
 
-/// export_utils.c
-int						msg_invalid_export(char *str);
+/// builtin_utils.c
 char					*ft_getenv(char *name, t_data **data);
+void					ft_set_env(t_data **data, char *name, char *value,
+							bool empty_value);
 
 #endif
