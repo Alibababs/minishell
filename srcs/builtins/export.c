@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 11:44:04 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:18:57 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ft_export(char **argv, t_data **data)
 			get_name_and_value(argv[i], &name, &value, &empty_value, data);
 			if (valid_export(name) == false)
 				flag = msg_invalid_export(argv[i]);
-			else
+			else if (ft_strchr(argv[i], '=') || !ft_getenv(name, data))
 				ft_set_env(data, name, value, empty_value);
 			free(name);
 			free(value);
