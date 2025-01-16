@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:08:40 by p0ulp1            #+#    #+#             */
-/*   Updated: 2024/12/20 17:39:00 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:45:55 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	add_env_empty(char *name, char *value, t_data **data)
 	new_env->data = *data;
 	new_env->prev = NULL;
 	new_env->next = NULL;
+	new_env->empty_value = NULL;
 	(*data)->h_env = new_env;
 }
 
@@ -49,5 +50,6 @@ void	add_env_end(char *name, char *value, t_data **data)
 	new_env->data = *data;
 	new_env->prev = temp;
 	new_env->next = NULL;
+	new_env->empty_value = NULL;
 	temp->next = new_env;
 }
