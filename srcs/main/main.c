@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/14 23:38:10 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:23:02 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	cleanup(t_data **data)
 
 static void	process_command(t_data **data, char *input)
 {
-	if (lexer(*data, input))
+	if (lexer(data, input))
 		return ;
 	// print_tokens((*data)->h_tokens);
-	if (expander(*data))
+	if (expander(data))
 		return ;
-	if (parsing(*data))
+	if (parsing(data))
 		return ;
 	if (exec(data))
 		return ;

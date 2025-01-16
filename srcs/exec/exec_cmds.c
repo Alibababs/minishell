@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:18:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/11 14:49:06 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:29:24 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,20 @@ static int	exec_now(t_data **data)
 	return (0);
 }
 
-static void	init_pipes(t_data *data)
+static void	init_pipes(t_data **data)
 {
 	int		nb_pipes;
 	int		pipefd[2];
 	t_cmd	*cmd;
 
 	nb_pipes = count_cmds(data) - 1;
-	cmd = data->h_cmds;
+	cmd = (*data)->h_cmds;
 	if (cmd->nb_infiles > 0)
 		cmd->to_read = cmd->infiles[cmd->nb_infiles - 1];
 	while (nb_pipes > 0)
 	{
 		if (pipe(pipefd) < 0)
-			ft_error("Error initializing pipes\n", &data);
+			ft_error("Error initializing pipes\n", data);
 		cmd->to_write = pipefd[1];
 		cmd->next->to_read = pipefd[0];
 		nb_pipes--;
@@ -101,7 +101,7 @@ static void	init_pipes(t_data *data)
 
 int	exec_cmds(t_data **data)
 {
-	init_pipes(*data);
+	init_pipes(data);
 	if (exec_now(data))
 		return (1);
 	return (0);

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:09:10 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/13 14:12:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/16 14:28:39 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
+static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data **data)
 {
 	int	i;
 
 	i = 0;
 	cmd->outfiles = malloc(sizeof(int) * cmd->nb_outfiles);
 	if (!cmd->outfiles)
-		mem_error(&data);
+		mem_error(data);
 	while (i < cmd->nb_outfiles)
 	{
 		if (!ft_strcmp(token_temp->value, ">") || !ft_strcmp(token_temp->value,
@@ -35,14 +35,14 @@ static void	set_outfiles(t_token *token_temp, t_cmd *cmd, t_data *data)
 	}
 }
 
-static void	set_infiles(t_token *token_temp, t_cmd *cmd, t_data *data)
+static void	set_infiles(t_token *token_temp, t_cmd *cmd, t_data **data)
 {
 	int	i;
 
 	i = 0;
 	cmd->infiles = malloc(sizeof(int) * cmd->nb_infiles);
 	if (!cmd->infiles)
-		mem_error(&data);
+		mem_error(data);
 	while (i < cmd->nb_infiles)
 	{
 		if (!ft_strcmp(token_temp->value, "<"))
@@ -92,15 +92,15 @@ static void	set_heredoc(t_token *token_temp, t_cmd *cmd)
 	}
 }
 
-int	set_redirs(t_data *data)
+int	set_redirs(t_data **data)
 {
 	int		cmd_n;
 	t_cmd	*cmd_temp;
 	t_token	*token_temp;
 
 	cmd_n = count_cmds(data);
-	cmd_temp = data->h_cmds;
-	token_temp = data->h_tokens;
+	cmd_temp = (*data)->h_cmds;
+	token_temp = (*data)->h_tokens;
 	while (cmd_n-- > 0)
 	{
 		count_redirs(token_temp, cmd_temp);

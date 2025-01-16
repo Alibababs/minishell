@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/13 14:07:55 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/16 14:26:34 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,33 @@ static void	init_cmd_values(t_cmd *current)
 	current->prev = NULL;
 }
 
-void	add_cmd_end(t_data *data)
+void	add_cmd_end(t_data **data)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
 
 	new_cmd = malloc(sizeof(t_cmd));
 	if (!new_cmd)
-		mem_error(&data);
+		mem_error(data);
 	init_cmd_values(new_cmd);
-	if (!data->h_cmds)
+	if (!(*data)->h_cmds)
 	{
-		data->h_cmds = new_cmd;
+		(*data)->h_cmds = new_cmd;
 		return ;
 	}
-	temp = data->h_cmds;
+	temp = (*data)->h_cmds;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
 }
 
-int	count_cmds(t_data *data)
+int	count_cmds(t_data **data)
 {
 	t_cmd	*temp;
 	int		res;
 
-	temp = data->h_cmds;
+	temp = (*data)->h_cmds;
 	res = 0;
 	while (temp)
 	{

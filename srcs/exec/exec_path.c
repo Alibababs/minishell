@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/09 17:13:21 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/16 14:26:54 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,24 @@ char	*get_cmd_path(char *binary)
 	return (ft_strdup(binary));
 }
 
-static char	*set_path_bis(t_token *current, t_cmd *cmd, t_data *data)
+static char	*set_path_bis(t_token *current, t_cmd *cmd, t_data **data)
 {
 	if (current->value[0] != '/')
 	{
 		cmd->path = get_cmd_path(current->value);
 		if (!cmd->path)
-			mem_error(&data);
+			mem_error(data);
 	}
 	else
 	{
 		cmd->path = ft_strdup(current->value);
 		if (!cmd->path)
-			mem_error(&data);
+			mem_error(data);
 	}
 	return (NULL);
 }
 
-void	set_path_cmd(t_token *current, t_cmd *cmd, t_data *data)
+void	set_path_cmd(t_token *current, t_cmd *cmd, t_data **data)
 {
 	while (current)
 	{
@@ -113,7 +113,7 @@ void	set_path_cmd(t_token *current, t_cmd *cmd, t_data *data)
 			cmd->no_cmd = true;
 			cmd->path = ft_strdup("no_cmd");
 			if (!cmd->path)
-				mem_error(&data);
+				mem_error(data);
 			return ;
 		}
 		else

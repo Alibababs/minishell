@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/11 16:57:51 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:24:52 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_token(t_data *data, t_type type, char *str, int len, bool quote)
+static void	add_token(t_data **data, t_type type, char *str, int len, bool quote)
 {
 	t_token	*new_token;
 	t_token	*temp;
@@ -21,27 +21,27 @@ static void	add_token(t_data *data, t_type type, char *str, int len, bool quote)
 		return ;
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		mem_error(&data);
+		mem_error(data);
 	new_token->value = ft_substr(str, 0, len);
 	if (!new_token->value)
-		mem_error(&data);
+		mem_error(data);
 	new_token->token = type;
 	new_token->was_quote = quote;
 	new_token->next = NULL;
 	new_token->prev = NULL;
-	if (!data->h_tokens)
+	if (!(*data)->h_tokens)
 	{
-		data->h_tokens = new_token;
+		(*data)->h_tokens = new_token;
 		return ;
 	}
-	temp = data->h_tokens;
+	temp = (*data)->h_tokens;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new_token;
 	new_token->prev = temp;
 }
 
-static int	tokenize_quote(t_data *data, int *ip, char *input)
+static int	tokenize_quote(t_data **data, int *ip, char *input)
 {
 	int		start;
 	char	quote;
@@ -70,7 +70,7 @@ static int	tokenize_quote(t_data *data, int *ip, char *input)
 	return (0);
 }
 
-static int	tokenize_str(t_data *data, int *ip, char *input)
+static int	tokenize_str(t_data **data, int *ip, char *input)
 {
 	int	start;
 
@@ -90,7 +90,7 @@ static int	tokenize_str(t_data *data, int *ip, char *input)
 	return (0);
 }
 
-static int	tokenize_sep(t_data *data, int *ip, char *input)
+static int	tokenize_sep(t_data **data, int *ip, char *input)
 {
 	int	start;
 	int	len;
@@ -119,7 +119,7 @@ static int	tokenize_sep(t_data *data, int *ip, char *input)
 	return (0);
 }
 
-int	lexer(t_data *data, char *input)
+int	lexer(t_data **data, char *input)
 {
 	int	i;
 
@@ -139,7 +139,7 @@ int	lexer(t_data *data, char *input)
 				return (1);
 		}
 	}
-	if (!data->h_tokens)
+	if (!(*data)->h_tokens)
 		return (1);
 	return (0);
 }

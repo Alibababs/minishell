@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 12:57:39 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:24:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char					*parse_env_value(char *var);
 
 /////////////LEXER///////////////
 /// lexer.c
-int						lexer(t_data *data, char *input);
+int						lexer(t_data **data, char *input);
 /// lexer_utils.c
 int						is_sep(char c);
 int						is_quote(char c);
@@ -122,20 +122,20 @@ bool					quotes_closed(char *input);
 
 /////////////EXPANDER/////////////
 /// expander.c
-int						expander(t_data *data);
+int						expander(t_data **data);
 /// expander_utils.c
 int						in_s_quotes(char *str, char *ptr);
 int						in_d_quotes(char *str, char *ptr);
-int						remove_empty_tokens(t_data *data);
-char					*get_var(char *value, t_data *data);
+int						remove_empty_tokens(t_data **data);
+char					*get_var(char *value, t_data **data);
 /// handle_dollar.c
-char					*handle_dollar(char *value, t_data *h_data);
+char					*handle_dollar(char *value, t_data **h_data);
 /// exit_status.c
-char					*handle_exit_status(char *value, t_data *data);
+char					*handle_exit_status(char *value, t_data **data);
 
 //////////////PARSING///////////////
 /// parsing.c
-int						parsing(t_data *data);
+int						parsing(t_data **data);
 void					syntax_error_msg(char *token);
 
 /////////////EXEC//////////////////
@@ -143,22 +143,22 @@ void					syntax_error_msg(char *token);
 int						exec(t_data **data);
 
 /// exec_utils.c
-void					add_cmd_end(t_data *data);
-int						count_cmds(t_data *data);
+void					add_cmd_end(t_data **data);
+int						count_cmds(t_data **data);
 int						is_builtin(char *value);
 int						count_argv(t_token *token_temp);
 
 /// exec_path.c
 void					set_path_cmd(t_token *current, t_cmd *cmd,
-							t_data *data);
+							t_data **data);
 char					*get_cmd_path(char *binary);
 
 /// exec_argv.c
 int						count_argv(t_token *token_temp);
-void					set_argv(t_data *data);
+void					set_argv(t_data **data);
 
 /// exec_redirs.c
-int						set_redirs(t_data *data);
+int						set_redirs(t_data **data);
 
 /// exec_cmds.c
 int						exec_cmds(t_data **data);

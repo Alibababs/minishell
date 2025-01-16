@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/10 15:42:56 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:20:31 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	process_exit_status(char *status_str, char *new_value, char *ptr)
 	*new_value = '\0';
 }
 
-char	*handle_exit_status(char *value, t_data *data)
+char	*handle_exit_status(char *value, t_data **data)
 {
 	char	*status_str;
 	char	*new_value;
@@ -76,7 +76,7 @@ char	*handle_exit_status(char *value, t_data *data)
 	status_str = ft_itoa(g_exit_status);
 	new_value = malloc(get_new_len(value, ft_strlen(status_str)) + 1);
 	if (!new_value)
-		mem_error(&data);
+		mem_error(data);
 	ptr = value;
 	process_exit_status(status_str, new_value, ptr);
 	return (new_value);

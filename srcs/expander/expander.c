@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2024/12/12 15:26:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:22:28 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	remove_useless_quotes(t_data *data, t_token *current)
+static void	remove_useless_quotes(t_data **data, t_token *current)
 {
 	int		i;
 	int		j;
@@ -24,7 +24,7 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 	mode = 1;
 	res = malloc(sizeof(char) * (ft_strlen(current->value) + 1));
 	if (!res)
-		mem_error(&data);
+		mem_error(data);
 	while (current->value[i])
 	{
 		if ((current->value[i] == 34 || current->value[i] == 39) && mode == 1)
@@ -40,7 +40,7 @@ static void	remove_useless_quotes(t_data *data, t_token *current)
 	current->value = res;
 }
 
-static void	remove_useless_dollars(t_data *data, t_token *current)
+static void	remove_useless_dollars(t_data **data, t_token *current)
 {
 	int		i;
 	int		j;
@@ -50,7 +50,7 @@ static void	remove_useless_dollars(t_data *data, t_token *current)
 	j = 0;
 	res = malloc(sizeof(char) * (ft_strlen(current->value) + 1));
 	if (!res)
-		mem_error(&data);
+		mem_error(data);
 	while (current->value[i])
 	{
 		if (current->value[i] == '$' && is_quote(current->value[i + 1])
@@ -66,11 +66,11 @@ static void	remove_useless_dollars(t_data *data, t_token *current)
 	current->value = res;
 }
 
-static void	remove_useless_char(t_data *data)
+static void	remove_useless_char(t_data **data)
 {
 	t_token	*temp;
 
-	temp = data->h_tokens;
+	temp = (*data)->h_tokens;
 	while (temp)
 	{
 		remove_useless_dollars(data, temp);
@@ -79,11 +79,11 @@ static void	remove_useless_char(t_data *data)
 	}
 }
 
-int	expander(t_data *data)
+int	expander(t_data **data)
 {
 	t_token	*temp;
 
-	temp = data->h_tokens;
+	temp = (*data)->h_tokens;
 	while (temp)
 	{
 		if (ft_strstr(temp->value, "$?"))

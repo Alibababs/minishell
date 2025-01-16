@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:51:54 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/11 17:28:43 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:22:57 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	syntax_error_msg(char *token)
 	g_exit_status = 2;
 }
 
-static bool	invalid_pipe(t_data *data)
+static bool	invalid_pipe(t_data **data)
 {
 	t_token	*temp;
 
-	temp = data->h_tokens;
+	temp = (*data)->h_tokens;
 	if (temp && temp->token == PIPE && temp->next && temp->next->token == PIPE)
 		return (syntax_error_msg("||"), true);
 	if (temp && (temp->token == PIPE || (temp->prev
@@ -48,36 +48,35 @@ static bool	invalid_pipe(t_data *data)
 	return (false);
 }
 
-static bool	invalid_dir(t_data *data)
+static bool	invalid_dir(t_data **data)
 {
 	t_token	*temp;
-	int		i;
+	int		fd;
 
-	temp = data->h_tokens;
-	i = 0;
+	temp = (*data)->h_tokens;
 	while (temp)
 	{
 		if (!temp->prev || temp->prev->token == PIPE)
 		{
-			while (temp->value[i])
+			fd = open(temp->value, __O_DIRECTORY);
+			if (fd > -1)
 			{
-				if (temp->value[i] != '.' && temp->value[i] != '/')
-					return (false);
-				i++;
+				close(fd);
+				ft_putstr_fd(temp->value, 2);
+				ft_putstr_fd(": Is a directory\n", 2);
+				return (true);
 			}
-			printf("%s: Is a directory\n", temp->value);
-			return (true);
 		}
 		temp = temp->next;
 	}
 	return (false);
 }
 
-static bool	invalid_redir(t_data *data)
+static bool	invalid_redir(t_data **data)
 {
 	t_token	*temp;
 
-	temp = data->h_tokens;
+	temp = (*data)->h_tokens;
 	while (temp)
 	{
 		if (temp->token == REDIR)
@@ -92,7 +91,7 @@ static bool	invalid_redir(t_data *data)
 	return (false);
 }
 
-int	parsing(t_data *data)
+int	parsing(t_data **data)
 {
 	if (invalid_pipe(data))
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 13:09:53 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/13 14:08:23 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/16 14:27:24 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data *data)
+static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data **data)
 {
 	int		argv_n;
 	int		i;
@@ -22,7 +22,7 @@ static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data *data)
 	i = 0;
 	res = malloc(sizeof(char *) * (argv_n + 1));
 	if (!res)
-		mem_error(&data);
+		mem_error(data);
 	while (argv_n > 0)
 	{
 		if (token_temp->token == REDIR)
@@ -31,7 +31,7 @@ static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data *data)
 		{
 			res[i] = ft_strdup(token_temp->value);
 			if (!res[i])
-				mem_error(&data);
+				mem_error(data);
 			token_temp = token_temp->next;
 			argv_n--;
 			i++;
@@ -41,15 +41,15 @@ static void	get_argv(t_token *token_temp, t_cmd *cmd, t_data *data)
 	cmd->argv = res;
 }
 
-void	set_argv(t_data *data)
+void	set_argv(t_data **data)
 {
 	int		cmd_n;
 	t_cmd	*cmd_temp;
 	t_token	*token_temp;
 
 	cmd_n = count_cmds(data);
-	cmd_temp = data->h_cmds;
-	token_temp = data->h_tokens;
+	cmd_temp = (*data)->h_cmds;
+	token_temp = (*data)->h_tokens;
 	while (cmd_n-- > 0)
 	{
 		if (token_temp->token == REDIR && cmd_temp->no_cmd == false)
