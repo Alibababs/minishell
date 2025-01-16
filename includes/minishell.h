@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/15 20:57:09 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 08:16:43 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_env
 	char				*value;
 	struct s_env		*next;
 	struct s_env		*prev;
+	bool				empty_value;
 	t_data				*data;
 }						t_env;
 

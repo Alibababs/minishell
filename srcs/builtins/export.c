@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/15 20:57:53 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 08:52:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 static bool	valid_export(char *str)
 {
 	int	i;
-	int	flag;
 
 	i = 0;
-	flag = 0;
+	if (!isalpha(str[i]) && str[i] != '_')
+		return (false);
+	i++;
 	while (str[i] && str[i] != '=')
 	{
-		if (!ft_isalnum(str[i]))
+		if (!isalnum(str[i]) && str[i] != '_')
 			return (false);
-		if (ft_isalpha(str[i]))
-			flag++;
 		i++;
 	}
-	if (flag == 0)
-		return (false);
 	return (true);
 }
 
@@ -41,30 +38,40 @@ static void	print_export(t_data **data)
 	{
 		if (temp->value && *temp->value)
 			printf("export %s=\"%s\"\n", temp->name, temp->value);
+		else if (temp->empty_value == true)
+			printf("export %s=\"\"\n", temp->name);
 		else
 			printf("export %s\n", temp->name);
 		temp = temp->next;
 	}
 }
 
-static void	ft_set_env(t_data **data, char *name, char *value)
+static void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
 {
-	char	*env_value;
+	t_env	*temp;
 
-	env_value = ft_getenv(name, data);
-	if (env_value)
+	temp = (*data)->h_env;
+	while (temp)
 	{
-		free(env_value);
-		env_value = ft_strdup(value);
-		if (!env_value)
-			mem_error(data);
+		if (!ft_strcmp(temp->name, name))
+		{
+			if (empty_value && (temp->value == NULL || *temp->value == '\0'))
+				return ;
+			free(temp->value);
+			temp->value = ft_strdup(value);
+			if (!temp->value)
+				mem_error(data);
+			temp->empty_value = empty_value;
+			return ;
+		}
+		temp = temp->next;
 	}
-	else
-		add_env_end(name, value, data);
+	add_env_end(name, value, data);
+	ft_set_env(data, name, value, empty_value);
 }
 
 static int	get_name_and_value(char *str, char **name, char **value,
-		t_data **data)
+		bool *empty_value, t_data **data)
 {
 	char	*equals;
 	char	*env_value;
@@ -74,6 +81,7 @@ static int	get_name_and_value(char *str, char **name, char **value,
 	{
 		*name = ft_substr(str, 0, equals - str);
 		*value = ft_strdup(equals + 1);
+		*empty_value = (*(equals + 1) == '\0');
 	}
 	else
 	{
@@ -83,6 +91,7 @@ static int	get_name_and_value(char *str, char **name, char **value,
 			*value = ft_strdup(env_value);
 		else
 			*value = ft_strdup("");
+		*empty_value = false;
 	}
 	return (0);
 }
@@ -93,6 +102,7 @@ int	ft_export(char **argv, t_data **data)
 	int		flag;
 	char	*name;
 	char	*value;
+	bool	empty_value;
 
 	flag = 0;
 	i = 1;
@@ -102,11 +112,11 @@ int	ft_export(char **argv, t_data **data)
 	{
 		while (argv[i])
 		{
-			get_name_and_value(argv[i], &name, &value, data);
+			get_name_and_value(argv[i], &name, &value, &empty_value, data);
 			if (valid_export(name) == false)
 				flag = msg_invalid_export(argv[i]);
 			else
-				ft_set_env(data, name, value);
+				ft_set_env(data, name, value, empty_value);
 			free(name);
 			free(value);
 			i++;
