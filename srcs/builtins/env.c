@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:15:17 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/15 21:09:52 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 08:57:05 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_env(t_data **data)
 	while (temp)
 	{
 		if (temp->value && *temp->value)
-			printf("%s=%s\n", temp->name, temp->value);
+			printf("%s=\"%s\"\n", temp->name, temp->value);
+		else if (temp->empty_value == true)
+			printf("%s=\n", temp->name);
 		temp = temp->next;
 	}
 }

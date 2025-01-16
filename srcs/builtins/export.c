@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 08:52:25 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/16 09:02:52 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
 	{
 		if (!ft_strcmp(temp->name, name))
 		{
-			if (empty_value && (temp->value == NULL || *temp->value == '\0'))
-				return ;
 			free(temp->value);
 			temp->value = ft_strdup(value);
 			if (!temp->value)
@@ -81,7 +79,7 @@ static int	get_name_and_value(char *str, char **name, char **value,
 	{
 		*name = ft_substr(str, 0, equals - str);
 		*value = ft_strdup(equals + 1);
-		*empty_value = (*(equals + 1) == '\0');
+		*empty_value = (*value && *value[0] == '\0');
 	}
 	else
 	{
