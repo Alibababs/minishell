@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:44:40 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 14:24:52 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:08:43 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_token(t_data **data, t_type type, char *str, int len, bool quote)
+static void	add_token(t_data **data, t_type type, char *str, int len,
+		bool quote)
 {
 	t_token	*new_token;
 	t_token	*temp;

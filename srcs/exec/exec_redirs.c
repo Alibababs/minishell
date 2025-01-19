@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 14:04:02 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:08:29 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ int	init_outfiles(t_data **data)
 			if (cmd->outfile > -1)
 				close(cmd->outfile);
 			if (!ft_strcmp(tp->value, ">"))
-				cmd->outfile = open(tp->next->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				cmd->outfile = open(tp->next->value,
+						O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			else if (!ft_strcmp(tp->value, ">>"))
-				cmd->outfile = open(tp->next->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
+				cmd->outfile = open(tp->next->value,
+						O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (cmd->outfile == -1)
 				return (perror(tp->value), 1);
 		}

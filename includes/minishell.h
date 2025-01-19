@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/19 13:33:36 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:07:44 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ typedef struct s_data
 	char				*str;
 	struct s_data		*next;
 }						t_data;
+
+typedef struct s_export_info
+{
+	char				*name;
+	char				*value;
+	bool				empty_value;
+	t_data				**data;
+}						t_export_info;
 
 ////////////////MAIN/////////////
 /// signals.c

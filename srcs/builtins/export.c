@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/19 14:52:18 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:07:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ static void	print_export(t_data **data)
 	}
 }
 
-static int	get_name_and_value(char *str, char **name, char **value,
-		bool *empty_value, t_data **data)
+static int	get_name_and_value(char *str, t_export_info *info)
 {
 	char	*equals;
 	char	*env_value;
@@ -63,46 +62,45 @@ static int	get_name_and_value(char *str, char **name, char **value,
 	equals = ft_strchr(str, '=');
 	if (equals)
 	{
-		*name = ft_substr(str, 0, equals - str);
-		*value = ft_strdup(equals + 1);
-		*empty_value = (*value && *value[0] == '\0');
+		info->name = ft_substr(str, 0, equals - str);
+		info->value = ft_strdup(equals + 1);
+		info->empty_value = (info->value && *info->value == '\0');
 	}
 	else
 	{
-		*name = ft_strdup(str);
-		env_value = ft_getenv(*name, data);
+		info->name = ft_strdup(str);
+		env_value = ft_getenv(info->name, info->data);
 		if (env_value)
-			*value = ft_strdup(env_value);
+			info->value = ft_strdup(env_value);
 		else
-			*value = ft_strdup("");
-		*empty_value = false;
+			info->value = ft_strdup("");
+		info->empty_value = false;
 	}
 	return (0);
 }
 
 int	ft_export(char **argv, t_data **data)
 {
-	int		i;
-	int		flag;
-	char	*name;
-	char	*value;
-	bool	empty_value;
+	int				i;
+	int				flag;
+	t_export_info	info;
 
 	flag = 0;
 	i = 1;
+	info.data = data;
 	if (!argv[1])
 		print_export(data);
 	else
 	{
 		while (argv[i])
 		{
-			get_name_and_value(argv[i], &name, &value, &empty_value, data);
-			if (valid_export(name) == false)
+			get_name_and_value(argv[i], &info);
+			if (valid_export(info.name) == false)
 				flag = msg_invalid_export(argv[i]);
-			else if (ft_strchr(argv[i], '=') || !ft_getenv(name, data))
-				ft_set_env(data, name, value, empty_value);
-			free(name);
-			free(value);
+			else if (ft_strchr(argv[i], '=') || !ft_getenv(info.name, data))
+				ft_set_env(data, info.name, info.value, info.empty_value);
+			free(info.name);
+			free(info.value);
 			i++;
 		}
 	}
