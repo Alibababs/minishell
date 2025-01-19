@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:51:54 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 14:22:57 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:10:54 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ static bool	invalid_dir(t_data **data)
 		if (!temp->prev || temp->prev->token == PIPE)
 		{
 			fd = open(temp->value, __O_DIRECTORY);
-			if (fd > -1)
+			if (fd > -1 && ft_strchr(temp->value, '/'))
 			{
 				close(fd);
+				ft_putstr_fd("minishell : ", 2);
 				ft_putstr_fd(temp->value, 2);
 				ft_putstr_fd(": Is a directory\n", 2);
 				return (true);

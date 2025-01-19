@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 15:45:21 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:11:47 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	close_pipes(t_data **data)
 {
 	t_cmd	*cmd;
 
-	cmd =(*data)->h_cmds;
+	cmd = (*data)->h_cmds;
 	while (cmd)
 	{
 		if (cmd->to_read > 2)
@@ -47,9 +47,12 @@ static void	close_pipes(t_data **data)
 	}
 }
 
-static void	check_cmd(t_cmd *cmd,t_data **data)
+static void	check_cmd(t_cmd *cmd, t_data **data)
 {
-	if (access(cmd->path, X_OK) == -1)
+	struct stat	path_stat;
+
+	if (access(cmd->path, X_OK) == -1 || (stat(cmd->path, &path_stat) == 0
+			&& S_ISDIR(path_stat.st_mode)))
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->path, 2);
@@ -83,7 +86,6 @@ static int	launch_command(t_data **data)
 	wait_for_all(data);
 	return (0);
 }
-
 
 int	exec(t_data **data)
 {
