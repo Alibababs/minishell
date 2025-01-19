@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 15:39:27 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:33:36 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ typedef struct s_data
 ////////////////MAIN/////////////
 /// signals.c
 void					ft_signals(int mode);
-/// free.c
-void					ft_error(char *msg, t_data **data);
+
+/// error_msg.c
+void					ft_put_error(char *str, char *str2);
 void					mem_error(t_data **data);
+
+/// free.c
 void					free_env(t_data *data);
 void					free_data(t_data **data);
 void					free_tokens(t_data **data);
-/// free_bis.c
 void					free_array(char **array);
 void					free_cmds(t_data **data);
 /// print.c
@@ -157,7 +159,8 @@ int						init_outfiles(t_data **data);
 
 /// exec_path.c
 char					*get_cmd_path(char *binary);
-void					set_path_cmd(t_token *current, t_cmd *cmd, t_data **data);
+void					set_path_cmd(t_token *current, t_cmd *cmd,
+							t_data **data);
 
 /// exec_argv.c
 void					set_path(t_data **data);

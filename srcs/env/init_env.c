@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibaba <alibaba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:06:24 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/09 14:53:52 by alibaba          ###   ########.fr       */
+/*   Updated: 2025/01/19 13:41:25 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	init_env(t_data **data, char *envp[])
 
 	(*data)->envp = envp;
 	if (!(*data)->envp)
-		return (ft_error("Please provide ENV variables\n", data));
+	{
+		ft_putstr_fd("Please provide ENV variables\n", 2);
+		free_data(data);
+		exit(1);
+	}
 	i = 0;
 	while (envp[i])
 	{

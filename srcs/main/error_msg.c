@@ -3,49 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   free_bis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:54:56 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 15:41:12 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:32:35 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_array(char **array)
+void	ft_put_error(char *str, char *str2)
 {
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(str2, 2);
 }
 
-void	free_cmds(t_data **data)
+void	mem_error(t_data **data)
 {
-	t_cmd *temp;
-	t_cmd *next;
-
-	temp = (*data)->h_cmds;
-	while (temp)
-	{
-		next = temp->next;
-		if (temp->path)
-			free(temp->path);
-		if (temp->argv)
-			free_array(temp->argv);
-		if (temp->infile)
-			close(temp->infile);
-		if (temp->outfile)
-			close(temp->outfile);
-		free(temp);
-		temp = next;
-	}
-	(*data)->h_cmds = NULL;
+	perror("Memory allocation failed");
+	free_data(data);
+	exit(1);
 }

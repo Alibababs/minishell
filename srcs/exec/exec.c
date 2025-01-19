@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/19 13:11:47 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:37:08 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,26 @@ static void	check_cmd(t_cmd *cmd, t_data **data)
 {
 	struct stat	path_stat;
 
-	if (access(cmd->path, X_OK) == -1 || (stat(cmd->path, &path_stat) == 0
+	if (ft_strchr(cmd->path, '/'))
+	{
+		if (access(cmd->path, F_OK) == -1)
+		{
+			ft_put_error(cmd->path, ": No such file or directory\n");
+			free_data(data);
+			exit(127);
+		}
+		else if (access(cmd->path, X_OK) == -1)
+		{
+			ft_put_error(cmd->path, ": Permission denied\n");
+			free_data(data);
+			exit(126);
+		}
+	}
+	if (access(cmd->path, X_OK) == -1 || (!stat(cmd->path, &path_stat)
 			&& S_ISDIR(path_stat.st_mode)))
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->path, 2);
-		ft_putstr_fd(": command not found\n", 2);
+		ft_put_error(cmd->path, ": command not found\n");
 		free_data(data);
-		g_exit_status = 127;
 		exit(127);
 	}
 }

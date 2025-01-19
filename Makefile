@@ -20,7 +20,7 @@ LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 C_FILE		=	main/main	 									\
 				main/signals									\
 				main/free										\
-				main/free_bis									\
+				main/error_msg									\
 				main/print										\
 				env/init_env									\
 				env/env_list									\
