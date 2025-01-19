@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 21:50:42 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 12:58:16 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:52:18 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static bool	valid_export(char *str)
 	int	i;
 
 	i = 0;
-	if (!isalpha(str[i]) && str[i] != '_')
+	if (!ft_isalpha(str[i]) && str[i] != '_')
 		return (false);
 	i++;
 	while (str[i] && str[i] != '=')
 	{
-		if (!isalnum(str[i]) && str[i] != '_')
+		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (false);
 		i++;
 	}
