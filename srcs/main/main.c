@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/16 15:50:41 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:14:02 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ static int	process_command(t_data **data, char *input)
 		return (1);
 	if (parsing(data))
 		return (1);
-	g_exit_status = exec(data);
-	if (g_exit_status > 0)
-		return (g_exit_status);
+	exec(data);
 	return (0);
 }
 
