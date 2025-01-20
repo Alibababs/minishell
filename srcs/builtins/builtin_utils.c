@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/20 16:19:38 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:28:26 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	launch_builtin(t_cmd *cmd, t_data **data)
 	int	save;
 
 	save = dup(STDOUT_FILENO);
-	dup2(cmd->outfile, STDOUT_FILENO);
+	if (cmd->outfile != -2)
+		dup2(cmd->outfile, STDOUT_FILENO);
+	else if (cmd->to_write > 2)
+		dup2(cmd->to_write, STDOUT_FILENO);
 	g_exit_status = exec_builtin(cmd, data);
 	dup2(save, STDOUT_FILENO);
 	close(save);

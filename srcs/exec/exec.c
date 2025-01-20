@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/20 16:16:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:40 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	exec(t_data **data)
 		return (1);
 	init_infiles(data);
 	init_outfiles((*data)->h_tokens, (*data)->h_cmds);
-	// print_cmds((*data)->h_cmds);
+	print_cmds((*data)->h_cmds);
 	launch_command(data);
 	return (0);
 }
