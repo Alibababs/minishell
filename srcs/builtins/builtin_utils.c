@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/20 16:28:26 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:54:01 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,21 @@ void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
 void	launch_builtin(t_cmd *cmd, t_data **data)
 {
 	int	save;
+	int	save2;
 
 	save = dup(STDOUT_FILENO);
 	if (cmd->outfile != -2)
 		dup2(cmd->outfile, STDOUT_FILENO);
 	else if (cmd->to_write > 2)
 		dup2(cmd->to_write, STDOUT_FILENO);
+	save2 = dup(STDIN_FILENO);
+	if (cmd->infile != -2)
+		dup2(cmd->infile, STDIN_FILENO);
+	else if (cmd->to_read > 2)
+		dup2(cmd->infile, STDIN_FILENO);
 	g_exit_status = exec_builtin(cmd, data);
 	dup2(save, STDOUT_FILENO);
+	dup2(save2, STDIN_FILENO);
 	close(save);
+	close(save2);
 }
