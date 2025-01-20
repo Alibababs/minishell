@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:32 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 11:22:01 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:18:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	init_cmd_values(t_cmd *current)
 	current->argv = NULL;
 	current->to_read = -1;
 	current->to_write = -1;
-	current->infile = -1;
-	current->outfile = -1;
+	current->infile = -2;
+	current->outfile = -2;
 	current->pid = -1;
 	current->here_doc = false;
 	current->no_cmd = false;

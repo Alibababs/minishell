@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/19 15:07:44 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:01:55 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,9 @@ int						count_cmds(t_data **data);
 /// exec_redirs.c
 void					make_dup(t_cmd *cmd);
 int						init_infiles(t_data **data);
-int						init_outfiles(t_data **data);
+int						init_outfiles(t_token *tp, t_cmd *cmd);
+int						check_redirs(t_cmd *cmd, t_data **data);
+t_token					*next_pipe(t_token *tp);
 
 /// exec_path.c
 char					*get_cmd_path(char *binary);

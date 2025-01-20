@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 15:39:12 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:19:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,11 @@ void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
 
 void	launch_builtin(t_cmd *cmd, t_data **data)
 {
-	make_dup(cmd);
+	int	save;
+
+	save = dup(STDOUT_FILENO);
+	dup2(cmd->outfile, STDOUT_FILENO);
 	g_exit_status = exec_builtin(cmd, data);
-	free_data(data);
-	exit(g_exit_status);
+	dup2(save, STDOUT_FILENO);
+	close(save);
 }

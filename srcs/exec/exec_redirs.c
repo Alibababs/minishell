@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/19 15:08:29 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:19:12 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int	init_infiles(t_data **data)
 				close(cmd->infile);
 			cmd->infile = open(tp->next->value, O_RDONLY);
 			if (cmd->infile == -1)
-				return (perror(tp->next->value), 1);
+			{
+				perror(tp->next->value);
+				g_exit_status = 1;
+				tp = next_pipe(tp);
+			}
 		}
 		tp = tp->next;
 	}
@@ -49,13 +53,8 @@ int	init_infiles(t_data **data)
 	return (0);
 }
 
-int	init_outfiles(t_data **data)
+int	init_outfiles(t_token *tp, t_cmd *cmd)
 {
-	t_token	*tp;
-	t_cmd	*cmd;
-
-	tp = (*data)->h_tokens;
-	cmd = (*data)->h_cmds;
 	while (tp)
 	{
 		if (tp->token == PIPE)
@@ -71,9 +70,30 @@ int	init_outfiles(t_data **data)
 				cmd->outfile = open(tp->next->value,
 						O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (cmd->outfile == -1)
-				return (perror(tp->value), 1);
+			{
+				perror(tp->next->value);
+				g_exit_status = 1;
+				tp = next_pipe(tp);
+			}
 		}
 		tp = tp->next;
 	}
 	return (0);
+}
+
+int	check_redirs(t_cmd *cmd, t_data **data)
+{
+	if (cmd->infile == -1)
+		return (1);
+	if (cmd->outfile == -1)
+		return (1);
+	return (0);
+	(void)data;
+}
+
+t_token	*next_pipe(t_token *tp)
+{
+	while (tp && tp->next && tp->next->token != PIPE)
+		tp = tp->next;
+	return (tp);
 }

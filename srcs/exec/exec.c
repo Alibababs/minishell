@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/19 14:11:57 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:16:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,20 @@ static int	launch_command(t_data **data)
 	cmd = (*data)->h_cmds;
 	while (cmd)
 	{
-		cmd->pid = fork();
-		if (cmd->pid == 0)
+		if (check_redirs(cmd, data))
+			;
+		else if (is_builtin(cmd->path))
+			launch_builtin(cmd, data);
+		else
 		{
-			if (is_builtin(cmd->path))
-				launch_builtin(cmd, data);
-			check_cmd(cmd, data);
-			make_dup(cmd);
-			close_pipes(data);
-			execve(cmd->path, cmd->argv, (*data)->envp);
+			cmd->pid = fork();
+			if (cmd->pid == 0)
+			{
+				check_cmd(cmd, data);
+				make_dup(cmd);
+				close_pipes(data);
+				execve(cmd->path, cmd->argv, (*data)->envp);
+			}
 		}
 		cmd = cmd->next;
 	}
@@ -101,21 +106,13 @@ static int	launch_command(t_data **data)
 
 int	exec(t_data **data)
 {
-	int	flag;
-
-	flag = 0;
 	init_cmd_nodes(data);
 	set_path(data);
 	set_argv(data);
 	if (init_pipes(data))
 		return (1);
-	flag += init_infiles(data);
-	flag += init_outfiles(data);
-	if (flag > 0)
-	{
-		g_exit_status = 1;
-		return (1);
-	}
+	init_infiles(data);
+	init_outfiles((*data)->h_tokens, (*data)->h_cmds);
 	// print_cmds((*data)->h_cmds);
 	launch_command(data);
 	return (0);
