@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/21 15:11:33 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:36:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	free_cmds(t_data **data)
 			free(temp->path);
 		if (temp->argv)
 			free_array(temp->argv);
-		if (temp->infile)
+		if (temp->infile > -1)
 			close(temp->infile);
-		if (temp->outfile)
+		if (temp->outfile > -1)
 			close(temp->outfile);
 		free(temp);
 		temp = next;
