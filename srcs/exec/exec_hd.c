@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:43:26 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 19:10:07 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:11:43 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ static int	here_doc_write(t_token *tp, int fd_in, t_data **data)
 			line = handle_exit_status(line, data);
 			line = handle_dollar(line, data);
 		}
-		if (ft_strcmp(line, tp->next->value) == 0)
-		{
-			free(line);
+		if (!ft_strcmp(line, tp->next->value))
 			break ;
-		}
 		write(fd_in, line, ft_strlen(line));
 		write(fd_in, "\n", 1);
 		free(line);
