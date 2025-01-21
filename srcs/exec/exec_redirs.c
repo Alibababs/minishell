@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 15:04:07 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:14:52 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
 		if (tp->token == PIPE)
 			cmd = cmd->next;
 		else if (tp->token == REDIR && (!ft_strcmp(tp->value, "<")
-			|| !ft_strcmp(tp->value, "<<")))
+				|| !ft_strcmp(tp->value, "<<")))
 		{
 			if (cmd->infile > -1)
 				close(cmd->infile);
@@ -39,7 +39,7 @@ int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
 				cmd->infile = init_here_doc(tp, data);
 			else
 				cmd->infile = open(tp->next->value, O_RDONLY);
-			if (cmd->infile == -1)
+			if (cmd->infile == -1 && g_exit_status != 130)
 			{
 				perror(tp->next->value);
 				g_exit_status = 1;

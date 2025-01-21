@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_hd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:43:26 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 16:09:13 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:27:22 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@ static void	here_doc_write(t_token *tp, int fd_in, t_data **data)
 {
 	char	*line;
 
-	dprintf(2, "LIM: [%s] WasQUOTE: %d\n", tp->next->value, tp->next->was_quote);
+	ft_signals(3);
 	while (1)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(0);
+		if (!line || g_exit_status == 130)
+		{
+			free(line);
+			break ;
+		}
 		if (tp->next->was_quote == false)
 		{
 			line = handle_exit_status(line, data);
 			line = handle_dollar(line, data);
 		}
 		if (!ft_strncmp(line, tp->next->value, ft_strlen(tp->next->value)))
-		{
-			free(line);
-			return ;
-		}
+			return (free(line));
 		ft_putstr_fd(line, fd_in);
 		free(line);
 	}
+	ft_signals(1);
 }
+
 int	init_here_doc(t_token *tp, t_data **data)
 {
 	int	infile;
@@ -45,7 +49,11 @@ int	init_here_doc(t_token *tp, t_data **data)
 	here_doc_write(tp, infile, data);
 	if (infile > 0)
 		close(infile);
+	if (g_exit_status == 130)
+	{
+		unlink("temp.txt");
+		return (-1);
+	}
 	infile = open("temp.txt", O_RDONLY);
 	return (infile);
 }
-
