@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 15:08:21 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:41:27 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	exec(t_data **data)
 		return (1);
 	init_infiles((*data)->h_tokens, (*data)->h_cmds, data);
 	init_outfiles((*data)->h_tokens, (*data)->h_cmds);
-	// print_cmds((*data)->h_cmds);
+	print_cmds((*data)->h_cmds);
 	launch_command(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/21 15:11:01 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:41:19 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	process_command(t_data **data, char *input)
 {
 	if (lexer(data, input))
 		return (1);
-	// print_tokens((*data)->h_tokens);
+	print_tokens((*data)->h_tokens);
 	if (expander(data))
 		return (1);
 	if (parsing(data))
