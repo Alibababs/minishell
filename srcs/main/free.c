@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/19 13:28:42 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:11:33 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	free_data(t_data **data)
 		free_env(*data);
 	if ((*data)->h_cmds)
 		free_cmds(data);
+	if (!access("temp.txt", F_OK))
+		unlink("temp.txt");
 	free(*data);
 	*data = NULL;
 }

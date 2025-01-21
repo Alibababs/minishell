@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/20 15:58:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/21 15:11:01 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	cleanup(t_data **data)
 {
 	free_tokens(data);
 	free_cmds(data);
+	if (!access("temp.txt", F_OK))
+		unlink("temp.txt");
 }
 
 static int	process_command(t_data **data, char *input)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/20 16:54:01 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:26:45 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	ft_set_env(t_data **data, char *name, char *value, bool empty_value)
 			return ;
 		}
 		temp = temp->next;
+		}
+		add_env_end(name, value, data);
+		ft_set_env(data, name, value, empty_value);
 	}
-	add_env_end(name, value, data);
-	ft_set_env(data, name, value, empty_value);
-}
 
 void	launch_builtin(t_cmd *cmd, t_data **data)
 {

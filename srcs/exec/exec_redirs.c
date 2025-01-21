@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/20 16:19:12 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/21 15:04:07 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,21 @@ void	make_dup(t_cmd *cmd)
 		dup2(cmd->to_write, STDOUT_FILENO);
 }
 
-int	init_infiles(t_data **data)
+int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
 {
-	t_token	*tp;
-	t_cmd	*cmd;
-
-	tp = (*data)->h_tokens;
-	cmd = (*data)->h_cmds;
 	while (tp)
 	{
 		if (tp->token == PIPE)
 			cmd = cmd->next;
-		else if (tp->token == REDIR && !ft_strcmp(tp->value, "<"))
+		else if (tp->token == REDIR && (!ft_strcmp(tp->value, "<")
+			|| !ft_strcmp(tp->value, "<<")))
 		{
 			if (cmd->infile > -1)
 				close(cmd->infile);
-			cmd->infile = open(tp->next->value, O_RDONLY);
+			if (!ft_strcmp(tp->value, "<<"))
+				cmd->infile = init_here_doc(tp, data);
+			else
+				cmd->infile = open(tp->next->value, O_RDONLY);
 			if (cmd->infile == -1)
 			{
 				perror(tp->next->value);

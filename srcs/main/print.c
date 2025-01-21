@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:26:33 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/20 15:22:48 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/21 15:00:37 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	print_tokens(t_token *temp)
 	while (temp)
 	{
 		printf("Value: [%s], Token: [%d]\n", temp->value, temp->token);
+		if (temp->was_quote == true)
+			printf("Was DQuote\n");
 		temp = temp->next;
 	}
 }
@@ -47,8 +49,8 @@ void	print_cmds(t_cmd *temp)
 		dprintf(2, "outfile: [%d]\n", temp->outfile);
 		dprintf(2, "to_read: [%d] ", temp->to_read);
 		dprintf(2, "to_write: [%d]\n", temp->to_write);
-		// if (temp->here_doc == true)
-			// dprintf(2, "Heredoc: %s\n", temp->hd_del->value);
+		if (temp->here_doc == true)
+			dprintf(2, "Heredoc: %s\n", temp->hd_del->value);
 		temp = temp->next;
 	}
 }

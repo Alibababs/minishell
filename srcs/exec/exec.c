@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/20 16:45:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/21 15:08:21 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ static int	launch_command(t_data **data)
 	while (cmd)
 	{
 		if (check_redirs(cmd, data))
-			;
+			g_exit_status = 1;
 		else if (is_builtin(cmd->path))
 			launch_builtin(cmd, data);
-		else
+		else if (cmd->no_cmd == false)
 		{
 			cmd->pid = fork();
 			if (cmd->pid == 0)
@@ -111,7 +111,7 @@ int	exec(t_data **data)
 	set_argv(data);
 	if (init_pipes(data))
 		return (1);
-	init_infiles(data);
+	init_infiles((*data)->h_tokens, (*data)->h_cmds, data);
 	init_outfiles((*data)->h_tokens, (*data)->h_cmds);
 	// print_cmds((*data)->h_cmds);
 	launch_command(data);
