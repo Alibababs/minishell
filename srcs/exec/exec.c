@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:23:08 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:17:52 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int	exec(t_data **data)
 	set_argv(data);
 	if (init_pipes(data))
 		return (1);
-	init_infiles((*data)->h_tokens, (*data)->h_cmds, data);
+	if (init_infiles((*data)->h_tokens, (*data)->h_cmds, data))
+		return (130);
 	init_outfiles((*data)->h_tokens, (*data)->h_cmds);
 	// print_cmds((*data)->h_cmds);
 	launch_command(data);
