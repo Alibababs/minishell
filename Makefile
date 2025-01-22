@@ -27,7 +27,6 @@ C_FILE		=	main/main	 									\
 				lexer/lexer_utils								\
 				expander/expander								\
 				expander/expander_utils							\
-				expander/exit_status							\
 				expander/handle_dollar							\
 				parsing/parsing									\
 				exec/exec										\

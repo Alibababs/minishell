@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/22 16:06:43 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:26:21 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	expander(t_data **data)
 	temp = (*data)->h_tokens;
 	while (temp)
 	{
-		if (ft_strstr(temp->value, "$?"))
-			temp->value = handle_exit_status(temp->value, data);
 		if (ft_strchr(temp->value, '$'))
 			temp->value = handle_dollar(temp->value, data);
 		temp = temp->next;
