@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:14:52 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:23:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	close_pipes(t_data **data)
 			close(cmd->to_read);
 		if (cmd->to_write > 2)
 			close(cmd->to_write);
+		if (cmd->infile > -1)
+			close(cmd->infile);
+		if (cmd->outfile > -1)
+			close(cmd->outfile);
 		cmd = cmd->next;
 	}
 }
