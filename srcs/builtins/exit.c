@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:39:53 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/22 11:33:05 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:24:27 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_exit_error(char *current, int has_next)
 
 	if (!ft_isnumber(current))
 	{
-		ft_putstr_fd("bash: exit: ", 2);
+		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(current, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit(2);
@@ -80,7 +80,7 @@ int	ft_exit_error(char *current, int has_next)
 	if (error == 1)
 	{
 		printf("exit\n");
-		ft_putstr_fd("bash: exit: ", 2);
+		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(current, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit(2);
