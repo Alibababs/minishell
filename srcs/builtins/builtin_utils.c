@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/21 14:26:45 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:35:07 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_builtin(t_cmd *cmd, t_data **data)
 	else if (!ft_strcmp(cmd->path, "env"))
 		return (ft_env(data), 0);
 	else if (!ft_strcmp(cmd->path, "exit"))
-		return (ft_exit(cmd->argv));
+		return (ft_exit(cmd->argv, data));
 	return (1);
 }
 
