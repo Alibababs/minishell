@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 11:04:19 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:14:49 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void					syntax_error_msg(char *token);
 /////////////EXEC//////////////////
 /// exec.c
 int						exec(t_data **data);
-
+void					close_pipes(t_data **data);
 /// exec_utils.c
 void					add_cmd_end(t_data **data);
 int						is_builtin(char *value);

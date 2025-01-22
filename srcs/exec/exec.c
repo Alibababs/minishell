@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 16:10:15 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:14:52 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	wait_for_all(t_data **data)
 	}
 }
 
-static void	close_pipes(t_data **data)
+void	close_pipes(t_data **data)
 {
 	t_cmd	*cmd;
 

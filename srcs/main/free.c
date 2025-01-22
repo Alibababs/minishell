@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/21 15:36:35 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:14:58 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	free_data(t_data **data)
 {
 	if (!data || !*data)
 		return ;
+	close_pipes(data);
 	if ((*data)->h_tokens)
 		free_tokens(data);
 	if ((*data)->h_env)
