@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:00:39 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 14:21:27 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:04:47 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ char	*handle_dollar(char *value, t_data **data)
 	if (!new_value)
 		mem_error(data);
 	replace_dollars(value, data, new_value);
+	free(value);
 	return (new_value);
 }

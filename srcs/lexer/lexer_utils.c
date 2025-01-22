@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:58:13 by phautena          #+#    #+#             */
-/*   Updated: 2024/12/12 11:55:39 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:38 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,33 @@ bool	quotes_closed(char *input)
 	if (flag != -1)
 		return (false);
 	return (true);
+}
+
+void	add_token_quote(t_data **data, t_type type, char *str, int len)
+{
+	t_token	*new_token;
+	t_token	*temp;
+
+	if (len <= 0)
+		return ;
+	new_token = malloc(sizeof(t_token));
+	if (!new_token)
+		mem_error(data);
+	new_token->value = ft_substr(str, 0, len);
+	if (!new_token->value)
+		mem_error(data);
+	new_token->token = type;
+	new_token->was_quote = false;
+	new_token->next = NULL;
+	new_token->prev = NULL;
+	if (!(*data)->h_tokens)
+	{
+		(*data)->h_tokens = new_token;
+		return ;
+	}
+	temp = (*data)->h_tokens;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_token;
+	new_token->prev = temp;
 }

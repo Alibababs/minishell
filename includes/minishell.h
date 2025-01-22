@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 11:31:06 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:02:52 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int						lexer(t_data **data, char *input);
 int						is_sep(char c);
 int						is_quote(char c);
 bool					quotes_closed(char *input);
+void					add_token_quote(t_data **data, t_type type, char *str, int len);
 
 /////////////EXPANDER/////////////
 /// expander.c
