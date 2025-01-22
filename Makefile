@@ -23,7 +23,6 @@ C_FILE		=	main/main	 									\
 				main/error_msg									\
 				main/print										\
 				env/init_env									\
-				env/env_list									\
 				lexer/lexer										\
 				lexer/lexer_utils								\
 				expander/expander								\
