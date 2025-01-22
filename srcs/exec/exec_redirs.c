@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/21 18:43:39 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:10:42 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
 				cmd->infile = open(tp->next->value, O_RDONLY);
 			if (cmd->infile == -1)
 			{
+				if (g_exit_status == 130)
+					return (1);
 				perror(tp->next->value);
 				g_exit_status = 1;
 				tp = next_pipe(tp);
@@ -48,7 +50,6 @@ int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
 		}
 		tp = tp->next;
 	}
-	cmd = cmd->next;
 	return (0);
 }
 

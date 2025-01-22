@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:43:26 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:05:47 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:10:56 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,15 @@ int	init_here_doc(t_token *tp, t_data **data)
 	if (infile < 0)
 		return (-1);
 	ft_signals(3);
+	g_exit_status = 0;
 	here_doc_write(tp, infile, data);
 	ft_signals(2);
+	if (g_exit_status == 130)
+	{
+		close(infile);
+		unlink("temp.txt");
+		return (-1);
+	}
 	close(infile);
 	infile = open("temp.txt", O_RDONLY);
 	return (infile);

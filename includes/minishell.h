@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 12:02:52 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:10:15 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -128,7 +129,8 @@ int						lexer(t_data **data, char *input);
 int						is_sep(char c);
 int						is_quote(char c);
 bool					quotes_closed(char *input);
-void					add_token_quote(t_data **data, t_type type, char *str, int len);
+void					add_token_quote(t_data **data, t_type type, char *str,
+							int len);
 
 /////////////EXPANDER/////////////
 /// expander.c

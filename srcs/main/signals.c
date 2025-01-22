@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:53:46 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 10:57:03 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:10:04 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	handle_heredoc(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 	rl_done = 1;
+	ioctl(STDIN_FILENO, TIOCSTI, "");
 }
 
 void	ft_signals(int mode)
