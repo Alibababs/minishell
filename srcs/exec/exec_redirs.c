@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 12:17:35 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:19:11 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int	init_outfiles(t_token *tp, t_cmd *cmd)
 						O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (cmd->outfile == -1)
 			{
-				if (g_exit_status == 130)
-					return (1);
 				perror(tp->next->value);
 				g_exit_status = 1;
 				tp = next_pipe(tp);
