@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 13:07:42 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:23:39 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void					mem_error(t_data **data);
 void					ft_heredoc_error(char *str);
 
 /// free.c
-void					free_env(t_data *data);
+void					free_env(t_data **data);
 void					free_data(t_data **data);
 void					free_tokens(t_data **data);
 void					free_array(char **array);

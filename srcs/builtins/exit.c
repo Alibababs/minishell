@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:39:53 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/22 12:24:27 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:24:08 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	ft_exit(char **argv, t_data **data)
 	if (!argv[1])
 	{
 		printf("exit\n");
+		free_data(data);
 		exit(0);
 	}
 	if (ft_exit_error(argv[1], argv[2] != NULL))
@@ -103,7 +104,7 @@ int	ft_exit(char **argv, t_data **data)
 	if (exit_code > 255)
 		exit_code %= 256;
 	printf("exit\n");
-	free_env(*data);
+	free_data(data);
 	exit(exit_code);
 	return (0);
 }

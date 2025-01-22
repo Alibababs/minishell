@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:02:05 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 11:18:30 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:24:13 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	free_cmds(t_data **data)
 	(*data)->h_cmds = NULL;
 }
 
-void	free_env(t_data *data)
+void	free_env(t_data **data)
 {
 	t_env	*temp;
 	t_env	*next;
 
-	temp = data->h_env;
+	temp = (*data)->h_env;
 	while (temp)
 	{
 		next = temp->next;
@@ -64,7 +64,7 @@ void	free_env(t_data *data)
 		free(temp);
 		temp = next;
 	}
-	data->h_env = NULL;
+	(*data)->h_env = NULL;
 }
 
 void	free_tokens(t_data **data)
@@ -94,7 +94,7 @@ void	free_data(t_data **data)
 	if ((*data)->h_tokens)
 		free_tokens(data);
 	if ((*data)->h_env)
-		free_env(*data);
+		free_env(data);
 	if ((*data)->h_cmds)
 		free_cmds(data);
 	if (!access("temp.txt", F_OK))
