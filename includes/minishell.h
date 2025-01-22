@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 12:10:15 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:07:42 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,11 @@ void					print_tokens(t_token *temp);
 void					print_cmds(t_cmd *temp);
 
 /////////////ENV/////////////////
-/// env_list.c
-void					add_env_end(char *name, char *value, t_data **data);
 /// init_env.c
 void					init_env(t_data **data, char *envp[]);
 char					*parse_env_name(char *var);
 char					*parse_env_value(char *var);
+void					add_env_end(char *name, char *value, t_data **data);
 
 /////////////LEXER///////////////
 /// lexer.c
