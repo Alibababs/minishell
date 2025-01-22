@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:19:22 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/22 11:15:48 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:26:58 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,14 @@ static void	remove_useless_char(t_data **data)
 int	expander(t_data **data)
 {
 	t_token	*temp;
-	char	*old_value;
 
 	temp = (*data)->h_tokens;
 	while (temp)
 	{
 		if (ft_strstr(temp->value, "$?"))
-		{
-			old_value = temp->value;
 			temp->value = handle_exit_status(temp->value, data);
-			free(old_value);
-		}
 		if (ft_strchr(temp->value, '$'))
-		{
-			old_value = temp->value;
 			temp->value = handle_dollar(temp->value, data);
-			free(old_value);
-		}
 		temp = temp->next;
 	}
 	if (remove_empty_tokens(data))

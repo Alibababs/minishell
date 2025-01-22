@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:45:03 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/16 14:20:31 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:29:32 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ char	*handle_exit_status(char *value, t_data **data)
 		mem_error(data);
 	ptr = value;
 	process_exit_status(status_str, new_value, ptr);
+	free(status_str);
+	free(value);
 	return (new_value);
 }

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 11:14:49 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:31:06 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void					ft_echo(char *argv[]);
 void					ft_pwd(void);
 void					ft_unset(char **argv, t_data **data);
 void					ft_env(t_data **data);
-int						ft_exit(char **argv);
+int						ft_exit(char **argv, t_data **data);
 int						ft_export(char **argv, t_data **data);
 
 /// builtin_utils.c
