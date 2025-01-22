@@ -6,7 +6,7 @@
 /*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/21 18:43:45 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:04:19 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void					ft_signals(int mode);
 /// error_msg.c
 void					ft_put_error(char *str, char *str2);
 void					mem_error(t_data **data);
+void					ft_heredoc_error(char *str);
 
 /// free.c
 void					free_env(t_data *data);
