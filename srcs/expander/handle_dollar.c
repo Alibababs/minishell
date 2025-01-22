@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:00:39 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/22 12:04:47 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:03:32 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	calculate_new_len(char *value, t_data **data)
 	i = 0;
 	while (value[i])
 	{
-		if (value[i] == '$' && (ft_isalnum(value[i + 1])))
+		if (value[i] == '$' && !in_s_quotes(value, &value[i])
+			&& (ft_isalnum(value[i + 1]) || value[i + 1] == '_'))
 			i = var_len(value, data, i, &new_len);
 		else
 		{
@@ -51,62 +52,54 @@ static int	calculate_new_len(char *value, t_data **data)
 	return (new_len);
 }
 
-static char	*handle_var_replacement(char *ptr, t_data **data, char **new_ptr)
+static char	*handle_var_replacement(char *value, t_data **data,
+		char **new_value)
 {
 	int		j;
 	char	*var_name;
 	char	*var_value;
 
-	if (ft_isdigit(ptr[1]))
-		return (ptr + 2);
+	if (ft_isdigit(value[1]))
+		return (value + 2);
 	j = 1;
-	while (ft_isalnum(ptr[j]))
+	while (ft_isalnum(value[j]))
 		j++;
-	var_name = ft_substr(ptr, 1, j - 1);
+	var_name = ft_substr(value, 1, j - 1);
 	var_value = get_var(var_name, data);
 	if (var_value)
 	{
-		ft_strcpy(*new_ptr, var_value);
-		*new_ptr += ft_strlen(var_value);
+		ft_strcpy(*new_value, var_value);
+		*new_value += ft_strlen(var_value);
 	}
 	free(var_name);
-	return (ptr + j);
+	return (value + j);
 }
 
 static void	replace_dollars(char *value, t_data **data, char *new_value)
 {
-	char	*new_ptr;
 	char	*ptr;
 
-	new_ptr = new_value;
 	ptr = value;
 	while (*ptr)
 	{
-		if (*ptr == '$' && (ft_isalnum(*(ptr + 1))))
-			ptr = handle_var_replacement(ptr, data, &new_ptr);
+		if (*ptr == '$' && !in_s_quotes(value, ptr) && (ft_isalnum(*(ptr + 1))
+				|| *(ptr + 1) == '_'))
+			ptr = handle_var_replacement(ptr, data, &new_value);
 		else
 		{
-			*new_ptr = *ptr;
-			new_ptr++;
+			*new_value = *ptr;
+			new_value++;
 			ptr++;
 		}
 	}
-	*new_ptr = '\0';
+	*new_value = '\0';
 }
 
 char	*handle_dollar(char *value, t_data **data)
 {
 	int		new_len;
 	char	*new_value;
-	int		i;
 
-	i = 0;
-	while (value[i])
-	{
-		if (value[i] == '$' && in_s_quotes(value, &value[i]))
-			return (value);
-		i++;
-	}
 	new_len = calculate_new_len(value, data);
 	new_value = malloc(new_len + 1);
 	if (!new_value)
