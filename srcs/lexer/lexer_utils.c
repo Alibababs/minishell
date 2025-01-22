@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:58:13 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 12:02:38 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:49:19 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	add_token_quote(t_data **data, t_type type, char *str, int len)
 	if (!new_token->value)
 		mem_error(data);
 	new_token->token = type;
-	new_token->was_quote = false;
+	new_token->was_quote = true;
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	if (!(*data)->h_tokens)
