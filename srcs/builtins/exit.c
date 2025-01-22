@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:39:53 by pbailly           #+#    #+#             */
-/*   Updated: 2025/01/22 13:24:08 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:18:50 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,22 @@ int	ft_exit_error(char *current, int has_next)
 	return (0);
 }
 
-int	ft_exit(char **argv, t_data **data)
+void	close_dup(int save, int save2)
+{
+	dup2(save, STDIN_FILENO);
+	dup2(save, STDOUT_FILENO);
+	close(save);
+	close(save2);
+}
+
+int	ft_exit(char **argv, t_data **data, int save, int save2)
 {
 	unsigned int	exit_code;
 
 	if (!argv[1])
 	{
 		printf("exit\n");
+		close_dup(save, save2);
 		free_data(data);
 		exit(0);
 	}
@@ -104,6 +113,7 @@ int	ft_exit(char **argv, t_data **data)
 	if (exit_code > 255)
 		exit_code %= 256;
 	printf("exit\n");
+	close_dup(save, save2);
 	free_data(data);
 	exit(exit_code);
 	return (0);

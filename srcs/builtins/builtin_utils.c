@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/22 12:59:37 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:19:10 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	exec_builtin(t_cmd *cmd, t_data **data)
+int	exec_builtin(t_cmd *cmd, t_data **data, int save, int save2)
 {
 	if (!ft_strcmp(cmd->path, "cd"))
 		return (ft_cd(cmd->argv, data));
@@ -27,7 +27,7 @@ int	exec_builtin(t_cmd *cmd, t_data **data)
 	else if (!ft_strcmp(cmd->path, "env"))
 		return (ft_env(data), 0);
 	else if (!ft_strcmp(cmd->path, "exit"))
-		return (ft_exit(cmd->argv, data));
+		return (ft_exit(cmd->argv, data, save, save2));
 	return (1);
 }
 
@@ -84,7 +84,7 @@ void	launch_builtin(t_cmd *cmd, t_data **data)
 		dup2(cmd->infile, STDIN_FILENO);
 	else if (cmd->to_read > 2)
 		dup2(cmd->infile, STDIN_FILENO);
-	g_exit_status = exec_builtin(cmd, data);
+	g_exit_status = exec_builtin(cmd, data, save, save2);
 	dup2(save, STDOUT_FILENO);
 	dup2(save2, STDIN_FILENO);
 	close(save);

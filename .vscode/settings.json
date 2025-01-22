@@ -4,6 +4,7 @@
 		"array": "c",
 		"string": "c",
 		"string_view": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"type_traits": "c"
 	}
 }
