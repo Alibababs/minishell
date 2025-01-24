@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:36:49 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 15:54:53 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:16:06 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	init_data(t_data **data, char *envp[])
 	(*data)->envp = envp;
 	(*data)->str = NULL;
 	init_env(data, envp);
+	shlvl(data);
 }
 
 int	main(int argc, char *argv[], char *envp[])

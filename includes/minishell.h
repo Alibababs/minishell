@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/22 16:19:39 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:16:00 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ int						ft_cd(char **argv, t_data **data);
 void					ft_echo(char *argv[]);
 void					ft_pwd(void);
 void					ft_unset(char **argv, t_data **data);
-void					ft_env(t_data **data);
 int						ft_exit(char **argv, t_data **data, int save, int save2);
 int						ft_export(char **argv, t_data **data);
 
@@ -197,5 +196,9 @@ char					*ft_getenv(char *name, t_data **data);
 void					ft_set_env(t_data **data, char *name, char *value,
 							bool empty_value);
 void					launch_builtin(t_cmd *cmd, t_data **data);
+
+/// env.c
+void					ft_env(t_data **data);
+void					shlvl(t_data **data);
 
 #endif
