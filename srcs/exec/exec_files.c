@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_temp_files.c                                  :+:      :+:    :+:   */
+/*   exec_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 23:09:42 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 00:17:25 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 00:29:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	set_infile(t_cmd *cmd, t_token *token)
 {
 	if (cmd->infile > -1)
 		close(cmd->infile);
-	dprintf(2, "Infile: [%s]\n", token->value);
 	cmd->infile = open(token->value, O_RDONLY);
 	if (cmd->infile == -1)
 	{

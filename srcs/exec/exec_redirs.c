@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_temp_redirs.c                                 :+:      :+:    :+:   */
+/*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:42:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 00:12:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 00:29:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,21 @@ static int	set_files(t_cmd *cmd, t_token *token)
 {
 	if (!ft_strcmp(token->value, "<"))
 	{
-		dprintf(2, "exec1\n");
-		dprintf(2, "Infile: [%s]\n", token->value);
 		if (set_infile(cmd, token->next))
 			return (1);
 	}
 	else if (!ft_strcmp(token->value, "<<"))
 	{
-		dprintf(2, "exec2\n");
 		if (set_here_doc(cmd, token))
 			return (1);
 	}
 	else if (!ft_strcmp(token->value, ">"))
 	{
-		dprintf(2, "exec3\n");
 		if (set_outfile(cmd, token->next, 1))
 			return (1);
 	}
 	else
 	{
-		dprintf(2, "exec4\n");
 		if (set_outfile(cmd, token->next, 0))
 			return (1);
 	}
@@ -86,11 +81,9 @@ int	init_redirections(t_data **data)
 	while (cmd)
 	{
 		count = count_redirections(token);
-		dprintf(2, "N_Redirs: %d\n", count);
 		while (count-- > 0)
 		{
 			token = next_token(token);
-			dprintf(2, "Value: %s\n", token->value);
 			if (set_files(cmd, token))
 			{
 				g_exit_status = 1;

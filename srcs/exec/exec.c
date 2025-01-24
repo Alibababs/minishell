@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/24 23:47:56 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 00:28:48 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	exec(t_data **data)
 		return (1);
 	if (init_redirections(data))
 		return (1);
-	print_cmds((*data)->h_cmds);
+	// print_cmds((*data)->h_cmds);
 	launch_command(data);
 	return (0);
 }
