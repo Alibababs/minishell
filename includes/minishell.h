@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/24 11:16:00 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:43:26 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_cmd
 	int					infile;
 	int					outfile;
 	int					pid;
+	int					ex_stat;
 	bool				here_doc;
 	bool				no_cmd;
 	t_token				*hd_del;

@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 20:56:00 by alibabab          #+#    #+#             */
-/*   Updated: 2025/01/22 16:19:10 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:47:52 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	launch_builtin(t_cmd *cmd, t_data **data)
 	else if (cmd->to_read > 2)
 		dup2(cmd->infile, STDIN_FILENO);
 	g_exit_status = exec_builtin(cmd, data, save, save2);
+	if (cmd->ex_stat == -1)
+		cmd->ex_stat = g_exit_status;
 	dup2(save, STDOUT_FILENO);
 	dup2(save2, STDIN_FILENO);
 	close(save);

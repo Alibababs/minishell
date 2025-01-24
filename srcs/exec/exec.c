@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/22 12:17:52 by alibabab         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:44:35 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	wait_for_all(t_data **data)
 			else if (WIFSIGNALED(status))
 				g_exit_status = 128 + WTERMSIG(status);
 		}
+		else if (is_builtin(temp->path))
+			g_exit_status = temp->ex_stat;
 		temp = temp->next;
 	}
 }
