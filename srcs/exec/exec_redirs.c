@@ -1,99 +1,105 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redirs.c                                      :+:      :+:    :+:   */
+/*   exec_temp_redirs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 10:17:55 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/24 11:48:30 by phautena         ###   ########.fr       */
+/*   Created: 2025/01/24 22:42:59 by ubuntu            #+#    #+#             */
+/*   Updated: 2025/01/25 00:12:56 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	make_dup(t_cmd *cmd)
+static int	set_files(t_cmd *cmd, t_token *token)
 {
-	if (cmd->infile > -1)
-		dup2(cmd->infile, STDIN_FILENO);
-	else
-		dup2(cmd->to_read, STDIN_FILENO);
-	if (cmd->outfile > -1)
-		dup2(cmd->outfile, STDOUT_FILENO);
-	else
-		dup2(cmd->to_write, STDOUT_FILENO);
-}
-
-int	init_infiles(t_token *tp, t_cmd *cmd, t_data **data)
-{
-	while (tp)
+	if (!ft_strcmp(token->value, "<"))
 	{
-		if (tp->token == PIPE)
-			cmd = cmd->next;
-		else if (tp->token == REDIR && (!ft_strcmp(tp->value, "<")
-				|| !ft_strcmp(tp->value, "<<")))
-		{
-			if (cmd->infile > -1)
-				close(cmd->infile);
-			if (!ft_strcmp(tp->value, "<<"))
-				cmd->infile = init_here_doc(tp, data);
-			else
-				cmd->infile = open(tp->next->value, O_RDONLY);
-			if (cmd->infile == -1)
-			{
-				if (g_exit_status == 130)
-					return (1);
-				perror(tp->next->value);
-				cmd->ex_stat = 1;
-				tp = next_pipe(tp);
-			}
-		}
-		tp = tp->next;
+		dprintf(2, "exec1\n");
+		dprintf(2, "Infile: [%s]\n", token->value);
+		if (set_infile(cmd, token->next))
+			return (1);
+	}
+	else if (!ft_strcmp(token->value, "<<"))
+	{
+		dprintf(2, "exec2\n");
+		if (set_here_doc(cmd, token))
+			return (1);
+	}
+	else if (!ft_strcmp(token->value, ">"))
+	{
+		dprintf(2, "exec3\n");
+		if (set_outfile(cmd, token->next, 1))
+			return (1);
+	}
+	else
+	{
+		dprintf(2, "exec4\n");
+		if (set_outfile(cmd, token->next, 0))
+			return (1);
 	}
 	return (0);
 }
 
-int	init_outfiles(t_token *tp, t_cmd *cmd)
+static t_token	*next_token(t_token *token)
 {
-	while (tp)
+	while (token->token != REDIR)
+		token = token->next;
+	return (token);
+}
+
+static t_token	*next_pipe(t_token *token, t_cmd *cmd)
+{
+	if (!cmd->next)
+		return (token);
+	while (token->token != PIPE)
+		token = token->next;
+	token = token->next;
+	return (token);
+}
+
+static int	count_redirections(t_token *token)
+{
+	t_token *temp;
+	int		count;
+
+	temp = token;
+	count = 0;
+	while (temp && temp->token != PIPE)
 	{
-		if (tp->token == PIPE)
-			cmd = cmd->next;
-		else if (tp->token == REDIR && tp->value[0] == '>')
+		if (temp->token == REDIR)
+			count++;
+		temp = temp->next;
+	}
+	return (count);
+}
+
+int	init_redirections(t_data **data)
+{
+	t_cmd	*cmd;
+	t_token	*token;
+	int		count;
+
+	cmd = (*data)->h_cmds;
+	token = (*data)->h_tokens;
+	while (cmd)
+	{
+		count = count_redirections(token);
+		dprintf(2, "N_Redirs: %d\n", count);
+		while (count-- > 0)
 		{
-			if (cmd->outfile > -1)
-				close(cmd->outfile);
-			if (!ft_strcmp(tp->value, ">"))
-				cmd->outfile = open(tp->next->value,
-						O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			else if (!ft_strcmp(tp->value, ">>"))
-				cmd->outfile = open(tp->next->value,
-						O_CREAT | O_WRONLY | O_APPEND, 0644);
-			if (cmd->outfile == -1)
+			token = next_token(token);
+			dprintf(2, "Value: %s\n", token->value);
+			if (set_files(cmd, token))
 			{
-				perror(tp->next->value);
-				cmd->ex_stat = 1;
-				tp = next_pipe(tp);
+				g_exit_status = 1;
+				return (1);
 			}
+			token = token->next;
 		}
-		tp = tp->next;
+		token = next_pipe(token, cmd);
+		cmd = cmd->next;
 	}
 	return (0);
-}
-
-int	check_redirs(t_cmd *cmd, t_data **data)
-{
-	if (cmd->infile == -1)
-		return (1);
-	if (cmd->outfile == -1)
-		return (1);
-	return (0);
-	(void)data;
-}
-
-t_token	*next_pipe(t_token *tp)
-{
-	while (tp && tp->next && tp->next->token != PIPE)
-		tp = tp->next;
-	return (tp);
 }

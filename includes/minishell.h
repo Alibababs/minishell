@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/24 11:43:26 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/25 00:17:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,15 @@ int						init_pipes(t_data **data);
 int						count_argv(t_token *token_temp);
 int						count_cmds(t_data **data);
 
-/// exec_redirs.c
+/// exec_temp_redirs.c
+int						init_redirections(t_data **data);
+
+/// exec_temp_files.c
+int						set_outfile(t_cmd *cmd, t_token *token, int mode);
+int						set_infile(t_cmd *cmd, t_token *token);
+int						set_here_doc(t_cmd *cmd, t_token *token);
 void					make_dup(t_cmd *cmd);
-int						init_infiles(t_token *tp, t_cmd *cmd, t_data **data);
-int						init_outfiles(t_token *tp, t_cmd *cmd);
 int						check_redirs(t_cmd *cmd, t_data **data);
-t_token					*next_pipe(t_token *tp);
 
 /// exec_hd.c
 int						init_here_doc(t_token *tp, t_data **data);
