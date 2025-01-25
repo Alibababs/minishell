@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/16 11:18:37 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:12:37 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ static char	*set_path_bis(t_token *current, t_cmd *cmd, t_data **data)
 	{
 		cmd->path = get_cmd_path(current->value);
 		if (!cmd->path)
-			mem_error(data);
+		{
+			cmd->path = ft_strdup(current->value);
+			if (!cmd->path)
+				mem_error(data);
+		}
 	}
 	else
 	{
