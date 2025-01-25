@@ -6,13 +6,13 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/25 00:28:48 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 16:02:45 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	wait_for_all(t_data **data)
+void	wait_for_all(t_data **data)
 {
 	t_cmd	*temp;
 	int		status;
@@ -53,7 +53,7 @@ void	close_pipes(t_data **data)
 	}
 }
 
-static void	check_cmd(t_cmd *cmd, t_data **data)
+void	check_cmd(t_cmd *cmd, t_data **data)
 {
 	struct stat	path_stat;
 
@@ -81,35 +81,6 @@ static void	check_cmd(t_cmd *cmd, t_data **data)
 	}
 }
 
-static int	launch_command(t_data **data)
-{
-	t_cmd	*cmd;
-
-	cmd = (*data)->h_cmds;
-	while (cmd)
-	{
-		if (check_redirs(cmd, data))
-			g_exit_status = 1;
-		else if (is_builtin(cmd->path))
-			launch_builtin(cmd, data);
-		else if (cmd->no_cmd == false)
-		{
-			cmd->pid = fork();
-			if (cmd->pid == 0)
-			{
-				check_cmd(cmd, data);
-				make_dup(cmd);
-				close_pipes(data);
-				execve(cmd->path, cmd->argv, (*data)->envp);
-			}
-		}
-		cmd = cmd->next;
-	}
-	close_pipes(data);
-	wait_for_all(data);
-	return (0);
-}
-
 int	exec(t_data **data)
 {
 	init_cmd_nodes(data);
@@ -120,6 +91,6 @@ int	exec(t_data **data)
 	if (init_redirections(data))
 		return (1);
 	// print_cmds((*data)->h_cmds);
-	launch_command(data);
+	start_exec(data);
 	return (0);
 }

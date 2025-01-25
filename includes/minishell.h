@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/25 00:17:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:58:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void					ft_signals(int mode);
 void					ft_put_error(char *str, char *str2);
 void					mem_error(t_data **data);
 void					ft_heredoc_error(char *str);
+void					fork_error(t_data **data);
 
 /// free.c
 void					free_env(t_data **data);
@@ -154,6 +155,9 @@ void					syntax_error_msg(char *token);
 /// exec.c
 int						exec(t_data **data);
 void					close_pipes(t_data **data);
+void					wait_for_all(t_data **data);
+void					check_cmd(t_cmd *cmd, t_data **data);
+
 /// exec_utils.c
 void					add_cmd_end(t_data **data);
 int						is_builtin(char *value);
@@ -186,6 +190,11 @@ void					set_path_cmd(t_token *current, t_cmd *cmd,
 void					set_path(t_data **data);
 void					set_argv(t_data **data);
 
+/// exec_bis.c
+void					start_exec(t_data **data);
+void					child_process(t_cmd *cmd, t_data **data);
+int						single_builtin(t_cmd *cmd, t_data **data);
+
 //////////////////BUILTINS//////////////////
 /// builtins.c
 int						ft_cd(char **argv, t_data **data);
@@ -200,6 +209,7 @@ char					*ft_getenv(char *name, t_data **data);
 void					ft_set_env(t_data **data, char *name, char *value,
 							bool empty_value);
 void					launch_builtin(t_cmd *cmd, t_data **data);
+int						exec_builtin(t_cmd *cmd, t_data **data, int save, int save2);
 
 /// env.c
 void					ft_env(t_data **data);
