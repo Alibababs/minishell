@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/25 16:02:45 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 16:33:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	wait_for_all(t_data **data)
 			else if (WIFSIGNALED(status))
 				g_exit_status = 128 + WTERMSIG(status);
 		}
-		else if (is_builtin(temp->path))
-			g_exit_status = temp->ex_stat;
+		else if (check_redirs(temp, data))
+			g_exit_status = 1;
 		temp = temp->next;
 	}
 }
@@ -88,8 +88,7 @@ int	exec(t_data **data)
 	set_argv(data);
 	if (init_pipes(data))
 		return (1);
-	if (init_redirections(data))
-		return (1);
+	init_redirections(data);
 	// print_cmds((*data)->h_cmds);
 	start_exec(data);
 	return (0);

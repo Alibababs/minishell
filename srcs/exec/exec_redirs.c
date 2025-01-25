@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:42:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 00:29:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 16:17:32 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	count_redirections(t_token *token)
 	return (count);
 }
 
-int	init_redirections(t_data **data)
+void	init_redirections(t_data **data)
 {
 	t_cmd	*cmd;
 	t_token	*token;
@@ -86,13 +86,13 @@ int	init_redirections(t_data **data)
 			token = next_token(token);
 			if (set_files(cmd, token))
 			{
+				cmd->no_cmd = true;
 				g_exit_status = 1;
-				return (1);
+				break ;
 			}
 			token = token->next;
 		}
 		token = next_pipe(token, cmd);
 		cmd = cmd->next;
 	}
-	return (0);
 }

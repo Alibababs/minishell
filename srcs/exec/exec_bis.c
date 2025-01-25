@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exex_bis.c                                         :+:      :+:    :+:   */
+/*   exec_bis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:39:21 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 15:58:27 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 16:29:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	single_builtin(t_cmd *cmd, t_data **data)
 	int	save;
 	int	save2;
 
-	if (is_builtin(cmd->path) && !cmd->prev && !cmd->next)
+	if (is_builtin(cmd->path) && !cmd->prev && !cmd->next && !cmd->no_cmd)
 	{
 		save = dup(STDOUT_FILENO);
 		save2 = dup(STDIN_FILENO);

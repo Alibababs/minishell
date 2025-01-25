@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/25 15:58:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/25 16:17:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ int						count_argv(t_token *token_temp);
 int						count_cmds(t_data **data);
 
 /// exec_temp_redirs.c
-int						init_redirections(t_data **data);
+void					init_redirections(t_data **data);
 
 /// exec_temp_files.c
 int						set_outfile(t_cmd *cmd, t_token *token, int mode);
