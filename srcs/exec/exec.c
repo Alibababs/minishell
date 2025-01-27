@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/25 16:33:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/27 10:22:53 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	close_pipes(t_data **data)
 		if (cmd->infile > -1)
 			close(cmd->infile);
 		if (cmd->outfile > -1)
+		{
 			close(cmd->outfile);
+			cmd->outfile = -1;
+		}
 		cmd = cmd->next;
 	}
 }
