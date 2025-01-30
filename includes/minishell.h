@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/25 16:17:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/30 10:28:16 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int						check_redirs(t_cmd *cmd, t_data **data);
 int						init_here_doc(t_token *tp, t_data **data);
 
 /// exec_path.c
-char					*get_cmd_path(char *binary);
+char					*get_cmd_path(char *binary, t_data **data);
 void					set_path_cmd(t_token *current, t_cmd *cmd,
 							t_data **data);
 

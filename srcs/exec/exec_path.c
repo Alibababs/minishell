@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/25 16:12:37 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/30 10:28:41 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	**fix_env(char **env)
 	return (res);
 }
 
-static char	**get_path(void)
+static char	**get_path(t_data **data)
 {
 	char	*path;
 	char	**splitted_path;
 	char	**fixed;
 
-	path = getenv("PATH");
+	path = get_var("PATH", data);
 	if (!path)
 		return (NULL);
 	splitted_path = ft_split(path, ':');
@@ -55,16 +55,17 @@ static char	**get_path(void)
 	return (fixed);
 }
 
-char	*get_cmd_path(char *binary)
+char	*get_cmd_path(char *binary, t_data **data)
 {
 	int		i;
 	char	**path;
 	char	*path_binary;
 
 	i = 0;
-	path = get_path();
+	path = get_path(data);
 	if (!path)
 		return (NULL);
+
 	while (path[i])
 	{
 		path_binary = ft_strjoin(path[i], binary);
@@ -83,7 +84,7 @@ static char	*set_path_bis(t_token *current, t_cmd *cmd, t_data **data)
 {
 	if (current->value[0] != '/')
 	{
-		cmd->path = get_cmd_path(current->value);
+		cmd->path = get_cmd_path(current->value, data);
 		if (!cmd->path)
 		{
 			cmd->path = ft_strdup(current->value);
