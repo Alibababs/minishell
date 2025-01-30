@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 23:09:42 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 00:29:22 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/30 10:32:20 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	set_infile(t_cmd *cmd, t_token *token)
 	return (0);
 }
 
-int	set_here_doc(t_cmd *cmd, t_token *token)
+int	set_here_doc(t_cmd *cmd, t_token *token, t_data **data)
 {
 	if (cmd->infile > -1)
 		close(cmd->infile);
-	cmd->infile = init_here_doc(token, &cmd->data);
+	cmd->infile = init_here_doc(token, data);
 	if (cmd->infile == -1)
 	{
 		perror(token->next->value);

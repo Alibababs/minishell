@@ -6,7 +6,7 @@
 /*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:16 by phautena         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:32:13 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void					init_redirections(t_data **data);
 /// exec_temp_files.c
 int						set_outfile(t_cmd *cmd, t_token *token, int mode);
 int						set_infile(t_cmd *cmd, t_token *token);
-int						set_here_doc(t_cmd *cmd, t_token *token);
+int						set_here_doc(t_cmd *cmd, t_token *token, t_data **data);
 void					make_dup(t_cmd *cmd);
 int						check_redirs(t_cmd *cmd, t_data **data);
 

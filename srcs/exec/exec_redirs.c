@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:42:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/25 16:17:32 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/30 10:31:59 by phautena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	set_files(t_cmd *cmd, t_token *token)
+static int	set_files(t_cmd *cmd, t_token *token, t_data **data)
 {
 	if (!ft_strcmp(token->value, "<"))
 	{
@@ -21,7 +21,7 @@ static int	set_files(t_cmd *cmd, t_token *token)
 	}
 	else if (!ft_strcmp(token->value, "<<"))
 	{
-		if (set_here_doc(cmd, token))
+		if (set_here_doc(cmd, token, data))
 			return (1);
 	}
 	else if (!ft_strcmp(token->value, ">"))
@@ -84,7 +84,7 @@ void	init_redirections(t_data **data)
 		while (count-- > 0)
 		{
 			token = next_token(token);
-			if (set_files(cmd, token))
+			if (set_files(cmd, token, data))
 			{
 				cmd->no_cmd = true;
 				g_exit_status = 1;
