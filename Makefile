@@ -21,7 +21,6 @@ C_FILE		=	main/main	 									\
 				main/signals									\
 				main/free										\
 				main/error_msg									\
-				main/print										\
 				env/init_env									\
 				lexer/lexer										\
 				lexer/lexer_utils								\
