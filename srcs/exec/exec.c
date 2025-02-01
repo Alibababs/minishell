@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:00:38 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/27 10:22:53 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/02/01 22:12:49 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	exec(t_data **data)
 	if (init_pipes(data))
 		return (1);
 	init_redirections(data);
-	// print_cmds((*data)->h_cmds);
 	start_exec(data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:42:59 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/30 10:31:59 by phautena         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:11:39 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_token	*next_pipe(t_token *token, t_cmd *cmd)
 
 static int	count_redirections(t_token *token)
 {
-	t_token *temp;
+	t_token	*temp;
 	int		count;
 
 	temp = token;

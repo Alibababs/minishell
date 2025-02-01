@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:38:51 by p0ulp1            #+#    #+#             */
-/*   Updated: 2025/01/30 10:32:13 by phautena         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:12:33 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,8 @@ int						ft_cd(char **argv, t_data **data);
 void					ft_echo(char *argv[]);
 void					ft_pwd(void);
 void					ft_unset(char **argv, t_data **data);
-int						ft_exit(char **argv, t_data **data, int save, int save2);
+int						ft_exit(char **argv, t_data **data, int save,
+							int save2);
 int						ft_export(char **argv, t_data **data);
 
 /// builtin_utils.c
@@ -209,7 +210,8 @@ char					*ft_getenv(char *name, t_data **data);
 void					ft_set_env(t_data **data, char *name, char *value,
 							bool empty_value);
 void					launch_builtin(t_cmd *cmd, t_data **data);
-int						exec_builtin(t_cmd *cmd, t_data **data, int save, int save2);
+int						exec_builtin(t_cmd *cmd, t_data **data, int save,
+							int save2);
 
 /// env.c
 void					ft_env(t_data **data);

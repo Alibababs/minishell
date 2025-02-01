@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phautena <phautena@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibabab <alibabab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:44:51 by phautena          #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:41 by phautena         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:12:42 by alibabab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	*get_cmd_path(char *binary, t_data **data)
 	path = get_path(data);
 	if (!path)
 		return (NULL);
-
 	while (path[i])
 	{
 		path_binary = ft_strjoin(path[i], binary);
